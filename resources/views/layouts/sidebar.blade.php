@@ -19,7 +19,7 @@
         <ul >
         <li class="logo">
                 <a href="#">
-                    <img src="Images/Logo1.png" alt="logo">
+                    <img src="Images/Logo.png" alt="logo">
 
                 </a>
             <li>
