@@ -14,7 +14,7 @@
     
     position:absolute;
     top:0;
-    background-color: #5398D4;
+    background-color:#ffffff;
     bottom: 0;
     height:100%;
     left:0;
@@ -68,5 +68,5 @@ a{
     margin-left: 10px;
 }
 a:hover{
-    background: #eee;
+    background: #9fb3f5;
 }

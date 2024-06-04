@@ -13,7 +13,7 @@
     
      <div style="display: inline-block; width: 45%;">
      <div class="py-6">
-    <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+    <div class="max-w-7xl mx-auto sm:px-6 lg:px-8" >
         <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
             <div class="p-6 flex items-center justify-between text-white">
                 <div class="flex items-center">
