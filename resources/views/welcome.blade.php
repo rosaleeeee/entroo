@@ -61,7 +61,11 @@
 </head>
 <body>
     <div id="menu">
+<<<<<<< HEAD
+        <img src="{{ asset('images/Logo1.png') }}" alt="Logo">
+=======
         <img src="{{ asset('images/Logoo.png') }}" alt="Logo">
+>>>>>>> 44eefd53ef30705f0d39b0ace24888f4a839c42a
         <div class="buttons">
             <button><a href="{{ route('login') }}">Log In</a></button>
             <button><a href="{{ route('register') }}">Register</a></button>
@@ -80,4 +84,8 @@
         </div>
     </div>
 </body>
+<<<<<<< HEAD
 </html>
+=======
+</html>
+>>>>>>> 44eefd53ef30705f0d39b0ace24888f4a839c42a
