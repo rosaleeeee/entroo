@@ -16,12 +16,9 @@
 </head>
 <body>
     <nav class="nav1">
-        <ul >
-        <li class="logo">
-                <a href="#">
-                    <img src="Images/Logo.png" alt="logo">
+                    <img class="logo" src="Images/Logoo.png" alt="logo">
 
-                </a>
+        <ul >
             <li>
                 <a href="http://127.0.0.1:8000/profile">
                     <i class="fas fa-user"></i>
