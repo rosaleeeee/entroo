@@ -1,3 +1,35 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+/* app.css */
+.login-form {
+    /* Ajoutez ici vos styles personnalisés pour le formulaire de connexion */
+    background-color: #577ca1;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+.login-form input[type="email"],
+.login-form input[type="password"] {
+    /* Ajoutez ici vos styles personnalisés pour les champs de saisie */
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ced4da;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+.login-form button[type="submit"] {
+    /* Ajoutez ici vos styles personnalisés pour le bouton de soumission */
+    width: 100%;
+    padding: 10px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.login-form button[type="submit"]:hover {
+    background-color: #0056b3;
+}
