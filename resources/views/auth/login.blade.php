@@ -1,7 +1,10 @@
 <x-guest-layout>
     <!-- Session Status -->
-    <x-auth-session-status class="mb-4" :status="session('status')" />
-
+    <x-auth-session-status class="password_reseted" :status="session('status')" />
+    @if(session('status'))
+    <br> <br>
+    @endif
+    
     <form method="POST" action="{{ route('login') }}">
         @csrf
 

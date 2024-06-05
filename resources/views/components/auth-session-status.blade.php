@@ -1,7 +1,7 @@
 @props(['status'])
 
 @if ($status)
-    <div>
+    <div class="status">
         {{ $status }}
     </div>
 @endif
