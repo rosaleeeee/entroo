@@ -159,3 +159,7 @@ li{
   .text-black {
     color: #000000;
   }
+
+.level_pointer{
+  cursor :pointer;
+}
