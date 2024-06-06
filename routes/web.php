@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+require __DIR__.'/auth.php';
 
 Route::get('/', function () {
     return view('welcome');
@@ -16,6 +17,10 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
+Auth::routes([
+    'verify' => true
+]);
+
 Route::get('/level1', function () {
     return view('level1.level1_obj');
 })->name('level1');
