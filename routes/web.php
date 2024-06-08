@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\MbtiQuizController;
 require __DIR__.'/auth.php';
 
 Route::get('/', function () {
@@ -36,5 +37,11 @@ Route::get('/level3', function () {
 Route::get('/level4', function () {
     return view('level4.level4_obj');
 })->name('level4');
+
+
+Route::get('/quiz', [MbtiQuizController::class, 'show'])->name('quiz.show');
+Route::post('/quiz', [MbtiQuizController::class, 'submit'])->name('quiz.submit');
+Route::get('/result', [MbtiQuizController::class, 'result'])->name('quiz.result');
+
 
 require __DIR__.'/auth.php';
