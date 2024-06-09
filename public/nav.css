@@ -12,13 +12,12 @@
 
 .nav1{
     
-    position:absolute;
+    position:fixed;
     top:0;
     background-color:#5398D4;
     bottom: 0;
     height:100%;
     left:0;
-   
     width: 200px;
     transition: width 0.2s linear;
     box-shadow:0 20px 35px rgba(0,0,0,0.1);

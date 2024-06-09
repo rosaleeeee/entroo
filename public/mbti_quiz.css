@@ -1,0 +1,112 @@
+/* Style pour le conteneur principal du quiz */
+.quiz-container {
+    margin-left: 200px;
+    margin-right: 0px;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-family: Arial, sans-serif;
+    min-height: 100vh; /* 100% de la hauteur de la fenêtre */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+/* Style pour le titre du quiz */
+.quiz-container h1 {
+    text-align: center;
+    color: #333;
+}
+
+/* Style pour chaque question du quiz */
+.question {
+    margin-bottom: 15px;
+    text-align: center; /* Centrer les questions */
+}
+
+/* Style pour le texte des questions */
+.question p {
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+/* Style pour les réponses aux questions */
+.answers {
+    display: flex;
+    justify-content: center; /* Centrer les boutons de réponse */
+    flex-wrap: wrap;
+}
+
+/* Style pour les boutons de réponse */
+.answer-button {
+    width: 350px;
+    margin: 5px;
+    padding: 10px 20px;
+    background-color: #5398D4; /* Bleu */
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    text-align: center; /* Centrer le texte des boutons */
+}
+
+/* Style pour les boutons de réponse sélectionnés */
+.answer-button.selected {
+    background-color: #327399; /* Orange pour les boutons sélectionnés */
+    color: #fff;
+}
+
+/* Style pour le survol des boutons de réponse */
+.answer-button:hover {
+    background-color: #3a7ea4; /* Couleur de survol pour les boutons */
+}
+
+/* Style pour le bouton de soumission */
+.submit-button {
+    display: block;
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #4CAF50; /* Vert */
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+/* Style pour le survol du bouton de soumission */
+.submit-button:hover {
+    background-color: #45a049;
+}
+
+/* Style pour les messages d'erreur */
+.error-message {
+    color: red;
+}
+
+/* Style pour la pagination */
+.pagination {
+    margin-top: 20px;
+    text-align: center;
+}
+
+/* Style pour les boutons Previous et Next */
+.btn-prev,
+.btn-next {
+    padding: 10px 20px;
+    background-color: #6c757d; /* Gris */
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin: 0 10px;
+}
+
+/* Style au survol des boutons Previous et Next */
+.btn-prev:hover,
+.btn-next:hover {
+    background-color: #5a6268; /* Gris plus foncé au survol */
+}
