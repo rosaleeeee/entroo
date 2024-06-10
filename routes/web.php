@@ -13,6 +13,22 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
+Route::get('/level1/start-level1', function () {
+    return view('level1.start-level1');
+})->middleware(['auth', 'verified'])->name('start-level1');
+
+Route::get('/level2/start-level2', function () {
+    return view('level2.start-level2');
+})->middleware(['auth', 'verified'])->name('start-level2');
+
+Route::get('/level3/start-level3', function () {
+    return view('level3.start-level3');
+})->middleware(['auth', 'verified'])->name('start-level3');
+
+Route::get('/level4/start-level4', function () {
+    return view('level4.start-level4');
+})->middleware(['auth', 'verified'])->name('start-level4');
+
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
@@ -39,9 +55,9 @@ Route::get('/level4', function () {
 })->name('level4');
 
 
-Route::get('/quiz', [MbtiQuizController::class, 'show'])->name('quiz.show');
-Route::post('/quiz', [MbtiQuizController::class, 'submit'])->name('quiz.submit');
-Route::get('/result', [MbtiQuizController::class, 'result'])->name('quiz.result');
-
+Route::get('/level4/quiz', [MbtiQuizController::class, 'show'])->name('quiz.show');
+Route::post('/level4/quiz', [MbtiQuizController::class, 'submit'])->name('quiz.submit');
+Route::get('/level4/result', [MbtiQuizController::class, 'result'])->name('quiz.result');
+Route::get('/level4/quiz/result', [App\Http\Controllers\MbtiQuizController::class, 'result'])->name('quiz.result');
 
 require __DIR__.'/auth.php';

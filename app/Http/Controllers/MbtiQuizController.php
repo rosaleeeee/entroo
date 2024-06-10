@@ -1,8 +1,9 @@
 <?php
+
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Auth;
+use Illuminate\Support\Facades\Auth;
 
 class MbtiQuizController extends Controller
 {
@@ -10,33 +11,60 @@ class MbtiQuizController extends Controller
     {
         $this->middleware('auth');
     }
+
     private $questions = [
-        "1. At a party do you:" => [
-            "a. Interact with many, including strangers" => "E",
-            "b. Interact with a few, known to you" => "I"
+        "At a party, do you:" => [
+            "Talk to many people, including those you don't know" => "E",
+            "Stick to a few familiar faces" => "I"
         ],
-        "2. Are you more:" => [
-            "a. Realistic than speculative" => "S",
-            "b. Speculative than realistic" => "N"
+        "Are you more:" => [
+            "Practical than theoretical" => "S",
+            "Theoretical than practical" => "N"
         ],
-        "3. Is it worse to:" => [
-            "a. Have your “head in the clouds”" => "S",
-            "b. Be “in a rut”" => "N"
+        "Is it worse to:" => [
+            "Be out of touch with reality" => "S",
+            "Be stuck in a mundane routine" => "N"
         ],
-        "4. Are you more impressed by:" => [
-            "a. Principles" => "T",
-            "b. Emotions" => "F"
+        "Are you more impressed by:" => [
+            "Logic" => "T",
+            "Feelings" => "F"
         ],
-        "5. Are more drawn toward the:" => [
-            "a. Convincing" => "T",
-            "b. Touching" => "F"
+        "Are you more drawn to:" => [
+            "Rational arguments" => "T",
+            "Emotional appeals" => "F"
+        ],
+        "Do you prefer to work:" => [
+            "With set deadlines" => "J",
+            "At your own pace" => "P"
+        ],
+        "Do you make decisions:" => [
+            "Carefully" => "J",
+            "Spontaneously" => "P"
+        ],
+        "At gatherings, do you:" => [
+            "Stay late, enjoying yourself more and more" => "E",
+            "Leave early, feeling worn out" => "I"
+        ],
+        "Are you more attracted to:" => [
+            "Practical people" => "S",
+            "Imaginative people" => "N"
         ],
         // Ajoutez les autres questions ici
     ];
 
-    public function show()
-    {
-        return view('level4.quiz.show', ['questions' => $this->questions]);
+    private function formatQuestionKey($question) {
+        // Remplace les points, espaces et points d'interrogation par des underscores
+        return strtolower(preg_replace('/[. ?]+/', '_', $question));
+    }
+
+    public function show() {
+        // Assumons que vous passez les questions à la vue show.blade.php
+        return view('level4.quiz.show', [
+            'questions' => $this->questions,
+            'formatQuestionKey' => function ($question) {
+                return $this->formatQuestionKey($question);
+            }
+        ]);
     }
 
     public function submit(Request $request)
@@ -53,8 +81,15 @@ class MbtiQuizController extends Controller
             'P' => 0,
         ];
 
-        foreach ($data as $key => $answer) {
-            $results[$answer]++;
+        // Traiter chaque question
+        foreach ($this->questions as $question => $answers) {
+            $key = $this->formatQuestionKey($question); // Utilisation de la fonction formatQuestionKey
+            if (isset($data[$key])) {
+                $results[$data[$key]]++;
+            } else {
+                // Gérer les réponses manquantes
+                return redirect()->back()->withErrors(['message' => 'Veuillez répondre à toutes les questions.']);
+            }
         }
 
         $mbti_type = '';
@@ -67,12 +102,36 @@ class MbtiQuizController extends Controller
         $user->mbti_type = $mbti_type;
         $user->save();
 
-        return redirect()->route('quiz.result');
+        return redirect()->route('quiz.result')->with([
+            'E' => $results['E'],
+            'I' => $results['I'],
+            'S' => $results['S'],
+            'N' => $results['N'],
+            'T' => $results['T'],
+            'F' => $results['F'],
+            'J' => $results['J'],
+            'P' => $results['P']
+        ]);
+
     }
 
     public function result()
     {
         $user = Auth::user();
-        return view('quiz.result', ['mbti_type' => $user->mbti_type]);
+        $sessionData = [
+            'E' => session('E'),
+            'I' => session('I'),
+            'S' => session('S'),
+            'N' => session('N'),
+            'T' => session('T'),
+            'F' => session('F'),
+            'J' => session('J'),
+            'P' => session('P'),
+            'mbti_type' => $user->mbti_type
+        ];
+   ; // Debugging line
+    
+        return view('level4.quiz.result', $sessionData);
     }
+    
 }
