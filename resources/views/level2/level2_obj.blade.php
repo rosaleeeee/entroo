@@ -3,7 +3,6 @@
             <!-- Page Content -->
 
             <main>
-            <div style="display: flex; height: 85vh;">
     <div style="width: 100px; ; color: black; padding: 20px;">
         <!-- start navbar --> 
     @include('layouts.sidebar')
@@ -40,11 +39,10 @@
         
     </div>
     </br>
-    <div class="buttons">
-    <button>start</button>
+    <div class="conteneur">
+        <button class="start_level_btn" onclick="window.location.href='level2/start-level2'">start</button>
     </div>
     
         
     </body>
 </x-app-layout>
-s

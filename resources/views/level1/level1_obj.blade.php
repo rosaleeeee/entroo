@@ -3,7 +3,6 @@
             <!-- Page Content -->
 
             <main>
-            <div style="display: flex; height: 85vh;">
     <div style="width: 100px; ; color: black; padding: 20px;">
         <!-- start navbar --> 
     @include('layouts.sidebar')
@@ -38,13 +37,10 @@
         <div id="right">
             <img src="{{ asset('images/Level1.png') }}" alt="Illustration">
         </div>
-        
     </div>
-    </br>
-    <div class="buttons">
-    <button>start</button>
-    </div>
+    <div class="conteneur">
+    <button class="start_level_btn" onclick="window.location.href='level1/start-level1'">start</button>
+</div>
     
-        
-    </body>
+</body>
 </x-app-layout>
