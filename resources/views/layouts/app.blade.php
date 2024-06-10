@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{s{ csrf_token() }}">
 
-        <title>{{ config('app.name', 'Laravel') }}</title>
+        <title>EntroSkills</title>
 
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">

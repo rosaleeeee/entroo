@@ -1,21 +1,20 @@
 body {
-    display: flex;
     justify-content: center;
     align-items: center;
-    height: 100%;
-    width: 100%;
-    margin: 0;
-    background-color: #EFEFEF;
     font-family: Arial, sans-serif;
 }
 
 .container {
+    margin-left: 200px;
     text-align: center;
-    margin: 200px;
-    background-color: #EFEFEF;
 }
 
-.icon img {
+.icon{
+    display: flex;
+    justify-content: center; /* Centrer horizontalement */
+    align-items: center;
+}
+.image_start {
     width: 350px; /* Adjust the size as needed */
 }
 
