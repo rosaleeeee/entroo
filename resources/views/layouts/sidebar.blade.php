@@ -8,7 +8,7 @@
     <!-- Import Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"/>
-    <link href="{{}a}"
+    <link href="{{}a}">
     <!-- Styles -->
     <style>
        
@@ -19,25 +19,25 @@
                     <img class="logo" src="Images/Logoo.png" alt="logo">
 
         <ul >
-            <li>
+            <li class="Button">
                 <a href="http://127.0.0.1:8000/profile">
                     <i class="fas fa-user"></i>
                     <span class="nav-item">Profile</span>
                 </a>
             </li>
-            <li>
+            <li class="Button">
                 <a href="#">
                     <i class="fas fa-home"></i>
                     <span class="nav-item">Home</span>
                 </a>
             </li>
-            <li>
+            <li class="Button">
                 <a href="#">
                     <i class="fas fa-users"></i>
                     <span class="nav-item">Team</span>
                 </a>
             </li>
-            <li>
+            <li  class="Button">
                 <a href="#">
                     <i class="fas fa-ellipsis-h"></i>
                     <span class="nav-item">More</span>

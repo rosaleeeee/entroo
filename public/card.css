@@ -1,0 +1,124 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+.container {
+    font-family: 'Poppins', sans-serif;
+    font-size: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 80vh;
+    padding: 4rem 0;
+}
+
+.img-box img {
+    display: block;
+    width: 100%;
+    height: 10rem; /* Hauteur ajustée */
+    object-fit: cover;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr); /* 5 colonnes dans la première ligne */
+    grid-template-areas: 
+        "card1 card2 card3 card4 card5"
+        "card6 card7 card8 card9 card9"; /* 4 colonnes dans la deuxième ligne (card9 occupe deux colonnes) */
+    justify-content: center;
+    grid-gap: 4rem; /* Espacement ajusté */
+    text-align: center;
+    width: 90%;
+    margin: auto;
+    margin-left: 30%; /* Aligner la grille à droite */
+}
+
+.card {
+    display: block;
+    overflow: hidden;
+    border-radius: 0.6rem;
+    box-shadow: 0 0.5rem 1rem rgba(80, 23, 223, 0.7);
+    cursor: pointer;
+    transition: 0.2s;
+    position: relative;
+    width: 10rem; /* Largeur ajustée */
+    height: 12rem; /* Hauteur ajustée */
+}
+
+.card-content {
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.5);
+    bottom: 0;
+    color: #fff;
+    width: 100%;
+    height: 20%; /* Hauteur ajustée */
+    padding: 0.5rem 0; /* Padding ajusté */
+    overflow: hidden;
+    transition: 0.7s;
+}
+
+.card-content h1 {
+    font-size: 0.875rem; /* Taille de police ajustée */
+    font-weight: 600;
+    text-transform: capitalize;
+}
+
+.card-content p {
+    font-size: 0.75rem; /* Taille de police ajustée */
+    font-weight: 400;
+    line-height: 1rem;
+    padding: 0.5rem; /* Padding ajusté */
+}
+
+.card-content:hover {
+    height: 40%; /* Hauteur ajustée */
+    transition: 0.7s;
+}
+
+/* Assignation des zones de grille aux cartes */
+.card:nth-child(1) { grid-area: card1; }
+.card:nth-child(2) { grid-area: card2; }
+.card:nth-child(3) { grid-area: card3; }
+.card:nth-child(4) { grid-area: card4; }
+.card:nth-child(5) { grid-area: card5; }
+.card:nth-child(6) { grid-area: card6; }
+.card:nth-child(7) { grid-area: card7; }
+.card:nth-child(8) { grid-area: card8; }
+.card:nth-child(9) { grid-area: card9; }
+
+/*======responsive======*/
+@media (max-width: 1024px) {
+    .grid {
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-areas: 
+            "card1 card2"
+            "card3 card4"
+            "card5 card6"
+            "card7 card8"
+            "card9 card9"; /* Card9 occupe deux colonnes */
+    }
+}
+
+@media (max-width: 767px) {
+    .grid {
+        grid-template-columns: repeat(1, 1fr);
+        grid-template-areas: 
+            "card1"
+            "card2"
+            "card3"
+            "card4"
+            "card5"
+            "card6"
+            "card7"
+            "card8"
+            "card9";
+    }
+}
