@@ -41,30 +41,12 @@ class MbtiQuizController extends Controller
             "Carefully" => "J",
             "Spontaneously" => "P"
         ],
-        "At gatherings, do you:" => [
-            "Stay late, enjoying yourself more and more" => "E",
-            "Leave early, feeling worn out" => "I"
-        ],
-        "Are you more attracted to:" => [
-            "Practical people" => "S",
-            "Imaginative people" => "N"
-        ],
         // Ajoutez les autres questions ici
     ];
 
-    private function formatQuestionKey($question) {
-        // Remplace les points, espaces et points d'interrogation par des underscores
-        return strtolower(preg_replace('/[. ?]+/', '_', $question));
-    }
-
-    public function show() {
-        // Assumons que vous passez les questions à la vue show.blade.php
-        return view('level4.quiz.show', [
-            'questions' => $this->questions,
-            'formatQuestionKey' => function ($question) {
-                return $this->formatQuestionKey($question);
-            }
-        ]);
+    public function show()
+    {
+        return view('level4.quiz.show', ['questions' => $this->questions]);
     }
 
     public function submit(Request $request)
@@ -83,7 +65,7 @@ class MbtiQuizController extends Controller
 
         // Traiter chaque question
         foreach ($this->questions as $question => $answers) {
-            $key = $this->formatQuestionKey($question); // Utilisation de la fonction formatQuestionKey
+            $key = str_replace(' ', '_', strtolower($question));
             if (isset($data[$key])) {
                 $results[$data[$key]]++;
             } else {
@@ -92,46 +74,40 @@ class MbtiQuizController extends Controller
             }
         }
 
+        // Calculer le type MBTI
         $mbti_type = '';
         $mbti_type .= $results['E'] >= $results['I'] ? 'E' : 'I';
         $mbti_type .= $results['S'] >= $results['N'] ? 'S' : 'N';
         $mbti_type .= $results['T'] >= $results['F'] ? 'T' : 'F';
         $mbti_type .= $results['J'] >= $results['P'] ? 'J' : 'P';
 
+        // Mettre à jour le type MBTI de l'utilisateur
         $user = Auth::user();
         $user->mbti_type = $mbti_type;
         $user->save();
 
-        return redirect()->route('quiz.result')->with([
-            'E' => $results['E'],
-            'I' => $results['I'],
-            'S' => $results['S'],
-            'N' => $results['N'],
-            'T' => $results['T'],
-            'F' => $results['F'],
-            'J' => $results['J'],
-            'P' => $results['P']
-        ]);
-
+        // Rediriger vers la vue de résultat avec tous les résultats
+        return redirect()->route('quiz.result', compact('mbti_type', 'results'));
     }
 
-    public function result()
+    public function result(Request $request)
     {
         $user = Auth::user();
-        $sessionData = [
-            'E' => session('E'),
-            'I' => session('I'),
-            'S' => session('S'),
-            'N' => session('N'),
-            'T' => session('T'),
-            'F' => session('F'),
-            'J' => session('J'),
-            'P' => session('P'),
-            'mbti_type' => $user->mbti_type
-        ];
-   ; // Debugging line
-    
-        return view('level4.quiz.result', $sessionData);
+
+        // Récupérer le type MBTI et les résultats de la requête
+        $mbti_type = $request->input('mbti_type');
+        $results = $request->input('results');
+
+        // Extraire chaque résultat individuellement
+        $results_E = $results['E'];
+        $results_I = $results['I'];
+        $results_S = $results['S'];
+        $results_N = $results['N'];
+        $results_T = $results['T'];
+        $results_F = $results['F'];
+        $results_J = $results['J'];
+        $results_P = $results['P'];
+
+        return view('level4.quiz.result', compact('user', 'mbti_type', 'results_E', 'results_I', 'results_S', 'results_N', 'results_T', 'results_F', 'results_J', 'results_P'));
     }
-    
 }

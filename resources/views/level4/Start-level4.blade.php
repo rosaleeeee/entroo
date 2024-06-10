@@ -19,7 +19,7 @@
             <img src="{{ asset('images/Level4.png') }}" alt="Business Model Icon">
         </div>
         <h1>PROFILE</h1>
-        <button class="start-button">start</button>
+        <button class="start-button" onclick="window.location.href='quiz/show'">start</button>
     </div>
 </body>
 
