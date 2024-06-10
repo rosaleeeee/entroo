@@ -42,6 +42,6 @@ Route::get('/level4', function () {
 Route::get('/level4/quiz', [MbtiQuizController::class, 'show'])->name('quiz.show');
 Route::post('/level4/quiz', [MbtiQuizController::class, 'submit'])->name('quiz.submit');
 Route::get('/level4/result', [MbtiQuizController::class, 'result'])->name('quiz.result');
-
+Route::get('/level4/quiz/result', [App\Http\Controllers\MbtiQuizController::class, 'result'])->name('quiz.result');
 
 require __DIR__.'/auth.php';

@@ -1,4 +1,3 @@
-<!-- mbti_quiz.blade.php -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -28,38 +27,10 @@
             @php
                 $questionKeys = array_keys($questions);
                 $totalQuestions = count($questionKeys);
-                $questionsPerPage = 10;
+                $questionsPerPage =4;
             @endphp
 
             @for ($i = 0; $i < $totalQuestions; $i += $questionsPerPage)
-            <p>La valeur de $i est : {{ $i }}</p>
-
-            @if ($i === 0)
-            <p>La valeur de $i est : {{ $i }}</p>
-
-            <style>
-              .btn-prev {
-                visibility: hidden;
-              }
-              .btn-next {
-                margin: auto;
-
-              }
-            </style>
-            @endif
-            @if ($i !== 0)
-            <p>La valeur de $i est : {{ $i }}</p>
-
-            <style>
-              .btn-prev {
-                visibility: visible;
-              }
-              .btn-next {
-                margin: auto;
-
-              }
-            </style>
-          @endif
                 <div class="quiz-section" data-start-index="{{ $i }}">
                     @for ($j = $i; $j < min($i + $questionsPerPage, $totalQuestions); $j++)
                         @php
@@ -80,46 +51,41 @@
             @endfor
 
             <div class="pagination">
-                <button type="button" class="btn-prev">Previous</button>
                 <button type="button" class="btn-next">Next</button>
             </div>
 
-            <button type="submit" class="submit-button">Submit</button>
+            <button type="submit" class="submit-button" style="display:none;">Submit</button>
         </form>
     </div>
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
         $(document).ready(function() {
-            // Initialiser les boutons et sections de question
+            const totalSections = $('.quiz-section').length;
+            let currentSectionIndex = 0;
+
             $('.quiz-section').hide();
             $('.quiz-section:first').show();
 
             $('.btn-next').click(function() {
-                var currentSection = $('.quiz-section:visible');
-                var nextSection = currentSection.next('.quiz-section');
+                const currentSection = $('.quiz-section:visible');
+                const nextSection = currentSection.next('.quiz-section');
                 currentSection.hide();
                 nextSection.show();
-            });
+                currentSectionIndex++;
 
-            $('.btn-prev').click(function() {
-                var currentSection = $('.quiz-section:visible');
-                var prevSection = currentSection.prev('.quiz-section');
-                currentSection.hide();
-                prevSection.show();
+                if (currentSectionIndex === totalSections - 1) {
+                    $('.btn-next').hide();
+                    $('.submit-button').show();
+                }
             });
 
             $('.answer-button').click(function() {
-                var questionKey = $(this).data('question');
-                var answerValue = $(this).data('answer');
+                const questionKey = $(this).data('question');
+                const answerValue = $(this).data('answer');
 
-                // Désélectionner tous les autres boutons de cette question
                 $('[data-question="' + questionKey + '"]').removeClass('selected');
-
-                // Sélectionner le bouton cliqué
                 $(this).addClass('selected');
-
-                // Mettre à jour le champ de réponse caché
                 $('input[name="' + questionKey + '"]').val(answerValue);
             });
         });
