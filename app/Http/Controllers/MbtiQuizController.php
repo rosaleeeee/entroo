@@ -13,34 +13,62 @@ class MbtiQuizController extends Controller
     }
 
     private $questions = [
-        "At a party, do you:" => [
-            "Talk to many people, including those you don't know" => "E",
-            "Stick to a few familiar faces" => "I"
-        ],
-        "Are you more:" => [
-            "Practical than theoretical" => "S",
-            "Theoretical than practical" => "N"
-        ],
-        "Is it worse to:" => [
-            "Be out of touch with reality" => "S",
-            "Be stuck in a mundane routine" => "N"
-        ],
-        "Are you more impressed by:" => [
-            "Logic" => "T",
-            "Feelings" => "F"
-        ],
-        "Are you more drawn to:" => [
-            "Rational arguments" => "T",
-            "Emotional appeals" => "F"
-        ],
-        "Do you prefer to work:" => [
-            "With set deadlines" => "J",
-            "At your own pace" => "P"
-        ],
-        "Do you make decisions:" => [
-            "Carefully" => "J",
-            "Spontaneously" => "P"
-        ],
+            "At a party, do you:" => [
+                "Talk to many people, including those you don't know" => "E",
+                "Stick to a few familiar faces" => "I"
+            ],
+            "Are you more:" => [
+                "Practical than theoretical" => "S",
+                "Theoretical than practical" => "N"
+            ],
+            "Is it worse to:" => [
+                "Be out of touch with reality" => "S",
+                "Be stuck in a mundane routine" => "N"
+            ],
+            "Are you more impressed by:" => [
+                "Logic" => "T",
+                "Feelings" => "F"
+            ],
+            "Are you more drawn to:" => [
+                "Rational arguments" => "T",
+                "Emotional appeals" => "F"
+            ],
+            "Do you prefer to work:" => [
+                "With set deadlines" => "J",
+                "At your own pace" => "P"
+            ],
+            "Do you make decisions:" => [
+                "Carefully" => "J",
+                "Spontaneously" => "P"
+            ],
+            "At gatherings, do you:" => [
+                "Stay late, enjoying yourself more and more" => "E",
+                "Leave early, feeling worn out" => "I"
+            ],
+            "Are you more attracted to:" => [
+                "Practical people" => "S",
+                "Imaginative people" => "N"
+            ],
+            "Are you more interested in:" => [
+                "What is real" => "S",
+                "What is possible" => "N"
+            ],
+            "When evaluating others, do you focus more on:" => [
+                "Rules than exceptions" => "T",
+                "Exceptions than rules" => "F"
+            ],
+            "When approaching others, do you tend to be:" => [
+                "Objective" => "T",
+                "Personal" => "F"
+            ],
+            "Are you more:" => [
+                "Punctual" => "J",
+                "Laid-back" => "P"
+            ],
+            "Does it bother you more to have things:" => [
+                "Incomplete" => "J",
+                "Finished" => "P"
+            ],
         // Ajoutez les autres questions ici
     ];
 
@@ -77,9 +105,9 @@ class MbtiQuizController extends Controller
         // Calculer le type MBTI
         $mbti_type = '';
         $mbti_type .= $results['E'] >= $results['I'] ? 'E' : 'I';
-        $mbti_type .= $results['S'] >= $results['N'] ? 'S' : 'N';
-        $mbti_type .= $results['T'] >= $results['F'] ? 'T' : 'F';
-        $mbti_type .= $results['J'] >= $results['P'] ? 'J' : 'P';
+        $mbti_type .= $results['N'] >= $results['S'] ? 'N' : 'S';
+        $mbti_type .= $results['F'] >= $results['T'] ? 'F' : 'T';
+        $mbti_type .= $results['P'] >= $results['J'] ? 'P' : 'J';
 
         // Mettre à jour le type MBTI de l'utilisateur
         $user = Auth::user();
