@@ -1,10 +1,11 @@
 <x-app-layout>
+    <link href="{{ asset('card.css') }}" rel="stylesheet">
     <!-- Page Content -->
     <main>
         <div style="display: flex; height: 85vh;">
             <div style="width: 100px; color: black; padding: 20px;">
                 <!-- start navbar --> 
-                @include('layouts.sidebar')  
+                @include('layouts.sidebar')    
                 <!-- end navbar -->
             </div>
             <section class="container">
