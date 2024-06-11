@@ -12,7 +12,7 @@
             <img class="image_start" src="{{ asset('images/Level3.png') }}" alt="Business Model Icon">
         </div>
         <h1>JOB DESCRIPTION</h1>
-        <button class="start-button">start</button>
+        <button class="start-button" onclick="window.location.href='card'">start</button>
     </div>
 </body>
 
