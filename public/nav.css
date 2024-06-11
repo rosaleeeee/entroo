@@ -20,7 +20,6 @@
     left:0;
     width: 200px;
     transition: width 0.2s linear;
-    box-shadow:0 20px 35px rgba(0,0,0,0.1);
 }
 .logo{
     text-align:-50px;
@@ -63,10 +62,10 @@ a{
     position: relative;
     top: 12px;
     margin-left: 10px;
-    color: aliceblue;
+    color: rgb(233, 234, 235);
 }
 a:hover{
-    background: #a5a5a8;
+    background: #3434b3;
 }
 .levels{
 position: relative;
@@ -76,6 +75,7 @@ margin-left: 250px;
 }
 li{
    margin-top: -7%;
+
    
 }
 .levels {
@@ -157,8 +157,5 @@ li{
   
   .text-black {
     color: #000000;
+    
   }
-
-.level_pointer{
-  cursor :pointer;
-}
