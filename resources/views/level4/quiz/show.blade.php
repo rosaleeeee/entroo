@@ -27,59 +27,32 @@
             @php
                 $questionKeys = array_keys($questions);
                 $totalQuestions = count($questionKeys);
-                $questionsPerPage =4;
             @endphp
 
-            @for ($i = 0; $i < $totalQuestions; $i += $questionsPerPage)
-                <div class="quiz-section" data-start-index="{{ $i }}">
-                    @for ($j = $i; $j < min($i + $questionsPerPage, $totalQuestions); $j++)
-                        @php
-                            $question = $questionKeys[$j];
-                            $key = $formatQuestionKey($question);
-                        @endphp
-                        <div class="question">
-                            <p>{{ $question }}</p>
-                            <div class="answers">
-                                @foreach($questions[$question] as $answer => $type)
-                                    <button type="button" class="answer-button" data-question="{{ $key }}" data-answer="{{ $type }}">{{ $answer }}</button>
-                                @endforeach
-                                <input type="hidden" name="{{ $key }}" value="">
-                            </div>
+            <div class="quiz-section">
+                @foreach ($questionKeys as $question)
+                    @php
+                        $key = str_replace(' ', '_', strtolower($question));
+                    @endphp
+                    <div class="question">
+                        <p>{{ $question }}</p>
+                        <div class="answers">
+                            @foreach($questions[$question] as $answer => $type)
+                                <button type="button" class="answer-button" data-question="{{ $key }}" data-answer="{{ $type }}">{{ $answer }}</button>
+                            @endforeach
+                            <input type="hidden" name="{{ $key }}" value="">
                         </div>
-                    @endfor
-                </div>
-            @endfor
-
-            <div class="pagination">
-                <button type="button" class="btn-next">Next</button>
+                    </div>
+                @endforeach
             </div>
 
-            <button type="submit" class="submit-button" style="display:none;">Submit</button>
+            <button type="submit" class="submit-button">Submit</button>
         </form>
     </div>
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
         $(document).ready(function() {
-            const totalSections = $('.quiz-section').length;
-            let currentSectionIndex = 0;
-
-            $('.quiz-section').hide();
-            $('.quiz-section:first').show();
-
-            $('.btn-next').click(function() {
-                const currentSection = $('.quiz-section:visible');
-                const nextSection = currentSection.next('.quiz-section');
-                currentSection.hide();
-                nextSection.show();
-                currentSectionIndex++;
-
-                if (currentSectionIndex === totalSections - 1) {
-                    $('.btn-next').hide();
-                    $('.submit-button').show();
-                }
-            });
-
             $('.answer-button').click(function() {
                 const questionKey = $(this).data('question');
                 const answerValue = $(this).data('answer');
