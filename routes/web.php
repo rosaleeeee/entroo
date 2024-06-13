@@ -3,6 +3,10 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MbtiQuizController;
+use Barryvdh\DomPDF\Facade\Pdf;
+
+use App\Models\User;
+
 require __DIR__.'/auth.php';
 
 Route::get('/', function () {
@@ -63,5 +67,39 @@ Route::get('/level4/quiz/show', [MbtiQuizController::class, 'show'])->name('quiz
 Route::post('/level4/quiz/show', [MbtiQuizController::class, 'submit'])->name('quiz.submit');
 Route::get('/level4/result', [MbtiQuizController::class, 'result'])->name('quiz.result');
 Route::get('/level4/quiz/result', [App\Http\Controllers\MbtiQuizController::class, 'result'])->name('quiz.result');
+
+
+
+Route::get('/mbti-pdf/{id}', function ($user_id) {
+    // Récupérer l'utilisateur par son ID
+    $user = User::findOrFail($user_id);
+
+    // Définir les vues pour chaque type MBTI
+    $views = [
+        'INTJ' => 'level4.quiz.mbti_pdf.INTJ',
+        'ENTP' => 'level4.quiz.mbti_pdf.ENTP',
+        'ENFP' => 'level4.quiz.mbti_pdf.ENFP',
+        'INFJ' => 'level4.quiz.mbti_pdf.INFJ',
+        'INFP' => 'level4.quiz.mbti_pdf.INFP',
+        'ISTJ' => 'level4.quiz.mbti_pdf.ISTJ',
+        'ISFJ' => 'level4.quiz.mbti_pdf.ISFJ',
+        'ISTP' => 'level4.quiz.mbti_pdf.ISTP',
+        'ISFP' => 'level4.quiz.mbti_pdf.ISFP',
+        'ENTJ' => 'level4.quiz.mbti_pdf.ENTJ',
+        'ENFJ' => 'level4.quiz.mbti_pdf.ENFJ',
+        'ESTJ' => 'level4.quiz.mbti_pdf.ESTJ',
+        'ESFJ' => 'level4.quiz.mbti_pdf.ESFJ',
+        'ESTP' => 'level4.quiz.mbti_pdf.ESTP',
+        'ESFP' => 'level4.quiz.mbti_pdf.ESFP',
+    ];
+    
+    $view = $views[$user->mbti_type];
+
+    // Charger la vue et passer les données
+    $pdf = PDF::loadView($view, compact('user'));
+
+    // Télécharger le PDF
+    return $pdf->download('mbti_profile.pdf');
+});
 
 require __DIR__.'/auth.php';

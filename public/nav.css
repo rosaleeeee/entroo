@@ -106,11 +106,28 @@ li{
     padding-left: 2rem;
     padding-right: 2rem;
   }
-  
-  .bg-white {
-    background-color: #ffffff;
+  .level_title_{
+    color: white;
+    font-weight: bold;
+    font-size: 20px;
   }
-  
+
+  .bg-white1 {
+    background-color: #13538A;
+    cursor: pointer;
+  }
+  .bg-white2 {
+    background-color: #1C66A4;
+    cursor: pointer;
+  }
+  .bg-white3 {
+    background-color: #377CB8;
+    cursor: pointer;
+  }
+  .bg-white4 {
+    background-color: #5398D4;
+    cursor: pointer;
+  } 
   .overflow-hidden {
     overflow: hidden;
   }
@@ -120,7 +137,7 @@ li{
   }
   
   .sm\:rounded-lg {
-    border-radius: 0.5rem;
+    border-radius: 7rem;
   }
   
   .p-6 {
@@ -156,6 +173,6 @@ li{
   }
   
   .text-black {
-    color: #000000;
+    color: #ffffff;
     
   }
