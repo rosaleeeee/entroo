@@ -8,13 +8,12 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
         <title>Result</title>
     </head>
-    <body>
-        
+    <body> 
         @include('layouts.sidebar')
-        <div class="container_result">
-          <form action="{{ url('/mbti-pdf/' . $user->id) }}" method="GET">
-            <button type="submit" class="btn">Télécharger le PDF</button>
+        <form class="container_btn" action="{{ url('/mbti-pdf/' . $user->id) }}" method="GET">
+          <button type="submit" class="btn">Downoald PDF</button>
         </form>
+        <div class="container_result">
             @php
             if ($results_E >= $results_I) {$v1 = ($results_E) / ($results_E + $results_I);} else {$v1 = ($results_I) / ($results_E + $results_I);}           
             if ($results_F >= $results_T) {$v3 = ($results_F) / ($results_F + $results_T);} else {$v3 = ($results_T) / ($results_F + $results_T);}
@@ -26,36 +25,104 @@
             if ($v4 == 0.5) {$v4 =0.51;}
             @endphp
 
-            <h1>Your MBTI Type is: {{ $mbti_type }}</h1>
+            <h1 class="titre1">Your MBTI Type is: </h1> <br>
+            <h1 class="mbti_titre" > {{ $mbti_type }}</h1> <br>
             <div class="x">    
-            <div>
-            <div class="pie animate no-round" style="--p:{{$v1 * 100}};--c:orange;"> {{round($v1 * 100)}}%</div>        
-            @if ($results_E >= $results_I) <p class="text1" > Extraversion</P> @else <P class="text1" > Introversion </p> @endif
+              <div class="container_audio">
+                <div class="pie animate no-round" style="--p:{{$v1 * 100}};--c:orange;">{{round($v1 * 100)}}%</div>
+                <div class="button-container">
+                    @if ($results_E >= $results_I)
+                        <button id="playButton1" class="audioButton">Extraversion <img class="image_volume" src="{{ asset('mbti/volume.png') }}" alt=""></button>
+                        <audio id="audioPlayer1" style="display: none;">
+                            <source src="{{ asset('mbti/e.mp3') }}" type="audio/mpeg">
+                        </audio>
+                    @else
+                        <button id="playButton1" class="audioButton">Introversion <img class="image_volume" src="{{ asset('mbti/volume.png') }}" alt=""></button>
+                        <audio id="audioPlayer1" style="display: none;">
+                            <source src="{{ asset('mbti/i.mp3') }}" type="audio/mpeg">
+                        </audio>
+                    @endif
+                </div>
             </div>
-            <div>   
-            <div class="pie animate no-round" style="--p:{{$v2 * 100}};--c:orange;"> {{round($v2 * 100)}}%</div>
-            @if ($results_N >= $results_S) <p class="text1" > Intuition  </P> @else <P class="text1" > Sensing </p> @endif
-            </div>
-            <div>
-            <div class="pie animate no-round" style="--p:{{$v3 * 100}};--c:orange;"> {{round($v3 * 100)}}%</div>
-            @if ($results_F >= $results_T) <p class="text1" > Feeling </P> @else <P class="text1" > Thinking </p> @endif           
-            </div>
-            <div>
-            <div class="pie animate no-round" style="--p:{{$v4 * 100}};--c:orange;"> {{round($v4 * 100)}}%</div>
-            @if ($results_P >= $results_J) <p class="text1" > Perceiving </P> @else <P class="text1" > Judging </p> @endif
-            </div>
-            </div>    
-            <p>E: {{ $results_E }}</p>
-            <p>I: {{ $results_I }}</p>
-            <p>S: {{ $results_S }}</p>
-            <p>N: {{ $results_N }}</p>
-            <p>T: {{ $results_T }}</p>
-            <p>F: {{ $results_F }}</p>
-            <p>J: {{ $results_J }}</p>
-            <p>P: {{ $results_P }}</p>    
-    <h1>About Your Type</h1> 
 
-    @if ($mbti_type == 'INTJ')
+            <div class="container_audio">
+            <div class="pie animate no-round" style="--p:{{$v2 * 100}};--c:orange;">{{round($v2 * 100)}}%</div>
+    <div class="button-container">
+        @if ($results_N >= $results_S)
+            <button id="playButton2" class="audioButton">Intuition<img class="image_volume" src="{{ asset('mbti/volume.png') }}" </button>
+            <audio id="audioPlayer2" style="display: none;">
+                <source src="{{ asset('mbti/n.mp3') }}" type="audio/mpeg">
+            </audio>
+        @else
+            <button id="playButton2" class="audioButton">Sensing<img class="image_volume" src="{{ asset('mbti/volume.png') }}" </button>
+            <audio id="audioPlayer2" style="display: none;">
+                <source src="{{ asset('mbti/s.mp3') }}" type="audio/mpeg">
+            </audio>
+        @endif
+    </div>
+  </div>
+
+    <div class="container_audio">
+    <div class="pie animate no-round" style="--p:{{$v3 * 100}};--c:orange;">{{round($v3 * 100)}}%</div>
+    <div class="button-container">
+        @if ($results_F >= $results_T)
+            <button id="playButton3" class="audioButton">Feeling<img class="image_volume" src="{{ asset('mbti/volume.png') }}" </button>
+            <audio id="audioPlayer3" style="display: none;">
+                <source src="{{ asset('mbti/f.mp3') }}" type="audio/mpeg">
+            </audio>
+        @else
+            <button id="playButton3" class="audioButton">Thinking<img class="image_volume" src="{{ asset('mbti/volume.png') }}" </button>
+            <audio id="audioPlayer3" style="display: none;">
+                <source src="{{ asset('mbti/t.mp3') }}" type="audio/mpeg">
+            </audio>
+        @endif
+    </div>
+  </div>
+
+    <div class="container_audio">
+    <div class="pie animate no-round" style="--p:{{$v4 * 100}};--c:orange;">{{round($v4 * 100)}}%</div>
+    <div class="button-container">
+        @if ($results_P >= $results_J)
+            <button id="playButton4" class="audioButton">Perceiving<img class="image_volume" src="{{ asset('mbti/volume.png') }}" </button>
+            <audio id="audioPlayer4" style="display: none;">
+                <source src="{{ asset('mbti/p.mp3') }}" type="audio/mpeg">
+            </audio>
+        @else
+            <button id="playButton4" class="audioButton">Judging<img class="image_volume" src="{{ asset('mbti/volume.png') }}" </button>
+            <audio id="audioPlayer4" style="display: none;">
+                <source src="{{ asset('mbti/j.mp3') }}" type="audio/mpeg">
+            </audio>
+        @endif
+    </div>
+  </div>
+            </div> 
+            <script>
+             document.addEventListener('DOMContentLoaded', function() {
+    function setupAudioControls(playButtonId, audioPlayerId) {
+        var audio = document.getElementById(audioPlayerId);
+        var playButton = document.getElementById(playButtonId);
+
+        playButton.addEventListener('click', function() {
+            if (audio.paused) {
+                audio.play();
+            } else {
+                audio.pause();
+            }
+        });
+    }
+
+    setupAudioControls('playButton1', 'audioPlayer1');
+    setupAudioControls('playButton2', 'audioPlayer2');
+    setupAudioControls('playButton3', 'audioPlayer3');
+    setupAudioControls('playButton4', 'audioPlayer4');
+});
+ </script> 
+    <br>      <br>                    
+   
+<button class="titre_et_img_o" onclick="toggleMBTIAudio()">
+        <h1 class="titre_et_img">About Your Type</h1>
+        <img class="image_volume" src="{{ asset('mbti/volume1.png') }}" alt="Volume Icon">
+    </button>    @if ($mbti_type == 'INTJ')
         <p class="info_mbti">INTJs are strategic, analytical, and independent individuals known for their ability to see the big picture and develop long-term plans. They are highly logical and excel at solving complex problems, often using their innovative thinking to create unique solutions. INTJs value intelligence and competence and strive for excellence in everything they do. They prefer to work independently or with a small group of like-minded individuals, valuing efficiency and productivity. Though reserved, INTJs are confident in their abilities and are often seen as visionary leaders. They are driven by a desire to achieve their goals and make significant contributions to their fields. Their decision-making is guided by logic and objective analysis, and they are often critical of inefficiency and incompetence. INTJs enjoy intellectual challenges and are constantly seeking to expand their knowledge and understanding of the world.</p>
     @elseif ($mbti_type == 'INTP')
         <p class="info_mbti">INTPs are analytical, logical, and innovative individuals who excel at understanding complex concepts and solving intricate problems. They are deeply curious and enjoy exploring new ideas and theories, often delving into abstract and theoretical subjects. INTPs value knowledge and are constantly seeking to expand their understanding of the world around them. They are independent thinkers who prefer to work alone or with a small group of like-minded individuals. INTPs are reserved and private, but they are also open-minded and enjoy engaging in intellectual debates and discussions. They are logical and objective, often relying on their analytical skills to make decisions. INTPs are innovative and enjoy finding unique solutions to problems, often thinking outside the box. They are driven by a desire to understand how things work and are often seen as intellectuals and scholars. Their ability to see connections between seemingly unrelated ideas makes them effective problem solvers and thinkers.</p>
@@ -90,129 +157,144 @@
     @endif
     
     {{-- card slider--}}
-    
- 
+<script>
+        let audio;
+        function toggleMBTIAudio() {
+            var mbtiType = "{{ $mbti_type }}";
+            if (!audio) {
+                audio = new Audio("{{ asset('mbti') }}/" + mbtiType + ".mp3");
+            }
+            if (audio.paused) {
+                audio.play();
+            } else {
+                audio.pause();
+            }
+        }
+    </script>
+ <br><br>       
+<h1 class="titre_et_img">Public figures have the same MBTI type as you</h1> <br><br>       
 <div class="xx">
 <div class="wrapper"> 
 		<i id="left" class="fa-solid fas fa-angle-left"></i> 
 		<ul class="carousel"> 
       @if ($mbti_type == 'INTJ')
-      <li class="card"> <div class="img"><img src="{{ asset('images_mbti/INTJ1.jfif') }}" alt="" draggable="false"> </div> <h2 style="color: green; font-weight:bold;"> elon musk </h2> </li>  
-      <li class="card"> <div class="img"><img src="{{ asset('images_mbti/INTJ2.jfif') }}" alt="" draggable="false"> </div> <h2 style="color: green; font-weight:bold;"> michelle obama </h2> </li>  
-      <li class="card"> <div class="img"><img src="{{ asset('images_mbti/INTJ3.jfif') }}" alt="" draggable="false"> </div> <h2 style="color: green; font-weight:bold;"> friedrich nietzsche </h2> </li>  
-      <li class="card"> <div class="img"><img src="{{ asset('images_mbti/INTJ4.jfif') }}" alt="" draggable="false"> </div> <h2 style="color: green; font-weight:bold;"> christopher nolan </h2> </li>  
-      <li class="card"> <div class="img"><img src="{{ asset('images_mbti/INTJ5.jfif') }}" alt="" draggable="false"> </div> <h2 style="color: green; font-weight:bold;"> colin powell </h2> </li>  
+      <li class="card"> <div class="img"><img src="{{ asset('images_mbti/INTJ1.jfif') }}" alt="" draggable="false"> </div> <h2 style="color: rgb(248, 138, 13); font-weight:bold;"> elon musk </h2> </li>  
+      <li class="card"> <div class="img"><img src="{{ asset('images_mbti/INTJ2.jfif') }}" alt="" draggable="false"> </div> <h2 style="color: rgb(248, 138, 13); font-weight:bold;"> michelle obama </h2> </li>  
+      <li class="card"> <div class="img"><img src="{{ asset('images_mbti/INTJ3.jfif') }}" alt="" draggable="false"> </div> <h2 style="color: rgb(248, 138, 13); font-weight:bold;"> friedrich nietzsche </h2> </li>  
+      <li class="card"> <div class="img"><img src="{{ asset('images_mbti/INTJ4.jfif') }}" alt="" draggable="false"> </div> <h2 style="color: rgb(248, 138, 13); font-weight:bold;"> christopher nolan </h2> </li>  
+      <li class="card"> <div class="img"><img src="{{ asset('images_mbti/INTJ5.jfif') }}" alt="" draggable="false"> </div> <h2 style="color: rgb(248, 138, 13); font-weight:bold;"> colin powell </h2> </li>  
 
       @elseif ($mbti_type == 'INTP')
-      <li class="card"> <div class="img"><img src="{{ asset('images_mbti/INTP1.jfif') }}" alt="" draggable="false"> </div> <h2 style="color: green; font-weight:bold;"> bill gates </h2> </li>  
-      <li class="card"> <div class="img"><img src="{{ asset('images_mbti/INTP2.jfif') }}" alt="" draggable="false"> </div> <h2 style="color: green; font-weight:bold;"> albert einstein </h2> </li>  
-      <li class="card"> <div class="img"><img src="{{ asset('images_mbti/INTP3.jfif') }}" alt="" draggable="false"> </div> <h2 style="color: green; font-weight:bold;"> kristen stewart </h2> </li>  
-      <li class="card"> <div class="img"><img src="{{ asset('images_mbti/INTP4.jfif') }}" alt="" draggable="false"> </div> <h2 style="color: green; font-weight:bold;"> isaac newton </h2> </li>  
-      <li class="card"> <div class="img"><img src="{{ asset('images_mbti/INTP5.jfif') }}" alt="" draggable="false"> </div> <h2 style="color: green; font-weight:bold;"> stanley crouch </h2> </li>  
+      <li class="card"> <div class="img"><img src="{{ asset('images_mbti/INTP1.jfif') }}" alt="" draggable="false"> </div> <h2 style="color: rgb(248, 138, 13); font-weight:bold;"> bill gates </h2> </li>  
+      <li class="card"> <div class="img"><img src="{{ asset('images_mbti/INTP2.jfif') }}" alt="" draggable="false"> </div> <h2 style="color: rgb(248, 138, 13); font-weight:bold;"> albert einstein </h2> </li>  
+      <li class="card"> <div class="img"><img src="{{ asset('images_mbti/INTP3.jfif') }}" alt="" draggable="false"> </div> <h2 style="color: rgb(248, 138, 13); font-weight:bold;"> kristen stewart </h2> </li>  
+      <li class="card"> <div class="img"><img src="{{ asset('images_mbti/INTP4.jfif') }}" alt="" draggable="false"> </div> <h2 style="color: rgb(248, 138, 13); font-weight:bold;"> isaac newton </h2> </li>  
+      <li class="card"> <div class="img"><img src="{{ asset('images_mbti/INTP5.jfif') }}" alt="" draggable="false"> </div> <h2 style="color: rgb(248, 138, 13); font-weight:bold;"> stanley crouch </h2> </li>  
 
       @elseif ($mbti_type == 'INFJ')
-      <li class="card"> <div class="img"><img src="{{ asset('images_mbti/INFJ1.jfif') }}" alt="" draggable="false"> </div> <h2 style="color: green; font-weight:bold;"> nelson mandela </h2> </li>  
-      <li class="card"> <div class="img"><img src="{{ asset('images_mbti/INFJ2.jfif') }}" alt="" draggable="false"> </div> <h2 style="color: green; font-weight:bold;"> lady gaga </h2> </li>  
-      <li class="card"> <div class="img"><img src="{{ asset('images_mbti/INFJ3.jfif') }}" alt="" draggable="false"> </div> <h2 style="color: green; font-weight:bold;"> morgan freeman </h2> </li>  
-      <li class="card"> <div class="img"><img src="{{ asset('images_mbti/INFJ4.jfif') }}" alt="" draggable="false"> </div> <h2 style="color: green; font-weight:bold;"> nicole kidman </h2> </li>  
-      <li class="card"> <div class="img"><img src="{{ asset('images_mbti/INFJ5.jfif') }}" alt="" draggable="false"> </div> <h2 style="color: green; font-weight:bold;"> martin luther king </h2> </li>
+      <li class="card"> <div class="img"><img src="{{ asset('images_mbti/INFJ1.jfif') }}" alt="" draggable="false"> </div> <h2 style="color: rgb(248, 138, 13); font-weight:bold;"> nelson mandela </h2> </li>  
+      <li class="card"> <div class="img"><img src="{{ asset('images_mbti/INFJ2.jfif') }}" alt="" draggable="false"> </div> <h2 style="color: rgb(248, 138, 13); font-weight:bold;"> lady gaga </h2> </li>  
+      <li class="card"> <div class="img"><img src="{{ asset('images_mbti/INFJ3.jfif') }}" alt="" draggable="false"> </div> <h2 style="color: rgb(248, 138, 13); font-weight:bold;"> morgan freeman </h2> </li>  
+      <li class="card"> <div class="img"><img src="{{ asset('images_mbti/INFJ4.jfif') }}" alt="" draggable="false"> </div> <h2 style="color: rgb(248, 138, 13); font-weight:bold;"> nicole kidman </h2> </li>  
+      <li class="card"> <div class="img"><img src="{{ asset('images_mbti/INFJ5.jfif') }}" alt="" draggable="false"> </div> <h2 style="color: rgb(248, 138, 13); font-weight:bold;"> martin luther king </h2> </li>
   
 
       @elseif ($mbti_type == 'INFP')
-      <li class="card"> <div class="img"><img src="{{ asset('images_mbti/INFP1.jfif') }}"alt="" draggable="false"> </div> <h2 style="color: green; font-weight:bold;"> william shakespeare </h2> </li>  
-      <li class="card"> <div class="img"><img src="{{ asset('images_mbti/INFP2.jpg') }}"alt="" draggable="false"> </div> <h2 style="color: green; font-weight:bold;"> jony depp </h2>  </li>  
-			<li class="card"> <div class="img"><img src="{{ asset('images_mbti/INFP3.jfif') }}"alt="" draggable="false"> </div> <h2 style="color: green; font-weight:bold;"> william wordsworth </h2> </li>  
-			<li class="card"> <div class="img"><img src="{{ asset('images_mbti/INFP4.jfif') }}"alt="" draggable="false"> </div> <h2 style="color: green; font-weight:bold;"> julia roberts </h2> </li>  
-			<li class="card"> <div class="img"><img src="{{ asset('images_mbti/INFP5.jfif') }}"alt="" draggable="false"> </div> <h2 style="color: green; font-weight:bold;">alicia keys </h2> </li>  
+      <li class="card"> <div class="img"><img src="{{ asset('images_mbti/INFP1.jfif') }}"alt="" draggable="false"> </div> <h2 style="color: rgb(248, 138, 13); font-weight:bold;"> william shakespeare </h2> </li>  
+      <li class="card"> <div class="img"><img src="{{ asset('images_mbti/INFP2.jpg') }}"alt="" draggable="false"> </div> <h2 style="color: rgb(248, 138, 13); font-weight:bold;"> jony depp </h2>  </li>  
+			<li class="card"> <div class="img"><img src="{{ asset('images_mbti/INFP3.jfif') }}"alt="" draggable="false"> </div> <h2 style="color: rgb(248, 138, 13); font-weight:bold;"> william wordsworth </h2> </li>  
+			<li class="card"> <div class="img"><img src="{{ asset('images_mbti/INFP4.jfif') }}"alt="" draggable="false"> </div> <h2 style="color: rgb(248, 138, 13); font-weight:bold;"> julia roberts </h2> </li>  
+			<li class="card"> <div class="img"><img src="{{ asset('images_mbti/INFP5.jfif') }}"alt="" draggable="false"> </div> <h2 style="color: rgb(248, 138, 13); font-weight:bold;">alicia keys </h2> </li>  
 
       @elseif ($mbti_type == 'ISFJ')
-      <li class="card"> <div class="img"><img src="{{ asset('images_mbti/ISFJ1.jfif') }}"alt="" draggable="false"> </div> <h2 style="color: green; font-weight:bold;"> beyoncé </h2>  </li>  
-      <li class="card"> <div class="img"><img src="{{ asset('images_mbti/ISFJ2.jfif') }}"alt="" draggable="false"> </div> <h2 style="color: green; font-weight:bold;"> queen elizabeth </h2>  </li>  
-			<li class="card"> <div class="img"><img src="{{ asset('images_mbti/ISFJ3.jfif') }}"alt="" draggable="false"> </div> <h2 style="color: green; font-weight:bold;"> vin diesel </h2>  </li>  
-			<li class="card"> <div class="img"><img src="{{ asset('images_mbti/ISFJ4.jfif') }}"alt="" draggable="false"> </div> <h2 style="color: green; font-weight:bold;"> halle berry </h2>  </li>  
-			<li class="card"> <div class="img"><img src="{{ asset('images_mbti/ISFJ5.jfif') }}"alt="" draggable="false"> </div> <h2 style="color: green; font-weight:bold;"> kate middleton </h2>  </li>  
+      <li class="card"> <div class="img"><img src="{{ asset('images_mbti/ISFJ1.jfif') }}"alt="" draggable="false"> </div> <h2 style="color: rgb(248, 138, 13); font-weight:bold;"> beyoncé </h2>  </li>  
+      <li class="card"> <div class="img"><img src="{{ asset('images_mbti/ISFJ2.jfif') }}"alt="" draggable="false"> </div> <h2 style="color: rgb(248, 138, 13); font-weight:bold;"> queen elizabeth </h2>  </li>  
+			<li class="card"> <div class="img"><img src="{{ asset('images_mbti/ISFJ3.jfif') }}"alt="" draggable="false"> </div> <h2 style="color: rgb(248, 138, 13); font-weight:bold;"> vin diesel </h2>  </li>  
+			<li class="card"> <div class="img"><img src="{{ asset('images_mbti/ISFJ4.jfif') }}"alt="" draggable="false"> </div> <h2 style="color: rgb(248, 138, 13); font-weight:bold;"> halle berry </h2>  </li>  
+			<li class="card"> <div class="img"><img src="{{ asset('images_mbti/ISFJ5.jfif') }}"alt="" draggable="false"> </div> <h2 style="color: rgb(248, 138, 13); font-weight:bold;"> kate middleton </h2>  </li>  
   
       @elseif ($mbti_type == 'ISFP')
-      <li class="card"> <div class="img"><img src="{{ asset('images_mbti/ISFP1.jfif') }}" alt="" draggable="false"> </div> <h2 style="color: green; font-weight:bold;"> lana del rey </h2> </li>  
-      <li class="card"> <div class="img"><img src="{{ asset('images_mbti/ISFP2.jfif') }}" alt="" draggable="false"> </div> <h2 style="color: green; font-weight:bold;"> kevin costner </h2> </li>  
-      <li class="card"> <div class="img"><img src="{{ asset('images_mbti/ISFP3.jfif') }}" alt="" draggable="false"> </div> <h2 style="color: green; font-weight:bold;"> michael jackson </h2> </li>  
-      <li class="card"> <div class="img"><img src="{{ asset('images_mbti/ISFP4.jfif') }}" alt="" draggable="false"> </div> <h2 style="color: green; font-weight:bold;"> jeon jungkook </h2> </li>  
-      <li class="card"> <div class="img"><img src="{{ asset('images_mbti/ISFP5.jfif') }}" alt="" draggable="false"> </div> <h2 style="color: green; font-weight:bold;"> frida kahlo </h2> </li>  
+      <li class="card"> <div class="img"><img src="{{ asset('images_mbti/ISFP1.jfif') }}" alt="" draggable="false"> </div> <h2 style="color: rgb(248, 138, 13); font-weight:bold;"> lana del rey </h2> </li>  
+      <li class="card"> <div class="img"><img src="{{ asset('images_mbti/ISFP2.jfif') }}" alt="" draggable="false"> </div> <h2 style="color: rgb(248, 138, 13); font-weight:bold;"> kevin costner </h2> </li>  
+      <li class="card"> <div class="img"><img src="{{ asset('images_mbti/ISFP3.jfif') }}" alt="" draggable="false"> </div> <h2 style="color: rgb(248, 138, 13); font-weight:bold;"> michael jackson </h2> </li>  
+      <li class="card"> <div class="img"><img src="{{ asset('images_mbti/ISFP4.jfif') }}" alt="" draggable="false"> </div> <h2 style="color: rgb(248, 138, 13); font-weight:bold;"> jeon jungkook </h2> </li>  
+      <li class="card"> <div class="img"><img src="{{ asset('images_mbti/ISFP5.jfif') }}" alt="" draggable="false"> </div> <h2 style="color: rgb(248, 138, 13); font-weight:bold;"> frida kahlo </h2> </li>  
 
       @elseif ($mbti_type == 'ISTJ')
-      <li class="card"> <div class="img"><img src="{{ asset('images_mbti/ISTJ1.jfif') }}"alt="" draggable="false"> </div> <h2 style="color: green; font-weight:bold;"> george washington </h2>  </li>  
-      <li class="card"> <div class="img"><img src="{{ asset('images_mbti/ISTJ2.jfif') }}"alt="" draggable="false"> </div> <h2 style="color: green; font-weight:bold;"> anthony hopkins </h2>  </li>  
-			<li class="card"> <div class="img"><img src="{{ asset('images_mbti/ISTJ3.jfif') }}"alt="" draggable="false"> </div> <h2 style="color: green; font-weight:bold;"> angela merkel </h2>  </li>  
-			<li class="card"> <div class="img"><img src="{{ asset('images_mbti/ISTJ4.jfif') }}"alt="" draggable="false"> </div> <h2 style="color: green; font-weight:bold;"> denzel washington </h2>  </li>  
-			<li class="card"> <div class="img"><img src="{{ asset('images_mbti/ISTJ5.jfif') }}"alt="" draggable="false"> </div> <h2 style="color: green; font-weight:bold;"> sting </h2>  </li>  
+      <li class="card"> <div class="img"><img src="{{ asset('images_mbti/ISTJ1.jfif') }}"alt="" draggable="false"> </div> <h2 style="color: rgb(248, 138, 13); font-weight:bold;"> george washington </h2>  </li>  
+      <li class="card"> <div class="img"><img src="{{ asset('images_mbti/ISTJ2.jfif') }}"alt="" draggable="false"> </div> <h2 style="color: rgb(248, 138, 13); font-weight:bold;"> anthony hopkins </h2>  </li>  
+			<li class="card"> <div class="img"><img src="{{ asset('images_mbti/ISTJ3.jfif') }}"alt="" draggable="false"> </div> <h2 style="color: rgb(248, 138, 13); font-weight:bold;"> angela merkel </h2>  </li>  
+			<li class="card"> <div class="img"><img src="{{ asset('images_mbti/ISTJ4.jfif') }}"alt="" draggable="false"> </div> <h2 style="color: rgb(248, 138, 13); font-weight:bold;"> denzel washington </h2>  </li>  
+			<li class="card"> <div class="img"><img src="{{ asset('images_mbti/ISTJ5.jfif') }}"alt="" draggable="false"> </div> <h2 style="color: rgb(248, 138, 13); font-weight:bold;"> sting </h2>  </li>  
 
       @elseif ($mbti_type == 'ISTP')
-      <li class="card"> <div class="img"><img src="{{ asset('images_mbti/ISTP1.jfif') }}"alt="" draggable="false"> </div> <h2 style="color: green; font-weight:bold;"> michael jordan </h2>  </li>  
-      <li class="card"> <div class="img"><img src="{{ asset('images_mbti/ISTP2.jfif') }}"alt="" draggable="false"> </div> <h2 style="color: green; font-weight:bold;"> olivia wilde </h2>  </li>  
-			<li class="card"> <div class="img"><img src="{{ asset('images_mbti/ISTP3.jfif') }}"alt="" draggable="false"> </div> <h2 style="color: green; font-weight:bold;"> bear grylls </h2>  </li>  
-			<li class="card"> <div class="img"><img src="{{ asset('images_mbti/ISTP4.jfif') }}"alt="" draggable="false"> </div> <h2 style="color: green; font-weight:bold;"> tom cruise </h2>  </li>  
-			<li class="card"> <div class="img"><img src="{{ asset('images_mbti/ISTP5.jfif') }}"alt="" draggable="false"> </div> <h2 style="color: green; font-weight:bold;"> danielle craig </h2>  </li>  
+      <li class="card"> <div class="img"><img src="{{ asset('images_mbti/ISTP1.jfif') }}"alt="" draggable="false"> </div> <h2 style="color: rgb(248, 138, 13); font-weight:bold;"> michael jordan </h2>  </li>  
+      <li class="card"> <div class="img"><img src="{{ asset('images_mbti/ISTP2.jfif') }}"alt="" draggable="false"> </div> <h2 style="color: rgb(248, 138, 13); font-weight:bold;"> olivia wilde </h2>  </li>  
+			<li class="card"> <div class="img"><img src="{{ asset('images_mbti/ISTP3.jfif') }}"alt="" draggable="false"> </div> <h2 style="color: rgb(248, 138, 13); font-weight:bold;"> bear grylls </h2>  </li>  
+			<li class="card"> <div class="img"><img src="{{ asset('images_mbti/ISTP4.jfif') }}"alt="" draggable="false"> </div> <h2 style="color: rgb(248, 138, 13); font-weight:bold;"> tom cruise </h2>  </li>  
+			<li class="card"> <div class="img"><img src="{{ asset('images_mbti/ISTP5.jfif') }}"alt="" draggable="false"> </div> <h2 style="color: rgb(248, 138, 13); font-weight:bold;"> danielle craig </h2>  </li>  
 
       @elseif ($mbti_type == 'ENTP')
-      <li class="card"> <div class="img"><img src="{{ asset('images_mbti/ENTP1.jfif') }}"alt="" draggable="false"> </div> <h2 style="color: green; font-weight:bold;"> mark twain </h2>  </li>  
-      <li class="card"> <div class="img"><img src="{{ asset('images_mbti/ENTP2.jfif') }}"alt="" draggable="false"> </div> <h2 style="color: green; font-weight:bold;"> adam savage </h2>  </li>  
-			<li class="card"> <div class="img"><img src="{{ asset('images_mbti/ENTP3.jfif') }}"alt="" draggable="false"> </div> <h2 style="color: green; font-weight:bold;"> thomas edison </h2>  </li>  
-			<li class="card"> <div class="img"><img src="{{ asset('images_mbti/ENTP4.jfif') }}"alt="" draggable="false"> </div> <h2 style="color: green; font-weight:bold;"> celine dion </h2>  </li>  
-			<li class="card"> <div class="img"><img src="{{ asset('images_mbti/ENTP5.jfif') }}"alt="" draggable="false"> </div> <h2 style="color: green; font-weight:bold;"> julian sark </h2>  </li>  
+      <li class="card"> <div class="img"><img src="{{ asset('images_mbti/ENTP1.jfif') }}"alt="" draggable="false"> </div> <h2 style="color: rgb(248, 138, 13); font-weight:bold;"> mark twain </h2>  </li>  
+      <li class="card"> <div class="img"><img src="{{ asset('images_mbti/ENTP2.jfif') }}"alt="" draggable="false"> </div> <h2 style="color: rgb(248, 138, 13); font-weight:bold;"> adam savage </h2>  </li>  
+			<li class="card"> <div class="img"><img src="{{ asset('images_mbti/ENTP3.jfif') }}"alt="" draggable="false"> </div> <h2 style="color: rgb(248, 138, 13); font-weight:bold;"> thomas edison </h2>  </li>  
+			<li class="card"> <div class="img"><img src="{{ asset('images_mbti/ENTP4.jfif') }}"alt="" draggable="false"> </div> <h2 style="color: rgb(248, 138, 13); font-weight:bold;"> celine dion </h2>  </li>  
+			<li class="card"> <div class="img"><img src="{{ asset('images_mbti/ENTP5.jfif') }}"alt="" draggable="false"> </div> <h2 style="color: rgb(248, 138, 13); font-weight:bold;"> julian sark </h2>  </li>  
 
        @elseif ($mbti_type == 'ENFP')
-      <li class="card"> <div class="img"><img src="{{ asset('images_mbti/ENFP1.jfif') }}" alt="" draggable="false"> </div> <h2 style="color: green; font-weight:bold;"> robert downey jr </h2> </li>  
-      <li class="card"> <div class="img"><img src="{{ asset('images_mbti/ENFP2.jfif') }}" alt="" draggable="false"> </div> <h2 style="color: green; font-weight:bold;"> will smith </h2> </li>  
-      <li class="card"> <div class="img"><img src="{{ asset('images_mbti/ENFP3.jfif') }}" alt="" draggable="false"> </div> <h2 style="color: green; font-weight:bold;"> ellen degeneres </h2> </li>  
-      <li class="card"> <div class="img"><img src="{{ asset('images_mbti/ENFP4.jfif') }}" alt="" draggable="false"> </div> <h2 style="color: green; font-weight:bold;"> quentin tarantino </h2> </li>  
-      <li class="card"> <div class="img"><img src="{{ asset('images_mbti/ENFP5.jfif') }}" alt="" draggable="false"> </div> <h2 style="color: green; font-weight:bold;"> meg ryanx </h2> </li>  
+      <li class="card"> <div class="img"><img src="{{ asset('images_mbti/ENFP1.jfif') }}" alt="" draggable="false"> </div> <h2 style="color: rgb(248, 138, 13); font-weight:bold;"> robert downey jr </h2> </li>  
+      <li class="card"> <div class="img"><img src="{{ asset('images_mbti/ENFP2.jfif') }}" alt="" draggable="false"> </div> <h2 style="color: rgb(248, 138, 13); font-weight:bold;"> will smith </h2> </li>  
+      <li class="card"> <div class="img"><img src="{{ asset('images_mbti/ENFP3.jfif') }}" alt="" draggable="false"> </div> <h2 style="color: rgb(248, 138, 13)en; font-weight:bold;"> ellen degeneres </h2> </li>  
+      <li class="card"> <div class="img"><img src="{{ asset('images_mbti/ENFP4.jfif') }}" alt="" draggable="false"> </div> <h2 style="color: rgb(248, 138, 13); font-weight:bold;"> quentin tarantino </h2> </li>  
+      <li class="card"> <div class="img"><img src="{{ asset('images_mbti/ENFP5.jfif') }}" alt="" draggable="false"> </div> <h2 style="color: rgb(248, 138, 13); font-weight:bold;"> meg ryanx </h2> </li>  
 
       @elseif ($mbti_type == 'ENTJ')
-      <li class="card"> <div class="img"><img src="{{ asset('images_mbti/ENTJ1.jfif') }}" alt="" draggable="false"> </div> <h2 style="color: green; font-weight:bold;"> steve jobs </h2> </li>  
-      <li class="card"> <div class="img"><img src="{{ asset('images_mbti/ENTJ2.jfif') }}" alt="" draggable="false"> </div> <h2 style="color: green; font-weight:bold;"> gordon ramsay </h2> </li>  
-      <li class="card"> <div class="img"><img src="{{ asset('images_mbti/ENTJ3.jfif') }}" alt="" draggable="false"> </div> <h2 style="color: green; font-weight:bold;"> margaret thatcher </h2> </li>  
-      <li class="card"> <div class="img"><img src="{{ asset('images_mbti/ENTJ4.jfif') }}" alt="" draggable="false"> </div> <h2 style="color: green; font-weight:bold;"> franklin d roosevelt </h2> </li>  
-      <li class="card"> <div class="img"><img src="{{ asset('images_mbti/ENTJ5.jfif') }}" alt="" draggable="false"> </div> <h2 style="color: green; font-weight:bold;"> jim carrey </h2> </li>  
+      <li class="card"> <div class="img"><img src="{{ asset('images_mbti/ENTJ1.jfif') }}" alt="" draggable="false"> </div> <h2 style="color: rgb(248, 138, 13); font-weight:bold;"> steve jobs </h2> </li>  
+      <li class="card"> <div class="img"><img src="{{ asset('images_mbti/ENTJ2.jfif') }}" alt="" draggable="false"> </div> <h2 style="color: rgb(248, 138, 13); font-weight:bold;"> gordon ramsay </h2> </li>  
+      <li class="card"> <div class="img"><img src="{{ asset('images_mbti/ENTJ3.jfif') }}" alt="" draggable="false"> </div> <h2 style="color: rgb(248, 138, 13); font-weight:bold;"> margaret thatcher </h2> </li>  
+      <li class="card"> <div class="img"><img src="{{ asset('images_mbti/ENTJ4.jfif') }}" alt="" draggable="false"> </div> <h2 style="color: rgb(248, 138, 13); font-weight:bold;"> franklin d roosevelt </h2> </li>  
+      <li class="card"> <div class="img"><img src="{{ asset('images_mbti/ENTJ5.jfif') }}" alt="" draggable="false"> </div> <h2 style="color: rgb(248, 138, 13); font-weight:bold;"> jim carrey </h2> </li>  
 
       @elseif ($mbti_type == 'ENFJ')
-      <li class="card"> <div class="img"><img src="{{ asset('images_mbti/ENFJ1.jfif') }}" alt="" draggable="false"> </div> <h2 style="color: green; font-weight:bold;"> barack obama </h2> </li>  
-      <li class="card"> <div class="img"><img src="{{ asset('images_mbti/ENFJ2.jfif') }}" alt="" draggable="false"> </div> <h2 style="color: green; font-weight:bold;"> oprah winfrey </h2> </li>  
-      <li class="card"> <div class="img"><img src="{{ asset('images_mbti/ENFJ3.jfif') }}" alt="" draggable="false"> </div> <h2 style="color: green; font-weight:bold;"> john cusack </h2> </li>  
-      <li class="card"> <div class="img"><img src="{{ asset('images_mbti/ENFJ4.jfif') }}" alt="" draggable="false"> </div> <h2 style="color: green; font-weight:bold;"> sean connery </h2> </li>  
-      <li class="card"> <div class="img"><img src="{{ asset('images_mbti/ENFJ5.jfif') }}" alt="" draggable="false"> </div> <h2 style="color: green; font-weight:bold;"> maya angelou </h2> </li>  
+      <li class="card"> <div class="img"><img src="{{ asset('images_mbti/ENFJ1.jfif') }}" alt="" draggable="false"> </div> <h2 style="color: rgb(248, 138, 13); font-weight:bold;"> barack obama </h2> </li>  
+      <li class="card"> <div class="img"><img src="{{ asset('images_mbti/ENFJ2.jfif') }}" alt="" draggable="false"> </div> <h2 style="color: rgb(248, 138, 13); font-weight:bold;"> oprah winfrey </h2> </li>  
+      <li class="card"> <div class="img"><img src="{{ asset('images_mbti/ENFJ3.jfif') }}" alt="" draggable="false"> </div> <h2 style="color: rgb(248, 138, 13); font-weight:bold;"> john cusack </h2> </li>  
+      <li class="card"> <div class="img"><img src="{{ asset('images_mbti/ENFJ4.jfif') }}" alt="" draggable="false"> </div> <h2 style="color: rgb(248, 138, 13); font-weight:bold;"> sean connery </h2> </li>  
+      <li class="card"> <div class="img"><img src="{{ asset('images_mbti/ENFJ5.jfif') }}" alt="" draggable="false"> </div> <h2 style="color: rgb(248, 138, 13); font-weight:bold;"> maya angelou </h2> </li>  
 
       @elseif ($mbti_type == 'ESTP')
-      <li class="card"> <div class="img"><img src="{{ asset('images_mbti/ESTP1.jfif') }}" alt="" draggable="false"> </div> <h2 style="color: green; font-weight:bold;"> ernest hemingway </h2> </li>  
-      <li class="card"> <div class="img"><img src="{{ asset('images_mbti/ESTP2.jfif') }}" alt="" draggable="false"> </div> <h2 style="color: green; font-weight:bold;"> jack nicholson </h2> </li>  
-      <li class="card"> <div class="img"><img src="{{ asset('images_mbti/ESTP3.jfif') }}" alt="" draggable="false"> </div> <h2 style="color: green; font-weight:bold;"> eddie murphy </h2> </li>  
-      <li class="card"> <div class="img"><img src="{{ asset('images_mbti/ESTP4.jfif') }}" alt="" draggable="false"> </div> <h2 style="color: green; font-weight:bold;"> bruce willis </h2> </li>  
-      <li class="card"> <div class="img"><img src="{{ asset('images_mbti/ESTP5.jfif') }}" alt="" draggable="false"> </div> <h2 style="color: green; font-weight:bold;"> nicolas sarkozy </h2> </li>  
+      <li class="card"> <div class="img"><img src="{{ asset('images_mbti/ESTP1.jfif') }}" alt="" draggable="false"> </div> <h2 style="color: rgb(248, 138, 13); font-weight:bold;"> ernest hemingway </h2> </li>  
+      <li class="card"> <div class="img"><img src="{{ asset('images_mbti/ESTP2.jfif') }}" alt="" draggable="false"> </div> <h2 style="color: rgb(248, 138, 13); font-weight:bold;"> jack nicholson </h2> </li>  
+      <li class="card"> <div class="img"><img src="{{ asset('images_mbti/ESTP3.jfif') }}" alt="" draggable="false"> </div> <h2 style="color: rgb(248, 138, 13); font-weight:bold;"> eddie murphy </h2> </li>  
+      <li class="card"> <div class="img"><img src="{{ asset('images_mbti/ESTP4.jfif') }}" alt="" draggable="false"> </div> <h2 style="color: rgb(248, 138, 13); font-weight:bold;"> bruce willis </h2> </li>  
+      <li class="card"> <div class="img"><img src="{{ asset('images_mbti/ESTP5.jfif') }}" alt="" draggable="false"> </div> <h2 style="color: rgb(248, 138, 13); font-weight:bold;"> nicolas sarkozy </h2> </li>  
 
       @elseif ($mbti_type == 'ESFP')
-      <li class="card"> <div class="img"><img src="{{ asset('images_mbti/ESFP1.jfif') }}" alt="" draggable="false"> </div> <h2 style="color: green; font-weight:bold;"> adele </h2> </li>  
-      <li class="card"> <div class="img"><img src="{{ asset('images_mbti/ESFP2.jfif') }}" alt="" draggable="false"> </div> <h2 style="color: green; font-weight:bold;"> jamie oliver </h2> </li>  
-      <li class="card"> <div class="img"><img src="{{ asset('images_mbti/ESFP3.jfif') }}" alt="" draggable="false"> </div> <h2 style="color: green; font-weight:bold;"> elton john </h2> </li>  
-      <li class="card"> <div class="img"><img src="{{ asset('images_mbti/ESFP4.jfif') }}" alt="" draggable="false"> </div> <h2 style="color: green; font-weight:bold;"> jamie foxx </h2> </li>  
-      <li class="card"> <div class="img"><img src="{{ asset('images_mbti/ESFP5.jfif') }}" alt="" draggable="false"> </div> <h2 style="color: green; font-weight:bold;"> miley cyrus </h2> </li>  
+      <li class="card"> <div class="img"><img src="{{ asset('images_mbti/ESFP1.jfif') }}" alt="" draggable="false"> </div> <h2 style="color: rgb(248, 138, 13); font-weight:bold;"> adele </h2> </li>  
+      <li class="card"> <div class="img"><img src="{{ asset('images_mbti/ESFP2.jfif') }}" alt="" draggable="false"> </div> <h2 style="color: rgb(248, 138, 13); font-weight:bold;"> jamie oliver </h2> </li>  
+      <li class="card"> <div class="img"><img src="{{ asset('images_mbti/ESFP3.jfif') }}" alt="" draggable="false"> </div> <h2 style="color: rgb(248, 138, 13); font-weight:bold;"> elton john </h2> </li>  
+      <li class="card"> <div class="img"><img src="{{ asset('images_mbti/ESFP4.jfif') }}" alt="" draggable="false"> </div> <h2 style="color: rgb(248, 138, 13); font-weight:bold;"> jamie foxx </h2> </li>  
+      <li class="card"> <div class="img"><img src="{{ asset('images_mbti/ESFP5.jfif') }}" alt="" draggable="false"> </div> <h2 style="color: rgb(248, 138, 13); font-weight:bold;"> miley cyrus </h2> </li>  
 
       @elseif ($mbti_type == 'ESFJ')
-      <li class="card"> <div class="img"><img src="{{ asset('images_mbti/ESFJ1.jfif') }}" alt="" draggable="false"> </div> <h2 style="color: green; font-weight:bold;"> taylor swift </h2> </li>  
-      <li class="card"> <div class="img"><img src="{{ asset('images_mbti/ESFJ2.jfif') }}" alt="" draggable="false"> </div> <h2 style="color: green; font-weight:bold;"> bill clinton </h2> </li>  
-      <li class="card"> <div class="img"><img src="{{ asset('images_mbti/ESFJ3.jfif') }}" alt="" draggable="false"> </div> <h2 style="color: green; font-weight:bold;"> steve harvey </h2> </li>  
-      <li class="card"> <div class="img"><img src="{{ asset('images_mbti/ESFJ4.jfif') }}" alt="" draggable="false"> </div> <h2 style="color: green; font-weight:bold;"> danny glover </h2> </li>  
-      <li class="card"> <div class="img"><img src="{{ asset('images_mbti/ESFJ5.jfif') }}" alt="" draggable="false"> </div> <h2 style="color: green; font-weight:bold;"> jennifer lopez </h2> </li>  
+      <li class="card"> <div class="img"><img src="{{ asset('images_mbti/ESFJ1.jfif') }}" alt="" draggable="false"> </div> <h2 style="color: rgb(248, 138, 13); font-weight:bold;"> taylor swift </h2> </li>  
+      <li class="card"> <div class="img"><img src="{{ asset('images_mbti/ESFJ2.jfif') }}" alt="" draggable="false"> </div> <h2 style="color: rgb(248, 138, 13); font-weight:bold;"> bill clinton </h2> </li>  
+      <li class="card"> <div class="img"><img src="{{ asset('images_mbti/ESFJ3.jfif') }}" alt="" draggable="false"> </div> <h2 style="color: rgb(248, 138, 13); font-weight:bold;"> steve harvey </h2> </li>  
+      <li class="card"> <div class="img"><img src="{{ asset('images_mbti/ESFJ4.jfif') }}" alt="" draggable="false"> </div> <h2 style="color: rgb(248, 138, 13); font-weight:bold;"> danny glover </h2> </li>  
+      <li class="card"> <div class="img"><img src="{{ asset('images_mbti/ESFJ5.jfif') }}" alt="" draggable="false"> </div> <h2 style="color: rgb(248, 138, 13); font-weight:bold;"> jennifer lopez </h2> </li>  
 
       @else
-      <li class="card"> <div class="img"><img src="{{ asset('images_mbti/ESTJ1.jfif') }}" alt="" draggable="false"> </div> <h2 style="color: green; font-weight:bold;"> sonia sotomayor </h2> </li>  
-      <li class="card"> <div class="img"><img src="{{ asset('images_mbti/ESTJ2.jfif') }}" alt="" draggable="false"> </div> <h2 style="color: green; font-weight:bold;"> ella baker </h2> </li>  
-      <li class="card"> <div class="img"><img src="{{ asset('images_mbti/ESTJ3.jfif') }}" alt="" draggable="false"> </div> <h2 style="color: green; font-weight:bold;"> judje judy </h2> </li>  
-      <li class="card"> <div class="img"><img src="{{ asset('images_mbti/ESTJ4.jfif') }}" alt="" draggable="false"> </div> <h2 style="color: green; font-weight:bold;"> john d rockefeller </h2> </li>  
-      <li class="card"> <div class="img"><img src="{{ asset('images_mbti/ESTJ5.jfif') }}" alt="" draggable="false"> </div> <h2 style="color: green; font-weight:bold;"> james monroe </h2> </li>  
+      <li class="card"> <div class="img"><img src="{{ asset('images_mbti/ESTJ1.jfif') }}" alt="" draggable="false"> </div> <h2 style="color: rgb(248, 138, 13); font-weight:bold;"> sonia sotomayor </h2> </li>  
+      <li class="card"> <div class="img"><img src="{{ asset('images_mbti/ESTJ2.jfif') }}" alt="" draggable="false"> </div> <h2 style="color: rgb(248, 138, 13); font-weight:bold;"> ella baker </h2> </li>  
+      <li class="card"> <div class="img"><img src="{{ asset('images_mbti/ESTJ3.jfif') }}" alt="" draggable="false"> </div> <h2 style="color: rgb(248, 138, 13); font-weight:bold;"> judje judy </h2> </li>  
+      <li class="card"> <div class="img"><img src="{{ asset('images_mbti/ESTJ4.jfif') }}" alt="" draggable="false"> </div> <h2 style="color: rgb(248, 138, 13); font-weight:bold;"> john d rockefeller </h2> </li>  
+      <li class="card"> <div class="img"><img src="{{ asset('images_mbti/ESTJ5.jfif') }}" alt="" draggable="false"> </div> <h2 style="color: rgb(248, 138, 13); font-weight:bold;"> james monroe </h2> </li>  
       @endif
     </ul> 
 		<i id="right" class="fa-solid fas fa-angle-right"></i> 
 	</div> 
 	</div> 
+ <br><br>       
 
   <script>document.addEventListener("DOMContentLoaded", function() { 
     const carousel = document.querySelector(".carousel"); 
@@ -295,92 +377,94 @@
     }); 
   }); 
   </script>
-
+<br><br>
     {{-- jops poropositions --}}
+    <h1 class="titre_et_img">Job recommendations based on your MBTI profile</h1>
     <div class="big">
     <div class="container_card">
       @if ($mbti_type == 'INTJ')
       
-      <div class="card"><div class="face face1"><div class="content_card"><span class="stars"></span><h2 class="contenu_card_title">Product Manager </h2><p class="contenu_card"> This role requires strategic planning, vision, and the ability to analyze market trends and user needs. INTJs' ability to think ahead and create structured plans makes them well-suited for this position. </p></div></div><div class="face face2"><h2>Product Manager</h2></div></div>
-      <div class="card"><div class="face face1"><div class="content_card"><span class="stars"></span><h2 class="contenu_card_title">Sales Manager</h2><p class="contenu_card"> While this role might seem more people-oriented, it also involves setting strategies, analyzing sales data, and optimizing processes. INTJs can bring a strategic and methodical approach to improving sales performance. </p></div></div><div class="face face2"><h2>02</h2></div></div> 
-      <div class="card"><div class="face face1"><div class="content_card"><span class="stars"></span><h2 class="contenu_card_title">Accountant </h2><p class="contenu_card"> This job involves precision, attention to detail, and logical analysis of financial data, aligning well with the INTJ’s strengths in systematic and organized work. </p></div></div><div class="face face2"><h2>03</h2></div></div</div>
+      <div class="card"><div class="face face1"><div class="content_card"><h2 class="contenu_card_title">Product Manager </h2><p class="contenu_card"> This role requires strategic planning, vision, and the ability to analyze market trends and user needs. INTJs' ability to think ahead and create structured plans makes them well-suited for this position. </p></div></div><div class="face face2"><div class="h2_immg"><img class="immg" src="{{ asset('images_mbti/product_manager.png') }}"> <h2>Product Manager</h2></div></div></div>
+      <div class="card"><div class="face face1"><div class="content_card"><h2 class="contenu_card_title">Sales Manager</h2><p class="contenu_card"> While this role might seem more people-oriented, it also involves setting strategies, analyzing sales data, and optimizing processes. INTJs can bring a strategic and methodical approach to improving sales performance. </p></div></div><div class="face face2"><div class="h2_immg"><img class="immg" src="{{ asset('images_mbti/sales_manager.png') }}"> <h2>Sales Manager</h2></div></div></div>
+      <div class="card"><div class="face face1"><div class="content_card"><h2 class="contenu_card_title">Accountant </h2><p class="contenu_card"> This job involves precision, attention to detail, and logical analysis of financial data, aligning well with the INTJ’s strengths in systematic and organized work. </p></div></div><div class="face face2"><div class="h2_immg"><img class="immg" src="{{ asset('images_mbti/accountant.png') }}"> <h2>Accountant</h2></div></div></div>
      
-        @elseif ($mbti_type == 'INFJ')
-      <div class="card"><div class="face face1"><div class="content_card"><span class="stars"></span><h2 class="contenu_card_title"> </h2><p class="contenu_card">  </p></div></div><div class="face face2"><h2>01</h2></div></div>
-      <div class="card"><div class="face face1"><div class="content_card"><span class="stars"></span><h2 class="contenu_card_title"> </h2><p class="contenu_card">  </p></div></div><div class="face face2"><h2>02</h2></div></div> 
-      <div class="card"><div class="face face1"><div class="content_card"><span class="stars"></span><h2 class="contenu_card_title"> </h2><p class="contenu_card">  </p></div></div><div class="face face2"><h2>03</h2></div></div</div>
+@elseif ($mbti_type == 'INFJ')
+      <div class="card"><div class="face face1"><div class="content_card"><h2 class="contenu_card_title">Customer Service Manager</h2><p class="contenu_card"> INFJs' empathy and strong communication skills make them ideal for managing customer relations and ensuring customer satisfaction. </p></div></div><div class="face face2"><div class="h2_immg"><img class="immg" src="{{ asset('images_mbti/customer_service_manager.png') }}"> <h2>Customer Service Manager</h2></div></div></div>
+      <div class="card"><div class="face face1"><div class="content_card"><h2 class="contenu_card_title">Partnerships Manager</h2><p class="contenu_card"> Their ability to form deep connections and understand others' needs makes INFJs effective in managing and developing strategic partnerships. </p></div></div><div class="face face2"><div class="h2_immg"><img class="immg" src="{{ asset('images_mbti/partnerships_manager.png') }}"> <h2>Partnerships Manager</h2></div></div></div> 
+      <div class="card"><div class="face face1"><div class="content_card"><h2 class="contenu_card_title">Project Manager</h2><p class="contenu_card"> INFJs' organizational skills and vision enable them to manage projects effectively, ensuring they align with their values and the company's goals. </p></div></div><div class="face face2"><div class="h2_immg"><img class="immg" src="{{ asset('images_mbti/project_manager.png') }}"> <h2>Project Manager</h2></div></div></div>
         
-      @elseif ($mbti_type == 'INFP') 
-      <div class="card"><div class="face face1"><div class="content_card"><span class="stars"></span><h2 class="contenu_card_title"> Marketing Manager</h2><p class="contenu_card"> INFPs can create authentic and emotionally resonant marketing messages. Their creativity and understanding of human emotions help them connect deeply with audiences. </p></div></div><div class="face face2"><h2>01</h2></div></div>
-      <div class="card"><div class="face face1"><div class="content_card"><span class="stars"></span><h2 class="contenu_card_title"> Chief Operating Officer (COO):</h2><p class="contenu_card"> Although this might seem unconventional, INFPs in this role can focus on creating an organizational culture that aligns with their values, fostering a positive and ethical work environment. </p></div></div><div class="face face2"><h2>02</h2></div></div> 
-      <div class="card"><div class="face face1"><div class="content_card"><span class="stars"></span><h2 class="contenu_card_title"> Accountant</h2><p class="contenu_card"> While not typically seen as a creative role, accounting can appeal to INFPs' desire for order and their meticulous nature. They can find satisfaction in ensuring financial accuracy and integrity. </p></div></div><div class="face face2"><h2>03</h2></div></div</div>
+@elseif ($mbti_type == 'INFP') 
+      <div class="card"><div class="face face1"><div class="content_card"><h2 class="contenu_card_title">Marketing Manager</h2><p class="contenu_card"> INFPs can create authentic and emotionally resonant marketing messages. Their creativity and understanding of human emotions help them connect deeply with audiences. </p></div></div><div class="face face2"><div class="h2_immg"><img class="immg" src="{{ asset('images_mbti/marketing_manager.png') }}"> <h2>Marketing Manager</h2></div></div></div>
+      <div class="card"><div class="face face1"><div class="content_card"><h2 class="contenu_card_title">Chief Operating Officer (COO)</h2><p class="contenu_card"> Although this might seem unconventional, INFPs in this role can focus on creating an organizational culture that aligns with their values, fostering a positive and ethical work environment. </p></div></div><div class="face face2"><div class="h2_immg"><img class="immg" src="{{ asset('images_mbti/coo.png') }}"> <h2>Chief Operating Officer (COO)</h2></div></div></div> 
+      <div class="card"><div class="face face1"><div class="content_card"><h2 class="contenu_card_title">Accountant</h2><p class="contenu_card"> While not typically seen as a creative role, accounting can appeal to INFPs' desire for order and their meticulous nature. They can find satisfaction in ensuring financial accuracy and integrity. </p></div></div><div class="face face2"><div class="h2_immg"><img class="immg" src="{{ asset('images_mbti/accountant.png') }}"> <h2>Accountant</h2></div></div></div>
         
-      @elseif ($mbti_type == 'INTP')
-      <div class="card"><div class="face face1"><div class="content_card"><span class="stars"></span><h2 class="contenu_card_title"> </h2><p class="contenu_card">  </p></div></div><div class="face face2"><h2>01</h2></div></div>
-      <div class="card"><div class="face face1"><div class="content_card"><span class="stars"></span><h2 class="contenu_card_title"> </h2><p class="contenu_card">  </p></div></div><div class="face face2"><h2>02</h2></div></div> 
-      <div class="card"><div class="face face1"><div class="content_card"><span class="stars"></span><h2 class="contenu_card_title"> </h2><p class="contenu_card">  </p></div></div><div class="face face2"><h2>03</h2></div></div</div> 
+@elseif ($mbti_type == 'INTP')
+      <div class="card"><div class="face face1"><div class="content_card"><h2 class="contenu_card_title">Chief Financial Officer (CFO)</h2><p class="contenu_card"> INTPs' logical and analytical approach to financial planning and oversight aligns well with the demands of this role. </p></div></div><div class="face face2"><div class="h2_immg"><img class="immg" src="{{ asset('images_mbti/cfo.png') }}"> <h2>Chief Financial Officer (CFO)</h2></div></div></div>
+      <div class="card"><div class="face face1"><div class="content_card"><h2 class="contenu_card_title">Chief Operating Officer (COO)</h2><p class="contenu_card"> INTPs' ability to solve complex problems and optimize processes makes them effective in managing operations and improving efficiency. </p></div></div><div class="face face2"><div class="h2_immg"><img class="immg" src="{{ asset('images_mbti/coo.png') }}"> <h2>Chief Operating Officer (COO)</h2></div></div></div> 
+      <div class="card"><div class="face face1"><div class="content_card"><h2 class="contenu_card_title">Accountant</h2><p class="contenu_card"> INTPs' precision and attention to detail make them well-suited for accounting, ensuring financial accuracy and integrity. </p></div></div><div class="face face2"><div class="h2_immg"><img class="immg" src="{{ asset('images_mbti/accountant.png') }}"> <h2>Accountant</h2></div></div></div> 
        
-      @elseif ($mbti_type == 'ISFJ') 
-      <div class="card"><div class="face face1"><div class="content_card"><span class="stars"></span><h2 class="contenu_card_title"> </h2><p class="contenu_card">  </p></div></div><div class="face face2"><h2>01</h2></div></div>
-      <div class="card"><div class="face face1"><div class="content_card"><span class="stars"></span><h2 class="contenu_card_title"> </h2><p class="contenu_card">  </p></div></div><div class="face face2"><h2>02</h2></div></div> 
-      <div class="card"><div class="face face1"><div class="content_card"><span class="stars"></span><h2 class="contenu_card_title"> </h2><p class="contenu_card">  </p></div></div><div class="face face2"><h2>03</h2></div></div</div>
+@elseif ($mbti_type == 'ISFJ') 
+      <div class="card"><div class="face face1"><div class="content_card"><h2 class="contenu_card_title">Customer Service Manager</h2><p class="contenu_card"> ISFJs' empathy and desire to help others make them well-suited for ensuring customer satisfaction and managing customer relations. </p></div></div><div class="face face2"><div class="h2_immg"><img class="immg" src="{{ asset('images_mbti/customer_service_manager.png') }}"> <h2>Customer Service Manager</h2></div></div></div>
+      <div class="card"><div class="face face1"><div class="content_card"><h2 class="contenu_card_title">Accountant</h2><p class="contenu_card"> ISFJs' meticulous nature and strong sense of responsibility align well with the precision and accuracy required in accounting. </p></div></div><div class="face face2"><div class="h2_immg"><img class="immg" src="{{ asset('images_mbti/accountant.png') }}"> <h2>Accountant</h2></div></div></div> 
+      <div class="card"><div class="face face1"><div class="content_card"><h2 class="contenu_card_title">Chief Operating Officer (COO)</h2><p class="contenu_card"> ISFJs' ability to create structure and maintain order makes them effective in overseeing daily operations and ensuring everything runs smoothly. </p></div></div><div class="face face2"><div class="h2_immg"><img class="immg" src="{{ asset('images_mbti/coo.png') }}"> <h2>Chief Operating Officer (COO)</h2></div></div></div>
        
-      @elseif ($mbti_type == 'ISTJ')
-      <div class="card"><div class="face face1"><div class="content_card"><span class="stars"></span><h2 class="contenu_card_title"> </h2><p class="contenu_card">  </p></div></div><div class="face face2"><h2>01</h2></div></div>
-      <div class="card"><div class="face face1"><div class="content_card"><span class="stars"></span><h2 class="contenu_card_title"> </h2><p class="contenu_card">  </p></div></div><div class="face face2"><h2>02</h2></div></div> 
-      <div class="card"><div class="face face1"><div class="content_card"><span class="stars"></span><h2 class="contenu_card_title"> </h2><p class="contenu_card">  </p></div></div><div class="face face2"><h2>03</h2></div></div</div>
+@elseif ($mbti_type == 'ISTJ')
+      <div class="card"><div class="face face1"><div class="content_card"><h2 class="contenu_card_title">Sales Manager</h2><p class="contenu_card"> ISTJs' reliability and methodical approach make them well-suited for managing sales processes and ensuring targets are met efficiently. </p></div></div><div class="face face2"><div class="h2_immg"><img class="immg" src="{{ asset('images_mbti/sales_manager.png') }}"> <h2>Sales Manager</h2></div></div></div>
+      <div class="card"><div class="face face1"><div class="content_card"><h2 class="contenu_card_title">Chief Financial Officer (CFO)</h2><p class="contenu_card"> ISTJs' attention to detail and systematic approach make them effective in overseeing financial operations and ensuring fiscal responsibility. </p></div></div><div class="face face2"><div class="h2_immg"><img class="immg" src="{{ asset('images_mbti/cfo.png') }}"> <h2>Chief Financial Officer (CFO)</h2></div></div></div> 
+      <div class="card"><div class="face face1"><div class="content_card"><h2 class="contenu_card_title">Accountant</h2><p class="contenu_card"> ISTJs' precision and adherence to rules make them well-suited for ensuring accuracy and compliance in accounting. </p></div></div><div class="face face2"><div class="h2_immg"><img class="immg" src="{{ asset('images_mbti/accountant.png') }}"> <h2>Accountant</h2></div></div></div>
        
-      @elseif ($mbti_type == 'ISFP') 
-      <div class="card"><div class="face face1"><div class="content_card"><span class="stars"></span><h2 class="contenu_card_title"> </h2><p class="contenu_card">  </p></div></div><div class="face face2"><h2>01</h2></div></div>
-      <div class="card"><div class="face face1"><div class="content_card"><span class="stars"></span><h2 class="contenu_card_title"> </h2><p class="contenu_card">  </p></div></div><div class="face face2"><h2>02</h2></div></div> 
-      <div class="card"><div class="face face1"><div class="content_card"><span class="stars"></span><h2 class="contenu_card_title"> </h2><p class="contenu_card">  </p></div></div><div class="face face2"><h2>03</h2></div></div</div>
+@elseif ($mbti_type == 'ISFP') 
+      <div class="card"><div class="face face1"><div class="content_card"><h2 class="contenu_card_title">Customer Service Manager</h2><p class="contenu_card"> ISFPs' warm and friendly nature makes them effective in managing customer relations and ensuring a positive customer experience. </p></div></div><div class="face face2"><div class="h2_immg"><img class="immg" src="{{ asset('images_mbti/customer_service_manager.png') }}"> <h2>Customer Service Manager</h2></div></div></div>
+      <div class="card"><div class="face face1"><div class="content_card"><h2 class="contenu_card_title">Partnerships Manager</h2><p class="contenu_card"> ISFPs' ability to form genuine connections and understand others' needs makes them effective in managing and developing strategic partnerships. </p></div></div><div class="face face2"><div class="h2_immg"><img class="immg" src="{{ asset('images_mbti/partnerships_manager.png') }}"> <h2>Partnerships Manager</h2></div></div></div> 
+      <div class="card"><div class="face face1"><div class="content_card"><h2 class="contenu_card_title">Project Manager</h2><p class="contenu_card"> ISFPs' attention to detail and creativity enable them to manage projects effectively, ensuring they align with their vision and goals. </p></div></div><div class="face face2"><div class="h2_immg"><img class="immg" src="{{ asset('images_mbti/project_manager.png') }}"> <h2>Project Manager</h2></div></div></div>
        
-      @elseif ($mbti_type == 'ISTP') 
-      <div class="card"><div class="face face1"><div class="content_card"><span class="stars"></span><h2 class="contenu_card_title"> </h2><p class="contenu_card">  </p></div></div><div class="face face2"><h2>01</h2></div></div>
-      <div class="card"><div class="face face1"><div class="content_card"><span class="stars"></span><h2 class="contenu_card_title"> </h2><p class="contenu_card">  </p></div></div><div class="face face2"><h2>02</h2></div></div> 
-      <div class="card"><div class="face face1"><div class="content_card"><span class="stars"></span><h2 class="contenu_card_title"> </h2><p class="contenu_card">  </p></div></div><div class="face face2"><h2>03</h2></div></div</div>
-       
-      @elseif ($mbti_type == 'ENFJ') 
-      <div class="card"><div class="face face1"><div class="content_card"><span class="stars"></span><h2 class="contenu_card_title"> </h2><p class="contenu_card">  </p></div></div><div class="face face2"><h2>01</h2></div></div>
-      <div class="card"><div class="face face1"><div class="content_card"><span class="stars"></span><h2 class="contenu_card_title"> </h2><p class="contenu_card">  </p></div></div><div class="face face2"><h2>02</h2></div></div> 
-      <div class="card"><div class="face face1"><div class="content_card"><span class="stars"></span><h2 class="contenu_card_title"> </h2><p class="contenu_card">  </p></div></div><div class="face face2"><h2>03</h2></div></div</div>
-       
-      @elseif ($mbti_type == 'ENTJ') 
-      <div class="card"><div class="face face1"><div class="content_card"><span class="stars"></span><h2 class="contenu_card_title">Product Manager </h2><p class="contenu_card"> This role benefits from ENTJs' ability to lead, plan strategically, and drive projects to completion. Their decisive nature helps in managing product development efficiently. </p></div></div><div class="face face2"><h2>01</h2></div></div>
-      <div class="card"><div class="face face1"><div class="content_card"><span class="stars"></span><h2 class="contenu_card_title">Sales Manager </h2><p class="contenu_card"> ENTJs' leadership skills and goal-driven mindset make them effective in managing sales teams and strategies to achieve high performance. </p></div></div><div class="face face2"><h2>02</h2></div></div> 
-      <div class="card"><div class="face face1"><div class="content_card"><span class="stars"></span><h2 class="contenu_card_title">Partnerships Manager </h2><p class="contenu_card"> ENTJs can effectively negotiate and establish partnerships, using their assertiveness and strategic insight to form beneficial alliances. </p></div></div><div class="face face2"><h2>03</h2></div></div</div>
-       
-      @elseif ($mbti_type == 'ENFP')
-      <div class="card"><div class="face face1"><div class="content_card"><span class="stars"></span><h2 class="contenu_card_title"> Product Manager</h2><p class="contenu_card">  ENFPs' creativity and enthusiasm help them to come up with innovative product ideas and engage with diverse stakeholders effectively. </p></div></div><div class="face face2"><h2>01</h2></div></div>
-      <div class="card"><div class="face face1"><div class="content_card"><span class="stars"></span><h2 class="contenu_card_title"> Marketing Manager</h2><p class="contenu_card"> This role leverages their creativity and ability to communicate compellingly. ENFPs excel at creating engaging marketing campaigns and building relationships with customers. </p></div></div><div class="face face2"><h2>02</h2></div></div> 
-      <div class="card"><div class="face face1"><div class="content_card"><span class="stars"></span><h2 class="contenu_card_title"> Partnerships Manager</h2><p class="contenu_card">  ENFPs are natural networkers and can easily build and maintain relationships. This role allows them to use their interpersonal skills to establish and nurture strategic partnerships. </p></div></div><div class="face face2"><h2>03</h2></div></div</div>
-      
-      @elseif ($mbti_type == 'ENTP') 
-      <div class="card"><div class="face face1"><div class="content_card"><span class="stars"></span><h2 class="contenu_card_title"> </h2><p class="contenu_card">  </p></div></div><div class="face face2"><h2>01</h2></div></div>
-      <div class="card"><div class="face face1"><div class="content_card"><span class="stars"></span><h2 class="contenu_card_title"> </h2><p class="contenu_card">  </p></div></div><div class="face face2"><h2>02</h2></div></div> 
-      <div class="card"><div class="face face1"><div class="content_card"><span class="stars"></span><h2 class="contenu_card_title"> </h2><p class="contenu_card">  </p></div></div><div class="face face2"><h2>03</h2></div></div</div>
-      
       @elseif ($mbti_type == 'ESTP')
-      <div class="card"><div class="face face1"><div class="content_card"><span class="stars"></span><h2 class="contenu_card_title"> </h2><p class="contenu_card">  </p></div></div><div class="face face2"><h2>01</h2></div></div>
-      <div class="card"><div class="face face1"><div class="content_card"><span class="stars"></span><h2 class="contenu_card_title"> </h2><p class="contenu_card">  </p></div></div><div class="face face2"><h2>02</h2></div></div> 
-      <div class="card"><div class="face face1"><div class="content_card"><span class="stars"></span><h2 class="contenu_card_title"> </h2><p class="contenu_card">  </p></div></div><div class="face face2"><h2>03</h2></div></div</div>
+      <div class="card"><div class="face face1"><div class="content_card"><h2 class="contenu_card_title">Sales Manager</h2><p class="contenu_card"> ESTPs' dynamic and outgoing nature makes them effective in driving sales, motivating teams, and closing deals. </p></div></div><div class="face face2"><div class="h2_immg"><img class="immg" src="{{ asset('images_mbti/sales_manager.png') }}"> <h2>Sales Manager</h2></div></div></div>
+      <div class="card"><div class="face face1"><div class="content_card"><h2 class="contenu_card_title">Chief Operating Officer (COO)</h2><p class="contenu_card"> ESTPs' practical approach and ability to make quick decisions make them effective in managing operations and ensuring efficient workflow. </p></div></div><div class="face face2"><div class="h2_immg"><img class="immg" src="{{ asset('images_mbti/coo.png') }}"> <h2>Chief Operating Officer (COO)</h2></div></div></div>
+      <div class="card"><div class="face face1"><div class="content_card"><h2 class="contenu_card_title">Customer Service Manager</h2><p class="contenu_card"> ESTPs' people skills and problem-solving abilities make them effective in managing customer relations and ensuring customer satisfaction. </p></div></div><div class="face face2"><div class="h2_immg"><img class="immg" src="{{ asset('images_mbti/customer_service_manager.png') }}"> <h2>Customer Service Manager</h2></div></div></div>
+     
+@elseif ($mbti_type == 'ESFP')
+      <div class="card"><div class="face face1"><div class="content_card"><h2 class="contenu_card_title">Marketing Manager</h2><p class="contenu_card"> ESFPs' creativity and ability to connect with people make them effective in creating engaging and memorable marketing campaigns. </p></div></div><div class="face face2"><div class="h2_immg"><img class="immg" src="{{ asset('images_mbti/marketing_manager.png') }}"> <h2>Marketing Manager</h2></div></div></div>
+      <div class="card"><div class="face face1"><div class="content_card"><h2 class="contenu_card_title">Customer Service Manager</h2><p class="contenu_card"> ESFPs' friendly and empathetic nature makes them well-suited for managing customer relations and ensuring a positive customer experience. </p></div></div><div class="face face2"><div class="h2_immg"><img class="immg" src="{{ asset('images_mbti/customer_service_manager.png') }}"> <h2>Customer Service Manager</h2></div></div></div>
+      <div class="card"><div class="face face1"><div class="content_card"><h2 class="contenu_card_title">Partnerships Manager</h2><p class="contenu_card"> ESFPs' ability to form genuine connections and understand others' needs makes them effective in managing and developing strategic partnerships. </p></div></div><div class="face face2"><div class="h2_immg"><img class="immg" src="{{ asset('images_mbti/partnerships_manager.png') }}"> <h2>Partnerships Manager</h2></div></div></div>
       
-      @elseif ($mbti_type == 'ESFP') 
-      <div class="card"><div class="face face1"><div class="content_card"><span class="stars"></span><h2 class="contenu_card_title"> </h2><p class="contenu_card">  </p></div></div><div class="face face2"><h2>01</h2></div></div>
-      <div class="card"><div class="face face1"><div class="content_card"><span class="stars"></span><h2 class="contenu_card_title"> </h2><p class="contenu_card">  </p></div></div><div class="face face2"><h2>02</h2></div></div> 
-      <div class="card"><div class="face face1"><div class="content_card"><span class="stars"></span><h2 class="contenu_card_title"> </h2><p class="contenu_card">  </p></div></div><div class="face face2"><h2>03</h2></div></div</div>
-      
-      @elseif ($mbti_type == 'ESTJ') 
-      <div class="card"><div class="face face1"><div class="content_card"><span class="stars"></span><h2 class="contenu_card_title"> </h2><p class="contenu_card">  </p></div></div><div class="face face2"><h2>01</h2></div></div>
-      <div class="card"><div class="face face1"><div class="content_card"><span class="stars"></span><h2 class="contenu_card_title"> </h2><p class="contenu_card">  </p></div></div><div class="face face2"><h2>02</h2></div></div> 
-      <div class="card"><div class="face face1"><div class="content_card"><span class="stars"></span><h2 class="contenu_card_title"> </h2><p class="contenu_card">  </p></div></div><div class="face face2"><h2>03</h2></div></div</div>
-      
-      @else <div class="card">
-      <div class="face face1"><div class="content_card"><span class="stars"></span><h2 class="contenu_card_title"> </h2><p class="contenu_card">  </p></div></div><div class="face face2"><h2>01</h2></div></div>
-      <div class="card"><div class="face face1"><div class="content_card"><span class="stars"></span><h2 class="contenu_card_title"> </h2><p class="contenu_card">  </p></div></div><div class="face face2"><h2>02</h2></div></div> 
-      <div class="card"><div class="face face1"><div class="content_card"><span class="stars"></span><h2 class="contenu_card_title"> </h2><p class="contenu_card">  </p></div></div><div class="face face2"><h2>03</h2></div></div</div>
-       @endif
+@elseif ($mbti_type == 'ENFP') 
+      <div class="card"><div class="face face1"><div class="content_card"><h2 class="contenu_card_title">Marketing Manager</h2><p class="contenu_card"> ENFPs' creativity and enthusiasm make them effective in creating innovative marketing strategies that capture audience attention. </p></div></div><div class="face face2"><div class="h2_immg"><img class="immg" src="{{ asset('images_mbti/marketing_manager.png') }}"> <h2>Marketing Manager</h2></div></div></div>
+      <div class="card"><div class="face face1"><div class="content_card"><h2 class="contenu_card_title">Customer Service Manager</h2><p class="contenu_card"> ENFPs' empathetic and outgoing nature makes them well-suited for managing customer relations and ensuring a positive customer experience. </p></div></div><div class="face face2"><div class="h2_immg"><img class="immg" src="{{ asset('images_mbti/customer_service_manager.png') }}"> <h2>Customer Service Manager</h2></div></div></div>
+      <div class="card"><div class="face face1"><div class="content_card"><h2 class="contenu_card_title">Partnerships Manager</h2><p class="contenu_card"> ENFPs' ability to form deep connections and understand others' needs makes them effective in managing and developing strategic partnerships. </p></div></div><div class="face face2"><div class="h2_immg"><img class="immg" src="{{ asset('images_mbti/partnerships_manager.png') }}"> <h2>Partnerships Manager</h2></div></div></div>
+       
+@elseif ($mbti_type == 'ENTP')
+      <div class="card"><div class="face face1"><div class="content_card"><h2 class="contenu_card_title">Marketing Manager</h2><p class="contenu_card"> ENTPs' innovative and strategic thinking makes them effective in creating bold and impactful marketing campaigns. </p></div></div><div class="face face2"><div class="h2_immg"><img class="immg" src="{{ asset('images_mbti/marketing_manager.png') }}"> <h2>Marketing Manager</h2></div></div></div>
+      <div class="card"><div class="face face1"><div class="content_card"><h2 class="contenu_card_title">Chief Operating Officer (COO)</h2><p class="contenu_card"> ENTPs' ability to analyze and optimize processes makes them effective in managing operations and ensuring efficiency. </p></div></div><div class="face face2"><div class="h2_immg"><img class="immg" src="{{ asset('images_mbti/coo.png') }}"> <h2>Chief Operating Officer (COO)</h2></div></div></div>
+      <div class="card"><div class="face face1"><div class="content_card"><h2 class="contenu_card_title">Sales Manager</h2><p class="contenu_card"> ENTPs' persuasive skills and ability to think on their feet make them well-suited for managing sales teams and driving revenue growth. </p></div></div><div class="face face2"><div class="h2_immg"><img class="immg" src="{{ asset('images_mbti/sales_manager.png') }}"> <h2>Sales Manager</h2></div></div></div>
+     
+@elseif ($mbti_type == 'ENFJ')
+      <div class="card"><div class="face face1"><div class="content_card"><h2 class="contenu_card_title">Marketing Manager</h2><p class="contenu_card"> ENFJs' ability to inspire and connect with people makes them effective in creating compelling marketing strategies that resonate with audiences. </p></div></div><div class="face face2"><div class="h2_immg"><img class="immg" src="{{ asset('images_mbti/marketing_manager.png') }}"> <h2>Marketing Manager</h2></div></div></div>
+      <div class="card"><div class="face face1"><div class="content_card"><h2 class="contenu_card_title">Partnerships Manager</h2><p class="contenu_card"> ENFJs' strong interpersonal skills and ability to understand others' needs make them effective in managing and developing strategic partnerships. </p></div></div><div class="face face2"><div class="h2_immg"><img class="immg" src="{{ asset('images_mbti/partnerships_manager.png') }}"> <h2>Partnerships Manager</h2></div></div></div>
+      <div class="card"><div class="face face1"><div class="content_card"><h2 class="contenu_card_title">Customer Service Manager</h2><p class="contenu_card"> ENFJs' empathy and desire to help others make them well-suited for ensuring customer satisfaction and managing customer relations. </p></div></div><div class="face face2"><div class="h2_immg"><img class="immg" src="{{ asset('images_mbti/customer_service_manager.png') }}"> <h2>Customer Service Manager</h2></div></div></div>
+     
+@elseif ($mbti_type == 'ENTJ')
+      <div class="card"><div class="face face1"><div class="content_card"><h2 class="contenu_card_title">Chief Operating Officer (COO)</h2><p class="contenu_card"> ENTJs' leadership skills and strategic vision make them effective in managing operations and driving organizational success. </p></div></div><div class="face face2"><div class="h2_immg"><img class="immg" src="{{ asset('images_mbti/coo.png') }}"> <h2>Chief Operating Officer (COO)</h2></div></div></div>
+      <div class="card"><div class="face face1"><div class="content_card"><h2 class="contenu_card_title">Chief Financial Officer (CFO)</h2><p class="contenu_card"> ENTJs' analytical skills and ability to manage resources strategically make them effective in overseeing financial operations and ensuring fiscal health. </p></div></div><div class="face face2"><div class="h2_immg"><img class="immg" src="{{ asset('images_mbti/cfo.png') }}"> <h2>Chief Financial Officer (CFO)</h2></div></div></div>
+      <div class="card"><div class="face face1"><div class="content_card"><h2 class="contenu_card_title">Sales Manager</h2><p class="contenu_card"> ENTJs' persuasive skills and leadership abilities make them well-suited for driving sales performance and achieving targets. </p></div></div><div class="face face2"><div class="h2_immg"><img class="immg" src="{{ asset('images_mbti/sales_manager.png') }}"> <h2>Sales Manager</h2></div></div></div>
+      @elseif ($mbti_type == 'ISTP') 
+      <div class="card"><div class="face face1"><div class="content_card"><h2 class="contenu_card_title">Project Manager</h2><p class="contenu_card"> ISTPs' analytical and problem-solving skills make them effective in managing projects, optimizing workflows, and ensuring timely delivery. </p></div></div><div class="face face2"><div class="h2_immg"><img class="immg" src="{{ asset('images_mbti/project_manager.png') }}"> <h2>Project Manager</h2></div></div></div>
+      <div class="card"><div class="face face1"><div class="content_card"><h2 class="contenu_card_title">Sales Manager</h2><p class="contenu_card"> ISTPs' practical approach and ability to analyze data make them effective in managing sales teams, driving performance, and achieving targets. </p></div></div><div class="face face2"><div class="h2_immg"><img class="immg" src="{{ asset('images_mbti/sales_manager.png') }}"> <h2>Sales Manager</h2></div></div></div>
+      <div class="card"><div class="face face1"><div class="content_card"><h2 class="contenu_card_title">Chief Operating Officer (COO)</h2><p class="contenu_card"> ISTPs' ability to optimize processes and make practical decisions make them effective in managing operations and ensuring efficient workflows. </p></div></div><div class="face face2"><div class="h2_immg"><img class="immg" src="{{ asset('images_mbti/coo.png') }}"> <h2>Chief Operating Officer (COO)</h2></div></div></div>
+       
+@elseif ($mbti_type == 'ESFJ') 
+      <div class="card"><div class="face face1"><div class="content_card"><h2 class="contenu_card_title">Chief Financial Officer (CFO)</h2><p class="contenu_card"> ESFJs' organizational skills and attention to detail make them effective in overseeing financial operations and ensuring fiscal responsibility. </p></div></div><div class="face face2"><div class="h2_immg"><img class="immg" src="{{ asset('images_mbti/cfo.png') }}"> <h2>Chief Financial Officer (CFO)</h2></div></div></div>
+      <div class="card"><div class="face face1"><div class="content_card"><h2 class="contenu_card_title">Project Manager</h2><p class="contenu_card"> ESFJs' people skills and ability to coordinate make them effective in managing projects, ensuring teamwork and timely delivery. </p></div></div><div class="face face2"><div class="h2_immg"><img class="immg" src="{{ asset('images_mbti/project_manager.png') }}"> <h2>Project Manager</h2></div></div></div>
+      <div class="card"><div class="face face1"><div class="content_card"><h2 class="contenu_card_title">Partnerships Manager</h2><p class="contenu_card"> ESFJs' ability to build relationships and understand others' needs make them effective in managing strategic partnerships and fostering collaborations. </p></div></div><div class="face face2"><div class="h2_immg"><img class="immg" src="{{ asset('images_mbti/partnerships_manager.png') }}"> <h2>Partnerships Manager</h2></div></div></div>
+       
+@else
+      <div class="card"><div class="face face1"><div class="content_card"><h2 class="contenu_card_title">Chief Financial Officer (CFO)</h2><p class="contenu_card"> ESTJs' strong organizational skills and ability to manage resources make them effective in overseeing financial operations and ensuring fiscal discipline. </p></div></div><div class="face face2"><div class="h2_immg"><img class="immg" src="{{ asset('images_mbti/cfo.png') }}"> <h2>Chief Financial Officer (CFO)</h2></div></div></div>
+      <div class="card"><div class="face face1"><div class="content_card"><h2 class="contenu_card_title">Sales Manager</h2><p class="contenu_card"> ESTJs' decisive and goal-oriented approach makes them effective in managing sales teams, setting strategies, and achieving targets. </p></div></div><div class="face face2"><div class="h2_immg"><img class="immg" src="{{ asset('images_mbti/sales_manager.png') }}"> <h2>Sales Manager</h2></div></div></div>
+      <div class="card"><div class="face face1"><div class="content_card"><h2 class="contenu_card_title">Partnerships Manager</h2><p class="contenu_card"> ESTJs' strong interpersonal skills and strategic mindset make them effective in managing partnerships and driving collaborative efforts. </p></div></div><div class="face face2"><div class="h2_immg"><img class="immg" src="{{ asset('images_mbti/partnerships_manager.png') }}"> <h2>Partnerships Manager</h2></div></div></div>
+      @endif
     </div>
+  </div>
+  <div>    <a href="{{ route('allMbti') }}" class="btnnext">Next</a>
   </div>
     </body>
     </html>

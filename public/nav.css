@@ -40,7 +40,7 @@
     text-transform: uppercase;
 
 }
-a{
+.a_nav{
     position: relative;
     color:rgb(85,83,83);
     font-size: 14px;
@@ -64,9 +64,7 @@ a{
     margin-left: 10px;
     color: rgb(233, 234, 235);
 }
-a:hover{
-    background: #3434b3;
-}
+
 .levels{
 position: relative;
 margin-left: 250px;
