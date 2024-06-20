@@ -82,6 +82,26 @@ html {
     height: 40%; /* Hauteur ajustée */
     transition: 0.7s;
 }
+.bottom-right-button {
+    position: fixed;
+    bottom: 70px;
+    right: 100px;
+    padding: 10px 20px;
+    background-color: #5398D4;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.bottom-right-button:hover {
+    background-color: #3a6d9c;
+}
 
 /* Assignation des zones de grille aux cartes */
 .card:nth-child(1) { grid-area: card1; }
