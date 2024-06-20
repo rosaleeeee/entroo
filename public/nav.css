@@ -8,7 +8,9 @@
     font-family: "Poppins", sans-serif;
 }
 
-
+body{
+  background-color: #f3f4f6;
+}
 
 .nav1{
     
@@ -81,6 +83,30 @@ li{
     width: 45%;
   }
   
+.but_nom{
+  display: inline-flex;
+    align-items: center;
+    padding: 0.75rem 1rem; /* Equivaut à px-3 py-2 */
+    border: 1px solid transparent; /* Equivaut à border border-transparent */
+    font-size: 0.875rem; /* Equivaut à text-sm */
+    line-height: 1.25rem; /* Equivaut à leading-4 */
+    font-weight: 500; /* Equivaut à font-medium */
+    border-radius: 0.375rem; /* Equivaut à rounded-md */
+    color: #6B7280; /* Equivaut à text-gray-500 */
+    background-color: #FFFFFF; /* Equivaut à bg-white */
+    cursor: pointer;
+    transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out; /* Equivaut à transition ease-in-out duration-150 */
+    outline: none; /* Equivaut à focus:outline-none */
+}
+.but_nom:hover {
+  color: #374151; /* Equivaut à hover:text-gray-700 */
+}
+
+.but_nom:focus {
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+}
+
   .py-6 {
     padding-top: 1.5rem;
     padding-bottom: 1.5rem;

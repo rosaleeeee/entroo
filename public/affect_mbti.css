@@ -1,23 +1,28 @@
 /* public/css/styles.css */
-.big{
-    margin-left: 200px;
-    width: 1300px;
-    
-    align-items: center;
 
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
 }
+
+.big {
+    margin-left: 200px;
+    width: 1400px;
+    align-items: center;
+    padding: 20px;
+}
+
 #app {
     padding: 20px;
     border: 1px solid #ccc;
     border-radius: 8px;
 }
 
-.users-container, .positions-container {
-    margin-bottom: 20px;
-}
-
 h1, h2, h3 {
     text-align: center;
+    color: #333;
+    margin-bottom: 20px;
 }
 
 #users, #positions {
@@ -27,22 +32,54 @@ h1, h2, h3 {
     margin-top: 10px;
 }
 
-
-.user, .position {
+.user,.position {
     border: 1px solid #ccc;
     padding: 10px;
-    margin: 10px;
-    width: 150px;
+    min-height: 50px;
+    width: 240px;
     text-align: center;
     cursor: move;
+    background-color: #ffa32a;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+.user{
+    font-weight:500;
+    font-size:17px;
+}
+.user:hover, .position:hover {
+    background-color: #d1d1d1;
 }
 
 .droppable-area {
+    text-align: center;
     min-height: 50px;
-    border: 1px dashed #ccc;
-    margin-top: 5px;
-    padding: 10px;
+    width:230px;
+    border: 2px dashed #aaaaaa;
+    background-color: #fff;
+    border-radius: 5px;
 }
+
+button#showResults {
+    display: block;
+    margin: 0 auto;
+    width: 150px; /* ou ajustez selon vos besoins */
+    padding: 10px;
+    background-color: #4CAF50;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 20px;
+    text-align: center;
+}
+
+button#showResults:disabled {
+    background-color: #888;
+    cursor: not-allowed;
+}
+/* Styles pour la fenêtre modale */
 .modal {
     display: none;
     position: fixed;
@@ -52,16 +89,18 @@ h1, h2, h3 {
     width: 100%;
     height: 100%;
     overflow: auto;
-    background-color: rgb(0,0,0);
-    background-color: rgba(0,0,0,0.4);
+    background-color: rgba(0, 0, 0, 0.4);
+
 }
 
 .modal-content {
-    background-color: aquamarine;
+    background-color: #fff;
     margin: 15% auto;
     padding: 20px;
     border: 1px solid #888;
     width: 80%;
+    max-width: 500px;
+    border-radius: 10px;
 }
 
 .close {
@@ -77,3 +116,42 @@ h1, h2, h3 {
     text-decoration: none;
     cursor: pointer;
 }
+.job_image{
+    width:65px;
+    text-align: center;
+}
+.xx {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.titre{
+    color: #123E96;
+    text-transform:uppercase;
+    letter-spacing: 1px;
+    font-weight:800;
+    font-size:30px;
+  }
+
+  .positions-container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.position {
+    width: 350px; /* Ajustez la largeur selon votre mise en page */
+    height: 250px;
+    margin: 15px;
+    text-align: center;
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 50%; /* Pour rendre les positions circulaires */
+    background-color: #cae0ff; /* Couleur de fond pour les positions */
+}
+.pos{
+    font-weight:500;
+    font-size:20px;
+    color: black;
+}
+

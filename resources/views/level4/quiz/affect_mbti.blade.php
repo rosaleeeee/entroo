@@ -11,24 +11,37 @@
     </head>
     <body>
         @include('layouts.sidebar')
+        @php
+           $jobs = [
+    'Product Manager' => 'product_manager.png',
+    'Marketing Manager' => 'marketing_manager.png',
+    'Sales Manager' => 'sales_manager.png',
+    'Customer Service Manager' => 'customer_service_manager.png',
+    'Chief Financial Officer (CFO)' => 'cfo.png',
+    'Chief Operating Officer (COO)' => 'coo.png',
+    'Project Manager' => 'project_manager.png',
+    'Partnerships Manager' => 'partnerships_manager.png',
+    'Accountant' => 'accountant.png',
+    ];
+
+        @endphp
         <div class="big">
-            <h1>Affecter des Utilisateurs</h1>
+            <h1 class="titre" > Choose your team's roles </h1><br>
             <div class="users-container">
-                <h2>Utilisateurs</h2>
                 <div id="users">
                     @foreach($users as $user)
-                        <div class="user" draggable="true" id="user-{{ $user->id }}">{{ $user->name }} {{ $user->mbti }}</div>
+                        <div class="user" draggable="true" id="user-{{ $user->id }}">{{ $user->name }} -{{$user->mbti_type}}</div>
                     @endforeach
                 </div>
             </div>
-    
+            <br>
             <div class="positions-container">
-                <h2>Postes</h2>
                 <div id="positions">
                     @foreach($positions as $key => $position)
                         <div class="position" id="position-{{ $key + 1 }}">
-                            <h3>{{ $position }}</h3>
-                            <div class="droppable-area" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+                           <div class="xx" > <img class="job_image" src="{{ asset('images_mbti/' . $jobs[$position]) }}" alt="image"></div>
+                            <h3 class="pos">{{ $position }}</h3>
+                            <div class="xx" ><div class="droppable-area" ondrop="drop(event)" ondragover="allowDrop(event)"></div></div>
                         </div>
                     @endforeach
                 </div>
@@ -198,7 +211,7 @@
                     });
                 }
             
-                setInterval(checkAllUsersCompleted, 60000); // Vérifie toutes les 60 secondes
+                setInterval(checkAllUsersCompleted, 600000); // Vérifie toutes les 60 secondes
             });
         </script>    
     </body>

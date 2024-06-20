@@ -6,6 +6,9 @@ use App\Http\Controllers\MbtiQuizController;
 use App\Http\Controllers\MBTIPDFController;
 use App\Http\Controllers\AllMbtiController;
 use App\Http\Controllers\AffectMbtiController;
+use App\Http\Controllers\MessageController;
+use App\Http\Controllers\RecController;
+
 
 
 use App\Models\User;
@@ -83,6 +86,13 @@ Route::post('/update-temporary-jobs', [AffectMbtiController::class, 'updateTempo
 Route::post('/finalize-jobs', [AffectMbtiController::class, 'finalizeJobs']);
 Route::get('/check-all-users-completed', [AffectMbtiController::class, 'checkAllUsersCompleted']);
 
+Route::get('/affichage_poste', [RecController::class, 'index']);
 
+Route::get('/home_mbti', [MessageController::class, 'index'])
+    ->name('home_mbti');
+Route::get('/messages', [MessageController::class, 'messages'])
+    ->name('messages');
+Route::post('/message', [MessageController::class, 'message'])
+    ->name('message');
 
 require __DIR__.'/auth.php';

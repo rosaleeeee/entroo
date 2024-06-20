@@ -1,0 +1,303 @@
+/* CSS reset */
+*,
+*::after,
+*::before {
+  box-sizing: inherit;
+  margin: 0;
+  padding: 0;
+}
+
+.clacla{
+  box-sizing: border-box;
+  position: relative;
+}
+
+/* Typography =======================*/
+
+/* Headings */
+
+/* Main heading for card's front cover */
+.card-front__heading {
+  font-size: 22px;
+  font-weight: 550;
+  margin-top: .25rem;
+}
+
+/* Main heading for inside page */
+.inside-page__heading { 
+  padding-bottom: 1rem; 
+  width: 100%;
+}
+
+/* Mixed */
+
+/* For both inside page's main heading and 'view me' text on card front cover */
+.inside-page__heading,
+.card-front__text-view {
+  font-size: 1.3rem;
+  font-weight: 800;
+  margin-top: .2rem;
+}
+
+.inside-page__heading--ski{ color:#0e2c69; }
+.card-front__text-view--ski { color: #ffb32f; }
+
+/* Front cover */
+
+.card-front__tp { color: #fafbfa; }
+
+/* For pricing text on card front cover */
+.card-front__text-price {
+  font-size: 1.2rem;
+  margin-top: -.2rem;
+}
+
+/* Back cover */
+
+/* For inside page's body text */
+.inside-page__text {
+  width: 30px;
+}
+.iimmgg {
+  width: 30px;
+}
+
+/* Icons ===========================================*/
+
+.card-front__icon {
+  fill: #fafbfa;
+  font-size: 3vw;
+  height: 3.25rem;
+  margin-top: -.5rem;
+  width: 3.25rem;
+}
+
+/* Buttons =================================================*/
+
+.inside-page__btn {
+  background-color: transparent;
+  border: 3px solid;
+  border-radius: .5rem;
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-top: 2rem;
+  overflow: hidden;
+  padding: .7rem .75rem;
+  position: relative;
+  text-decoration: none;
+  transition: all .3s ease;
+  width: 90%;
+  z-index: 10;
+}
+
+.inside-page__btn::before { 
+  content: "";
+  height: 100%;
+  left: 0;
+  position: absolute;
+  top: 0;
+  transform: scaleY(0);
+  transition: all .3s ease;
+  width: 100%;
+  z-index: -1;
+}
+
+.inside-page__btn--ski { 
+  border-color: #279eb2;
+  color: #279eb2;
+}
+
+.inside-page__btn--ski::before { 
+  background-color: #279eb2;
+}
+
+.inside-page__btn:hover { 
+  color: #fafbfa;
+}
+
+.inside-page__btn:hover::before { 
+  transform: scaleY(1);
+}
+
+/* Layout Structure=========================================*/
+
+.main {
+  margin-left: 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height:600px;
+  width: calc(100% - 200px); /* Adjusted to prevent overlap with sidebar */
+}
+
+/* Container to hold all cards in one place */
+.card-area {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  padding: 1rem;
+  margin-left:100px;
+}
+.titreee{
+  margin-left:200px;
+  text-align: center;
+}
+.titre{
+  color: #123E96;
+  text-transform:uppercase;
+  letter-spacing: 1px;
+  font-weight:800;
+  font-size:30px;
+}
+/* Card ============================================*/
+
+/* Area to hold an individual card */
+.card-section {
+  margin: 10px;
+  width: calc(33.333% - 30px); /* Three cards per row with some margin */
+}
+
+/* A container to hold the flip card and the inside page */
+.card {
+  background-color: rgba(0,0,0, .05);
+  box-shadow: -.1rem 1.7rem 6.6rem -3.2rem rgba(0,0,0,0.5);
+  height: 8rem; /* Reduced height */
+  position: relative;
+  transition: all 1s ease;
+  width: 16rem; /* Reduced width */
+}
+
+/* Flip card - covering both the front and inside front page */
+
+/* An outer container to hold the flip card. This excludes the inside page */
+.flip-card {
+  height: 8rem; /* Reduced height */
+  perspective: 100rem;
+  position: absolute;
+  right: 0;
+  transition: all 1s ease;
+  visibility: hidden;
+  width: 16rem; /* Reduced width */
+  z-index: 100;
+}
+
+/* The outer container's visibility is set to hidden. This is to make everything within the container NOT set to hidden  */
+/* This is done so content in the inside page can be selected */
+.flip-card > * {
+  visibility: visible;
+}
+
+/* An inner container to hold the flip card. This excludes the inside page */
+.flip-card__container {
+  height: 100%;
+  position: absolute;
+  right: 0;
+  transform-origin: left;
+  transform-style: preserve-3d;
+  transition: all 1s ease;
+  width: 100%;
+}
+
+.card-front,
+.card-back {
+  backface-visibility: hidden;
+  height: 100%;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 100%;
+}
+
+/* Styling for the front side of the flip card */
+
+/* container for the front side */
+.card-front {
+  background-color: #fafbfa;
+  height: 8rem; /* Reduced height */
+  width: 16rem; /* Reduced width */
+}
+
+/* Front side's top section */
+.card-front__tp {
+  align-items: center;
+  clip-path: polygon(0 0, 100% 0, 100% 90%, 57% 90%, 50% 100%, 43% 90%, 0 90%);
+  display: flex;
+  flex-direction: column;
+  height: 5.5rem; /* Adjusted height */
+  justify-content: center;
+  padding: .75rem;
+}
+
+.card-front__tp--ski {
+  background: linear-gradient(
+    to bottom,
+    #61b0e9,
+    #277ab2
+  );
+}
+
+/* Front card's bottom section */
+.card-front__bt {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}
+
+/* Styling for the back side of the flip card */
+
+.card-back {
+  background-color: rgb(255, 232, 203);
+  transform: rotateY(180deg);
+}
+
+/* Specifically targeting the <video> element */
+.video__container {
+  clip-path: polygon(0% 0%, 100% 0%, 90% 50%, 100% 100%, 0% 100%);
+  height: auto;
+  min-height: 100%;
+  object-fit: cover;
+  width: 100%;
+}
+
+/* Inside page */
+
+.inside-page {
+  background-color: rgb(255, 232, 203);
+  box-shadow: inset 20rem 0px 5rem -2.5rem rgba(0,0,0,0.25);
+  height: 100%;
+  padding: 1rem;
+  position: absolute;
+  right: 0;
+  transition: all 1s ease;
+  width: 16rem; /* Reduced width */
+  z-index: 1;
+}
+
+.inside-page__container {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  text-align: center; 
+  width: 100%;
+  background-color: rgb(255, 232, 203);
+}
+
+/* Functionality ====================================*/
+
+/* This is to keep the card centered (within its container) when opened */
+.card:hover {
+  box-shadow:
+  -.1rem 1.7rem 6.6rem -3.2rem rgba(0,0,0,0.75);
+  width: 24rem;
+}
+
+/* When the card is hovered, the flip card container will rotate */
+.card:hover .flip-card__container {
+  transform: rotateY(-180deg);
+}
+
+/* When the card is hovered, the shadow on the inside page will shrink to the left */
+.card:hover .inside-page {
+  box-shadow: inset 1rem 0px 5rem -2.5rem rgba(0,0,0,0.1);
+}

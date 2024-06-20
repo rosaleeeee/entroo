@@ -24,7 +24,7 @@ class AffectMbtiController extends Controller
             'Chief Operating Officer (COO)',
             'Project Manager',
             'Partnerships Manager',
-            'Accountant'
+            'Accountant' 
         ];
 
         return view('level4.quiz.affect_mbti', compact('users', 'positions'));

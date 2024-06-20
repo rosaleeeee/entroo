@@ -138,7 +138,7 @@
           </div>
       </section>
   </div>
-  <div class="btn" >    <a href="{{ route('affect_mbti') }}" class="btnnext">Next</a>
+  <div class="btn" >    <a href="{{ route('home_mbti') }}" class="btnnext">Next</a>
   </div>
 </div>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
