@@ -1,16 +1,16 @@
+<x-app-layout>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MBTI Quiz</title>
-    <link href="{{ asset('nav.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('mbti_quiz.css') }}">
 </head>
 <body>
     @include('layouts.sidebar')
     <div class="quiz-container">
-        <h1>MBTI Quiz</h1>
+        <h1 class="big" >MBTI Quiz</h1>
 
         @if ($errors->any())
             <div class="error-message">
@@ -65,3 +65,4 @@
     </script>
 </body>
 </html>
+</x-app-layout>

@@ -3,6 +3,13 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MbtiQuizController;
+use App\Http\Controllers\MBTIPDFController;
+use App\Http\Controllers\AllMbtiController;
+use App\Http\Controllers\AffectMbtiController;
+
+
+use App\Models\User;
+
 require __DIR__.'/auth.php';
 
 Route::get('/', function () {
@@ -72,5 +79,19 @@ Route::get('/level4/quiz/show', [MbtiQuizController::class, 'show'])->name('quiz
 Route::post('/level4/quiz/show', [MbtiQuizController::class, 'submit'])->name('quiz.submit');
 Route::get('/level4/result', [MbtiQuizController::class, 'result'])->name('quiz.result');
 Route::get('/level4/quiz/result', [App\Http\Controllers\MbtiQuizController::class, 'result'])->name('quiz.result');
+
+Route::get('/mbti-pdf/{id}', [MBTIPDFController::class, 'generatePDF']);
+
+Route::get('/all-mbti', [AllMbtiController::class, 'index'])->name('allMbti');
+
+Route::get('/affect_mbti', [AffectMbtiController::class, 'index'])->middleware(['auth', 'verified'])
+->name('affect_mbti');
+
+Route::post('/update-jobs', [AffectMbtiController::class, 'updateJobs']);
+Route::post('/update-temporary-jobs', [AffectMbtiController::class, 'updateTemporaryJobs']);
+Route::post('/finalize-jobs', [AffectMbtiController::class, 'finalizeJobs']);
+Route::get('/check-all-users-completed', [AffectMbtiController::class, 'checkAllUsersCompleted']);
+
+
 
 require __DIR__.'/auth.php';
