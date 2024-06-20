@@ -12,7 +12,7 @@
                 <div class="cards grid">
                     <div class="card">
                         <div class="img-box">
-                           <img src="images/cm.png" alt="csm"> 
+                           <img src="{{asset ('images/cm.png')}}" alt="csm"> 
                         </div>
                         <div class="card-content">
                         <h1 class="card-heading">Community manager</h1>
@@ -23,7 +23,7 @@
                     </div>
                     <div class="card">
                         <div class="img-box">
-                           <img src="images/sm.png" alt="csm"> 
+                           <img src="{{asset ('images/sm.png')}}" alt="csm"> 
                         </div>
                         <div class="card-content">
                         <h1 class="card-heading">Sales manager</h1>
@@ -34,7 +34,7 @@
                     </div>
                     <div class="card">
                         <div class="img-box">
-                           <img src="images/ps.png" alt="csm"> 
+                           <img src="{{asset ('images/ps.png')}}" alt="csm"> 
                         </div>
                         <div class="card-content">
                         <h1 class="card-heading">Partnership manager</h1>
@@ -45,7 +45,7 @@
                     </div>
                     <div class="card">
                         <div class="img-box">
-                           <img src="images/csm.png" alt="csm"> 
+                           <img src="{{asset ('images/csm.png')}}" alt="csm"> 
                         </div>
                         <div class="card-content">
                         <h1 class="card-heading">Customer Service Manager</h1>
@@ -56,7 +56,7 @@
                     </div>
                     <div class="card">
                         <div class="img-box">
-                           <img src="images/mm.png" alt="csm"> 
+                           <img src="{{asset ('images/mm.png')}}" alt="csm"> 
                         </div>
                         <div class="card-content">
                         <h1 class="card-heading">Marketing manager</h1>
@@ -67,7 +67,7 @@
                     </div>
                     <div class="card">
                         <div class="img-box">
-                           <img src="images/csm.png" alt="csm"> 
+                           <img src="{{asset ('images/csm.png')}}" alt="csm"> 
                         </div>
                         <div class="card-content">
                         <h1 class="card-heading">heading</h1>
@@ -78,7 +78,7 @@
                     </div>
                     <div class="card">
                         <div class="img-box">
-                           <img src="images/csm.png" alt="csm"> 
+                           <img src="{{asset ('images/csm.png')}}" alt="csm"> 
                         </div>
                         <div class="card-content">
                         <h1 class="card-heading">heading</h1>
@@ -89,7 +89,7 @@
                     </div>
                     <div class="card">
                         <div class="img-box">
-                           <img src="images/csm.png" alt="csm"> 
+                           <img src="{{asset ('images/csm.png')}}" alt="csm"> 
                         </div>
                         <div class="card-content">
                         <h1 class="card-heading">heading</h1>
@@ -100,7 +100,7 @@
                     </div>
                     <div class="card">
                         <div class="img-box">
-                           <img src="images/csm.png" alt="csm"> 
+                           <img src="{{asset ('images/csm.png')}}" alt="csm"> 
                         </div>
                         <div class="card-content">
                         <h1 class="card-heading">heading</h1>
@@ -110,7 +110,10 @@
                     </div>
                     </div>
                 </div>
+
             </section>
-        
+            <button class="bottom-right-button" onclick="window.location.href='howtoplay'">DONE</button>
+
     </main>
+
 </x-app-layout> 
