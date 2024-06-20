@@ -1,175 +1,128 @@
-<x-app-layout> 
+<x-app-layout>
     <link href="{{ asset('lv3quiz.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
-        <!-- Page Content -->
-        
-          
-     <script>  
-const questions=[
-    {
-        question:"hhhhhhhhhhhhhhhhhhhhhhh",
-        answers:[
-            {text:"shark1", correct: false},
-            {text:"shark2", correct: false},
-            {text:"shark3", correct: true},
-            {text:"shark4", correct: false},
 
-        ]
-    },
-    {
-        question:"llllllllllllllllllllllllll",
-        answers:[
-            {text:"kkkk", correct: false},
-            {text:"kkkk", correct: false},
-            {text:"skkkkk", correct: true},
-            {text:"mmmm", correct: false},
+    <body>
+        <div>
+            <!-- start navbar -->
+            @include('layouts.sidebar')
+            <!-- end navbar -->
+        </div>
 
-        ]
-    },
-    {
-        question:"hhhhhhhhhhhhhhhhhhhhhhh",
-        answers:[
-            {text:"shark1", correct: false},
-            {text:"shark2", correct: true},
-            {text:"shark3", correct: false},
-            {text:"shark4", correct: false},
-
-        ]
-    },
-    {
-        question:"hhhhhhhhhhhhhhhhhhhhhhh",
-        answers:[
-            {text:"shark1", correct: true},
-
-            {text:"shark2", correct: false},
-            {text:"shark3", correct: false},
-            {text:"shark4", correct: false},
-
-        ]
-    },
-    {
-        question:"hhhhhhhhhhhhhhhhhhhhhhh",
-        answers:[
-            {text:"shark1", correct: false},
-            {text:"shark2", correct: false},
-            {text:"shark3", correct: false},
-            {text:"shark4", correct: false},
-
-        ]
-    },
-];
-const questionElement=document.getElementById("question");
-const answerButton=document.getElementById("answer-buttons");
-const nextButton=document.getElementById("next-btn");
-
-let currentQuestionIndex=0;
-let score=0;
-
-function startQuiz(){
-    currentQuestionIndex=0;
-    score=0;
-    nextButton.innerHTML="Next";
-    showQuestion();
-
-}
-function showQuestion(){
-    resetState();
-    let currentQuestion=questions[currentQuestionIndex];
-    let questionNo=currentQuestionIndex + 1;
-    questionElement.innerHTML=questionNo+"."+currentQuestion.question;
-     
-    currentQuestion.answers.forEach(answer =>{
-        const button = document.createElement("button");
-        button.innerHTML=answer.text;
-        button.classList.add("btn");
-        answerButton.appendChild(button);
-        if(answer.correct){
-            button.dataset.correct = answer.correct;
-        }
-        button.addEventListener("click",selectAnswer);
-    });
-}
-  function resetState(){
-    nextButton.style.display ="none";
-    while(answerButton.firstChild){
-        answerButton.removeChild(answerButton.firstChild);
-    }
-  }
-  function selectAnswer(e){
-    const selectedbtn = e.target;
-    const isCorrect = selectedbtn.dataset.correct == "true";
-    if(isCorrect){
-        selectedbtn.classList.add("correct");
-        score++;
-    }else{
-        selectedbtn.classList.add("incorrect");
-    }
-    Array.from(answerButton.children).forEach(button =>{
-        if(button.dataset.correct == "true"){
-            button.classList.add(correct);
-        }
-        button.disabled =  true;
-    });
-    nextButton.style.display="block";
-  }
-  function showScore(){
-    resetState();
-    questionElement.innerHTML = ` You scored ${score} out of ${questions.length}`;
-    nextButton.innerHTML = "play Again";
-    nextButton.style.display="block";
-
-  }
-
-  function handleNextButton(){
-    currentQuestionIndex++;
-    if(currentQuestionIndex < questions.length){
-        showQuestion();
-    }else{
-        showScore();
-    }
-  }
-
-  nextButton.addEventListener("click",()=>{
-    if(currentQuestionIndex < questions.length){
-        handleNextButton();
-    }else{
-        startQuiz();
-    }
-
-  });
-startQuiz();
-
-</script>
-        
-    <main >
-            <div >
-                <!-- start navbar --> 
-                @include('layouts.sidebar')    
-                <!-- end navbar -->
+        <section class="content">
+            <div class="app">
+                <h1>Simple quiz</h1>
+                <div class="quiz">
+                    <h2 id="question" class="question">Question goes here</h2>
+                    <div id="answer-buttons" class="answer-buttons">
+                        <!-- Answer buttons will be dynamically added here -->
+                    </div>
+                    <button id="next-btn">Next</button>
+                </div>
             </div>
-            <section class="content">
-           <div class="app">
-            <h >Simple quiz</h>
-            <div class="quiz">
-                <h2 class="question">question goes here</h2>
-                 <div class="answer-buttons">
-                    <button class="btn">answer 1</button>
-                    <button class="btn">answer 2</button>
-                    <button class="btn">answer 3</button>
-                    <button class="btn">answer 4</button>
+        </section>
 
-                 </div>
-                 <button id="next-btn">Next</button>
-            </div>
+        <script>
+            const questions = [
+                {
+                    question: "What is 10 + 2?",
+                    answers: [
+                        { text: "12", correct: true },
+                        { text: "10", correct: false },
+                        { text: "8", correct: false },
+                        { text: "14", correct: false },
+                    ]
+                },
+                {
+                    question: "What is the capital of France?",
+                    answers: [
+                        { text: "Berlin", correct: false },
+                        { text: "Paris", correct: true },
+                        { text: "London", correct: false },
+                        { text: "Madrid", correct: false },
+                    ]
+                },
+                // Add more questions here as needed
+            ];
 
-            
-           </div>
-                
-            </section>
-           
+            const questionElement = document.getElementById("question");
+            const answerButtonsElement = document.getElementById("answer-buttons");
+            const nextButton = document.getElementById("next-btn");
 
-    </main>
-   
-            
+            let currentQuestionIndex = 0;
+            let score = 0;
 
-</x-app-layout> 
+            function startQuiz() {
+                currentQuestionIndex = 0;
+                score = 0;
+                nextButton.innerHTML = "Next";
+                showQuestion();
+            }
+
+            function showQuestion() {
+                resetState();
+                let currentQuestion = questions[currentQuestionIndex];
+                questionElement.innerHTML = `${currentQuestionIndex + 1}. ${currentQuestion.question}`;
+
+                currentQuestion.answers.forEach(answer => {
+                    const button = document.createElement("button");
+                    button.innerHTML = answer.text;
+                    button.classList.add("btn");
+                    if (answer.correct) {
+                        button.dataset.correct = answer.correct;
+                    }
+                    button.addEventListener("click", selectAnswer);
+                    answerButtonsElement.appendChild(button);
+                });
+            }
+
+            function resetState() {
+                nextButton.style.display = "none";
+                while (answerButtonsElement.firstChild) {
+                    answerButtonsElement.removeChild(answerButtonsElement.firstChild);
+                }
+            }
+
+            function selectAnswer(e) {
+                const selectedBtn = e.target;
+                const isCorrect = selectedBtn.dataset.correct === "true";
+
+                if (isCorrect) {
+                    selectedBtn.classList.add("correct");
+                    score++;
+                } else {
+                    selectedBtn.classList.add("incorrect");
+                }
+
+                Array.from(answerButtonsElement.children).forEach(button => {
+                    if (button.dataset.correct === "true") {
+                        button.classList.add("correct");
+                    }
+                    button.disabled = true;
+                });
+
+                nextButton.style.display = "block";
+            }
+
+            function showScore() {
+                resetState();
+                questionElement.innerHTML = `You scored ${score} out of ${questions.length}`;
+                nextButton.innerHTML = "Play Again";
+                nextButton.style.display = "block";
+            }
+
+            function handleNextButton() {
+                currentQuestionIndex++;
+                if (currentQuestionIndex < questions.length) {
+                    showQuestion();
+                } else {
+                    showScore();
+                }
+            }
+
+            nextButton.addEventListener("click", handleNextButton);
+
+            startQuiz();
+        </script>
+    </body>
+</x-app-layout>
