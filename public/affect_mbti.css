@@ -125,7 +125,7 @@ button#showResults:disabled {
     justify-content: center;
     align-items: center;
 }
-.titre{
+.titre{ 
     color: #123E96;
     text-transform:uppercase;
     letter-spacing: 1px;
@@ -155,3 +155,26 @@ button#showResults:disabled {
     color: black;
 }
 
+.btn-affichage {
+    background-color: #4CAF50; /* Couleur de fond */
+    color: white; /* Couleur du texte */
+    padding: 10px 20px; /* Remplissage intérieur */
+    border: none; /* Supprimer le bord */
+    cursor: pointer; /* Curseur pointer au survol */
+    text-decoration: none; /* Supprimer la décoration du texte */
+    display: inline-block; /* Afficher en ligne */
+    font-size: 16px; /* Taille de la police */
+    margin-top: 20px; /* Marge en haut */
+}
+
+.btn-affichage:hover {
+    background-color: #45a049; /* Couleur de fond au survol */
+}
+
+.btn-affichage:disabled {
+    background-color: #cccccc; /* Couleur de fond pour désactivé */
+    cursor: not-allowed; /* Curseur non autorisé */
+}
+.ccon{
+    text-align: center;
+}
