@@ -128,5 +128,8 @@ Route::middleware('auth')->group(function () {
 Route::get('/messages', [BusinessModelController::class, 'messages'])->middleware(['auth', 'verified'])->name('messages');
 Route::post('/message', [BusinessModelController::class, 'message'])->middleware(['auth', 'verified'])->name('message');
 
+use App\Http\Controllers\GameController;
 
+
+Route::post('/check-answers', [GameController::class, 'checkAnswers']);
 require __DIR__.'/auth.php';
