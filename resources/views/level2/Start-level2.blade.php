@@ -12,9 +12,7 @@
             <img class="image_start" src="{{ asset('images/Level2.png') }}" alt="Business Model Icon">
         </div>
         <h1>Use Case</h1>
-        <button class="start-button">start</button>
+        <button class="start-button" onclick="window.location.href='submit-idea'">start</button>
     </div>
 </body>
-
-
 </x-app-layout>

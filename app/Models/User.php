@@ -20,6 +20,7 @@ class User extends Authenticatable implements MustVerifyEmail
         'name',
         'email',
         'password',
+        'score',
     ];
 
     /**
@@ -37,6 +38,10 @@ class User extends Authenticatable implements MustVerifyEmail
      *
      * @return array<string, string>
      */
+    public function votes()
+    {
+        return $this->hasMany(Vote::class);
+    }
     protected function casts(): array
     {
         return [

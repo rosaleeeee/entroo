@@ -1,0 +1,172 @@
+.container {
+    margin-left: 200px;
+}
+
+.page-header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.page-title {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.img_vote {
+    width: 60px;
+}
+
+/* Ajouter un espace fixe entre "Submitted by", "Votes" et "Vote" */
+.idea-info {
+    display: flex;
+    align-items: center;
+    gap: 20px; /* Espacement entre les éléments */
+}
+
+.submitted-by, .votes {
+    width: 600px; /* Largeur fixe pour assurer un espacement constant */
+    white-space: nowrap; /* Empêche le retour à la ligne */
+    overflow: hidden; /* Cache le contenu qui dépasse */
+    text-overflow: ellipsis; /* Ajoute "..." pour le contenu qui dépasse */
+}
+
+/* Style pour les boutons */
+.vote-button {
+    background-color: #3377b7; /* Couleur de fond */
+    color: #fff; /* Couleur du texte */
+    border: none; /* Pas de bordure */
+    padding: 0.5rem 1rem; /* Espacement interne */
+    cursor: pointer; /* Curseur pointer */
+    border-radius: 0.25rem; /* Bordure arrondie */
+    transition: background-color 0.3s ease; /* Animation au survol */
+    font-size: 16px; /* Taille de la police */
+    margin-bottom: 10px;
+}
+
+.vote-button:hover {
+    background-color: #1f588d; /* Couleur de fond au survol */
+}
+
+.vote-form {
+    display: inline;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.4); /* Fond semi-transparent */
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 300px;
+    text-align: center;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3); /* Ombre portée */
+    border-radius: 10px; /* Bordure arrondie */
+}
+
+.error-modal .modal-content {
+    background-color: #f8d7da; /* Couleur de fond pour l'erreur */
+    border-color: #f5c6cb; /* Couleur de bordure pour l'erreur */
+    color: #721c24; /* Couleur du texte pour l'erreur */
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+@import url("https://fonts.googleapis.com/css?family=Poppins:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i&subset=devanagari,latin-ext");
+
+.bnm {
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    user-select: none;
+    width: 1400px;
+}
+
+.card {
+    border-radius: 10px;
+    filter: drop-shadow(0 5px 10px 0 #ffffff);
+    width: 98%;
+    background-color: #ffffff;
+    padding: 20px;
+    position: relative;
+    z-index: 0;
+    overflow: hidden;
+    transition: 0.6s ease-in;
+    margin: 15px;
+}
+
+.card::before {
+    content: "";
+    position: absolute;
+    z-index: -1; 
+    top: -15px;
+    right: -15px;
+    background: #3377b7;
+    height: 100%;
+    width: 30px;
+    border-radius: 32px;
+    transform: scale(1);
+    transform-origin: 50% 50%;
+    transition: transform 0.25s ease-out;
+}
+
+.card:hover::before {
+    transition-delay: 0.25s;
+    transform: scale(150);
+}
+
+.card:hover {
+    color: #ffffff;
+}
+
+.card p {
+    padding: 10px 0;
+}
+
+.row {
+    width: 100%;
+}
+
+/* Centrer le bouton "See Results" */
+.see-results-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px; /* Ajouter un espacement au-dessus du bouton */
+}
+
+.img-like-button {
+    background: none; /* Enlève l'arrière-plan */
+    border: none; /* Enlève la bordure */
+    cursor: pointer; /* Curseur pointer */
+    padding: 0; /* Enlève le padding */
+}
+
+.img_like {
+    width: 35px;
+}

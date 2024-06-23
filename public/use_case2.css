@@ -1,0 +1,120 @@
+/* Styles pour le conteneur principal */
+.container {
+    margin-left: 203px;
+    width: 1950px;
+    padding: 0 20px;
+}
+
+/* Styles pour le conteneur de l'en-tête */
+.header-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+/* Styles pour le titre de la page */
+.page-title {
+    font-size: 32px;
+    margin-right: 20px; /* Espace entre le titre et l'image */
+}
+
+/* Styles pour l'image */
+.job_image {
+    width: 48px;
+    height: auto; /* Assurez-vous que l'image garde ses proportions */
+}
+
+/* Styles pour le modèle de canvas d'entreprise */
+.business-model-canvas {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: auto auto auto auto;
+    grid-gap: 10px;
+    margin-top: 20px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background: #f9f9f9;
+    overflow: hidden; /* Empêcher le débordement */
+}
+
+/* Styles pour chaque section du canvas */
+.canvas-section {
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 5px;
+    background: #fff;
+    overflow-wrap: break-word; /* Casser les mots longs */
+    box-sizing: border-box; /* Inclure padding et bordure dans les dimensions */
+    max-height: 100%; /* S'assurer que les sections ne dépassent pas le conteneur */
+    overflow-y: auto; /* Ajouter une barre de défilement si nécessaire */
+}
+
+/* Taille de police pour les titres des sections */
+.tit_ {
+    font-size: 19px;
+}
+
+/* Styles pour chaque type de section */
+.key-partnerships {
+    grid-column: 1 / 2;
+    grid-row: 1 / 3;
+}
+
+.key-activities {
+    grid-column: 2 / 3;
+    grid-row: 1 / 2;
+}
+
+.value-propositions {
+    grid-column: 3 / 4;
+    grid-row: 1 / 3;
+}
+
+.customer-relationships {
+    grid-column: 4 / 5;
+    grid-row: 1 / 2;
+}
+
+.customer-segments {
+    grid-column: 5 / 6;
+    grid-row: 1 / 3;
+}
+
+.key-resources {
+    grid-column: 2 / 3;
+    grid-row: 2 / 3;
+}
+
+.channels {
+    grid-column: 4 / 5;
+    grid-row: 2 / 3;
+}
+
+.cost-structure {
+    grid-column: 1 / 3;
+    grid-row: 3 / 4;
+}
+
+.revenue-streams {
+    grid-column: 3 / 6;
+    grid-row: 3 / 4;
+}
+
+/* Styles pour les éléments de réponse */
+.response-item {
+    position: relative;
+    padding-left: 20px;
+    margin-bottom: 5px;
+}
+
+.response-item::before {
+    content: "•";
+    position: absolute;
+    left: 0;
+    top: 0;
+    font-size: 20px;
+    line-height: 1;
+    color: black;
+}

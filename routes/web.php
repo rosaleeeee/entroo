@@ -8,6 +8,8 @@ use App\Http\Controllers\AllMbtiController;
 use App\Http\Controllers\AffectMbtiController;
 use App\Http\Controllers\MessageController;
 use App\Http\Controllers\RecController;
+use App\Http\Controllers\IdeaController;
+use App\Http\Controllers\BusinessModelController;
 
 
 
@@ -95,18 +97,36 @@ Route::post('/update-temporary-jobs', [AffectMbtiController::class, 'updateTempo
 Route::post('/finalize-jobs', [AffectMbtiController::class, 'finalizeJobs']);
 Route::get('/check-all-users-completed', [AffectMbtiController::class, 'checkAllUsersCompleted']);
 
-Route::get('/affichage_poste', [RecController::class, 'index']);
+Route::get('/affichage_poste', [RecController::class, 'index'])->middleware(['auth', 'verified'])->name('affp');
 
-Route::get('/home_mbti', [MessageController::class, 'index'])
-    ->name('home_mbti');
-Route::get('/messages', [MessageController::class, 'messages'])
-    ->name('messages');
-Route::post('/message', [MessageController::class, 'message'])
-    ->name('message');
+Route::get('/home_mbti', [MessageController::class, 'index'])->middleware(['auth', 'verified'])->name('home_mbti');
+Route::get('/messages', [MessageController::class, 'messages'])->middleware(['auth', 'verified'])->name('messages');
+Route::post('/message', [MessageController::class, 'message'])->middleware(['auth', 'verified'])->name('message');
 
 Route::get('/level1/buss_', function () {
     return view('level1.BUSINESSMODEL');
 })->name('level1ns');
-   
+
+Route::get('/level2/submit-idea', [IdeaController::class, 'showForm'])->middleware(['auth', 'verified'])->name('submit-idea');
+
+Route::post('/ideas', [IdeaController::class, 'store'])->middleware(['auth', 'verified'])->name('ideas.store');
+
+Route::get('/ideas', [IdeaController::class, 'index'])->middleware(['auth', 'verified'])->name('ideas.index');
+
+Route::post('/vote/{id}', [IdeaController::class, 'vote'])->middleware(['auth', 'verified'])->name('ideas.vote');
+
+Route::get('/winning-idea', [IdeaController::class, 'winningIdea'])->middleware(['auth', 'verified'])->name('ideas.winning');
+
+Route::middleware('auth')->group(function () {
+    Route::get('/business-model/create', [BusinessModelController::class, 'create'])->name('business_model.create');
+    Route::post('/business-model/store', [BusinessModelController::class, 'store'])->name('business_model.store');
+    Route::get('/business-model/wait', [BusinessModelController::class, 'wait'])->name('business_model.wait'); // Ajouter cette ligne
+    Route::get('/business-model/result', [BusinessModelController::class, 'result'])->name('business_model.result');
+    Route::get('/business-model/check-completion', [BusinessModelController::class, 'checkCompletion'])->name('business_model.checkCompletion');
+});
+
+Route::get('/messages', [BusinessModelController::class, 'messages'])->middleware(['auth', 'verified'])->name('messages');
+Route::post('/message', [BusinessModelController::class, 'message'])->middleware(['auth', 'verified'])->name('message');
+
 
 require __DIR__.'/auth.php';
