@@ -1,105 +1,103 @@
 * {
-    margin: 0;
-    padding: 0;
-    outline: none;
-    border: none;
-    text-decoration: none;
-    box-sizing: border-box;
-    font-family: "Poppins", sans-serif;
+  margin: 0;
+  padding: 0;
+  outline: none;
+  border: none;
+  text-decoration: none;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
 }
 
 body{
-  background-color: #f3f4f6;
+background-color: #f3f4f6;
 }
 
 .nav1{
-    
-    position:fixed;
-    top:0;
-    background-color:#5398D4;
-    bottom: 0;
-    height:100%;
-    left:0;
-    width: 200px;
-    transition: width 0.2s linear;
+  position: fixed;
+  top: 0;
+  background-color: #5398D4;
+  bottom: 0;
+  height: 100%;
+  left: 0;
+  width: 200px;
+  transition: width 0.2s linear;
 }
+
 .logo{
-    text-align:-50px;
-    display: flex;
-    transition: all 0.5s ease;
-    margin: 80px  0 0 5px;
-    width:170px;
-    margin-top: 0%;
-    margin-bottom: 50%;
-
-
+  text-align: -50px;
+  display: flex;
+  transition: all 0.5s ease;
+  margin: 80px 0 0 5px;
+  width: 170px;
+  margin-top: 0%;
+  margin-bottom: 50%;
 }
 
 .logo span{
-    font-weight: bold;
-    padding-left:15px ;
-    font-size: 18px;
-    text-transform: uppercase;
-
+  font-weight: bold;
+  padding-left: 15px;
+  font-size: 18px;
+  text-transform: uppercase;
 }
+
 .a_nav{
-    position: relative;
-    color:rgb(85,83,83);
-    font-size: 14px;
-    display: table;
-    width: 200px;
-    padding: 10px;
+  position: relative;
+  color: rgb(85, 83, 83);
+  font-size: 14px;
+  display: table;
+  width: 200px;
+  padding: 10px;
 }
-.fas{
-    position: relative;
-    width:70px;
-    height: 40px;
-    top: 14px;
-    font-size: 20px;
-    text-align:center ;
-    color: aliceblue;
 
+.fas{
+  position: relative;
+  width: 70px;
+  height: 40px;
+  top: 14px;
+  font-size: 20px;
+  text-align: center;
+  color: aliceblue;
 }
+
 .nav-item{
-    position: relative;
-    top: 12px;
-    margin-left: 10px;
-    color: rgb(233, 234, 235);
+  position: relative;
+  top: 12px;
+  margin-left: 10px;
+  color: rgb(233, 234, 235);
 }
 
 .levels{
-position: relative;
-margin-left: 250px;
-
-
+  position: relative;
+  margin-left: 250px;
 }
+
 li{
-   margin-top: -7%;
-
-   
+  margin-top: -7%;
 }
+
 .levels {
-    display: inline-block;
-    width: 45%;
-  }
-  
+  display: inline-block;
+  width: 45%;
+}
+
 .but_nom{
   display: inline-flex;
-    align-items: center;
-    padding: 0.75rem 1rem; /* Equivaut à px-3 py-2 */
-    border: 1px solid transparent; /* Equivaut à border border-transparent */
-    font-size: 0.875rem; /* Equivaut à text-sm */
-    line-height: 1.25rem; /* Equivaut à leading-4 */
-    font-weight: 500; /* Equivaut à font-medium */
-    border-radius: 0.375rem; /* Equivaut à rounded-md */
-    color: #6B7280; /* Equivaut à text-gray-500 */
-    background-color: #FFFFFF; /* Equivaut à bg-white */
-    cursor: pointer;
-    transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out; /* Equivaut à transition ease-in-out duration-150 */
-    outline: none; /* Equivaut à focus:outline-none */
+  align-items: center;
+  padding: 0.75rem 1rem;
+  border: 1px solid transparent;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  font-weight: 500;
+  border-radius: 0.375rem;
+  color: #6B7280;
+  background-color: #FFFFFF;
+  cursor: pointer;
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out;
+  outline: none;
 }
+
 .but_nom:hover {
-  color: #374151; /* Equivaut à hover:text-gray-700 */
+  color: #374151;
 }
 
 .but_nom:focus {
@@ -107,96 +105,116 @@ li{
   outline-offset: 2px;
 }
 
-  .py-6 {
-    padding-top: 1.5rem;
-    padding-bottom: 1.5rem;
-  }
-  
-  .max-w-7xl {
-    max-width: 80rem;
-  }
-  
-  .mx-auto {
-    margin-left: auto;
-    margin-right: auto;
-  }
-  
-  .sm\:px-6 {
-    padding-left: 1.5rem;
-    padding-right: 1.5rem;
-  }
-  
-  .lg\:px-8 {
-    padding-left: 2rem;
-    padding-right: 2rem;
-  }
-  .level_title_{
-    color: white;
-    font-weight: bold;
-    font-size: 20px;
-  }
+.py-6 {
+  padding-top: 1.5rem;
+  padding-bottom: 1.5rem;
+}
 
-  .bg-white1 {
-    background-color: #13538A;
-    cursor: pointer;
+.max-w-7xl {
+  max-width: 80rem;
+}
+
+.mx-auto {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.sm\:px-6 {
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+
+.lg\:px-8 {
+  padding-left: 2rem;
+  padding-right: 2rem;
+}
+
+.level_title_{
+  color: white;
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.bg-white1 {
+  background-color: #13538A;
+  cursor: pointer;
+}
+
+.bg-white2 {
+  background-color: #1C66A4;
+  cursor: pointer;
+}
+
+.bg-white3 {
+  background-color: #377CB8;
+  cursor: pointer;
+}
+
+.bg-white4 {
+  background-color: #5398D4;
+  cursor: pointer;
+}
+
+.overflow-hidden {
+  overflow: hidden;
+}
+
+.shadow-sm {
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+}
+
+.sm\:rounded-lg {
+  border-radius: 7rem;
+}
+
+.p-6 {
+  padding: 1.5rem;
+}
+
+.flex {
+  display: flex;
+}
+
+.items-center {
+  align-items: center;
+}
+
+.justify-between {
+  justify-content: space-between;
+}
+
+.text-white {
+  color: #ffffff;
+}
+
+.w-12 {
+  width: 3rem;
+}
+
+.h-12 {
+  height: 3rem;
+}
+
+.mr-4 {
+  margin-right: 1rem;
+}
+
+.text-black {
+  color: #ffffff;
+}
+
+/* Media queries */
+
+/* For screens smaller than 768px (tablets and mobile devices) */
+@media (max-width: 768px) {
+  .nav1 {
+      width: 150px;
   }
-  .bg-white2 {
-    background-color: #1C66A4;
-    cursor: pointer;
+  .logo {
+      width: 120px;
+      margin-top: 40px;
   }
-  .bg-white3 {
-    background-color: #377CB8;
-    cursor: pointer;
-  }
-  .bg-white4 {
-    background-color: #5398D4;
-    cursor: pointer;
-  } 
-  .overflow-hidden {
-    overflow: hidden;
-  }
-  
-  .shadow-sm {
-    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-  }
-  
-  .sm\:rounded-lg {
-    border-radius: 7rem;
-  }
-  
-  .p-6 {
-    padding: 1.5rem;
-  }
-  
-  .flex {
-    display: flex;
-  }
-  
-  .items-center {
-    align-items: center;
-  }
-  
-  .justify-between {
-    justify-content: space-between;
-  }
-  
-  .text-white {
-    color: #ffffff;
-  }
-  
-  .w-12 {
-    width: 3rem;
-  }
-  
-  .h-12 {
-    height: 3rem;
-  }
-  
-  .mr-4 {
-    margin-right: 1rem;
-  }
-  
-  .text-black {
-    color: #ffffff;
-    
+  .a_nav {
+      font-size: 12px;
+      padding: 8px;
   }
