@@ -13,64 +13,128 @@ class MbtiQuizController extends Controller
     }
 
     private $questions = [
-            "At a party, do you:" => [
-                "Talk to many people, including those you don't know" => "E",
-                "Stick to a few familiar faces" => "I"
-            ],
-            "Are you more:" => [
-                "Practical than theoretical" => "S",
-                "Theoretical than practical" => "N"
-            ],
-            "Is it worse to:" => [
-                "Be out of touch with reality" => "S",
-                "Be stuck in a mundane routine" => "N"
-            ],
-            "Are you more impressed by:" => [
-                "Logic" => "T",
-                "Feelings" => "F"
-            ],
-            "Are you more drawn to:" => [
-                "Rational arguments" => "T",
-                "Emotional appeals" => "F"
-            ],
-            "Do you prefer to work:" => [
-                "With set deadlines" => "J",
-                "At your own pace" => "P"
-            ],
-            "Do you make decisions:" => [
-                "Carefully" => "J",
-                "Spontaneously" => "P"
-            ],
-            "At gatherings, do you:" => [
-                "Stay late, enjoying yourself more and more" => "E",
-                "Leave early, feeling worn out" => "I"
-            ],
-            "Are you more attracted to:" => [
-                "Practical people" => "S",
-                "Imaginative people" => "N"
-            ],
-            "Are you more interested in:" => [
-                "What is real" => "S",
-                "What is possible" => "N"
-            ],
-            "When evaluating others, do you focus more on:" => [
-                "Rules than exceptions" => "T",
-                "Exceptions than rules" => "F"
-            ],
-            "When approaching others, do you tend to be:" => [
-                "Objective" => "T",
-                "Personal" => "F"
-            ],
-            "Are you more:" => [
-                "Punctual" => "J",
-                "Laid-back" => "P"
-            ],
-            "Does it bother you more to have things:" => [
-                "Incomplete" => "J",
-                "Finished" => "P"
-            ],
-        // Ajoutez les autres questions ici
+        "At a party, do you:" => [
+            "Talk to many people, including those you don't know" => "E",
+            "Stick to a few familiar faces" => "I"
+        ],
+        "Are you more:" => [
+            "Practical than theoretical" => "S",
+            "Theoretical than practical" => "N"
+        ],
+        "Is it worse to:" => [
+            "Be out of touch with reality" => "S",
+            "Be stuck in a mundane routine" => "N"
+        ],
+        "Are you more impressed by:" => [
+            "Logic" => "T",
+            "Feelings" => "F"
+        ],
+        "Are you more drawn to:" => [
+            "Rational arguments" => "T",
+            "Emotional appeals" => "F"
+        ],
+        "Do you prefer to work:" => [
+            "With set deadlines" => "J",
+            "At your own pace" => "P"
+        ],
+        "Do you make decisions:" => [
+            "Carefully" => "J",
+            "Spontaneously" => "P"
+        ],
+        "At gatherings, do you:" => [
+            "Stay late, enjoying yourself more and more" => "E",
+            "Leave early, feeling worn out" => "I"
+        ],
+        "Are you more attracted to:" => [
+            "Practical people" => "S",
+            "Imaginative people" => "N"
+        ],
+        "Are you more interested in:" => [
+            "What is real" => "S",
+            "What is possible" => "N"
+        ],
+        "When evaluating others, do you focus more on:" => [
+            "Rules than exceptions" => "T",
+            "Exceptions than rules" => "F"
+        ],
+        "When approaching others, do you tend to be:" => [
+            "Objective" => "T",
+            "Personal" => "F"
+        ],
+        "Does it bother you more to have things:" => [
+            "Incomplete" => "J",
+            "Finished" => "P"
+        ],
+        "In social settings, do you:" => [
+            "Stay updated on others' lives" => "E",
+            "Lose track of what’s going on with others" => "I"
+        ],
+        "When doing routine tasks, do you:" => [
+            "Follow traditional methods" => "S",
+            "Try new methods" => "N"
+        ],
+        "Writers should:" => [
+            "Say exactly what they mean" => "S",
+            "Use metaphors and analogies" => "N"
+        ],
+        "Which appeals to you more:" => [
+            "Consistency in thought" => "T",
+            "Harmonious relationships" => "F"
+        ],
+        "Do you want things to be:" => [
+            "Decided" => "J",
+            "Open-ended" => "P"
+        ],
+        "Would you describe yourself as more:" => [
+            "Serious and determined" => "J",
+            "Relaxed and easy-going" => "P"
+        ],
+        "When making phone calls, do you:" => [
+            "Not worry about saying everything correctly" => "E",
+            "Rehearse what you’re going to say" => "I"
+        ],
+        "Facts:" => [
+            "Speak for themselves" => "S",
+            "Serve to illustrate principles" => "N"
+        ],
+        "Are you more often:" => [
+            "Logical and cool-headed" => "T",
+            "Warm and empathetic" => "F"
+        ],
+        "Is it worse to be:" => [
+            "Unfair" => "T",
+            "Unkind" => "F"
+        ],
+        "Do you feel better about:" => [
+            "Making purchases" => "J",
+            "Keeping your options open" => "P"
+        ],
+        "In social situations, do you:" => [
+            "Start conversations" => "E",
+            "Wait for others to initiate" => "I"
+        ],
+        "When making decisions, do you rely more on:" => [
+            "Standards" => "T",
+            "Emotions" => "F"
+        ],
+        "Do you value being:" => [
+            "Consistent" => "J",
+            "Open to new experiences" => "P"
+        ],
+        "Does meeting new people:" => [
+            "Energize you" => "E",
+            "Exhaust you" => "I"
+        ],
+        "Are you more likely to:" => [
+            "See how others can be useful" => "S",
+            "Understand others' perspectives" => "N"
+        ],
+        "Do you look for:" => [
+            "Order" => "J",
+            "Spontaneity" => "P"
+        ],
     ];
+    
 
     public function show()
     {

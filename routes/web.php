@@ -89,7 +89,7 @@ Route::get('/all-mbti', [AllMbtiController::class, 'index'])->name('allMbti');
 
 Route::get('/affect_mbti', [AffectMbtiController::class, 'index'])->middleware(['auth', 'verified'])
 ->name('affect_mbti');
-
+Route::post('/update-temporary-jobs', [AffectMbtiController::class, 'updateTemporaryJobs'])->name('updateTemporaryJobs');
 Route::post('/update-jobs', [AffectMbtiController::class, 'updateJobs']);
 Route::post('/update-temporary-jobs', [AffectMbtiController::class, 'updateTemporaryJobs']);
 Route::post('/finalize-jobs', [AffectMbtiController::class, 'finalizeJobs']);
@@ -103,5 +103,10 @@ Route::get('/messages', [MessageController::class, 'messages'])
     ->name('messages');
 Route::post('/message', [MessageController::class, 'message'])
     ->name('message');
+
+Route::get('/level1/buss_', function () {
+    return view('level1.BUSINESSMODEL');
+})->name('level1ns');
+   
 
 require __DIR__.'/auth.php';

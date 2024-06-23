@@ -5,16 +5,15 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\UserPosition;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 class AffectMbtiController extends Controller
 {
-    // Méthode pour afficher la vue
     public function index()
     {
-        // Récupérer tous les utilisateurs de la base de données
         $users = User::take(9)->get();
         
-        // Les postes à affecter
         $positions = [
             'Product Manager',
             'Marketing Manager',
@@ -24,114 +23,119 @@ class AffectMbtiController extends Controller
             'Chief Operating Officer (COO)',
             'Project Manager',
             'Partnerships Manager',
-            'Accountant' 
+            'Accountant'
         ];
 
         return view('level4.quiz.affect_mbti', compact('users', 'positions'));
     }
-    
-    // Mettre à jour les jobs des utilisateurs directement
+
     public function updateJobs(Request $request)
     {
-        $positions = $request->input('positions', []);
+        $request->validate([
+            'positions' => 'required|array',
+            'positions.*.userId' => 'required|exists:users,id',
+            'positions.*.job' => 'required|string|max:255'
+        ]);
 
-        foreach ($positions as $position) {
-            $user = User::find($position['userId']);
-            if ($user) {
-                $user->job = $position['job'];
-                $user->save();
+        DB::transaction(function () use ($request) {
+            foreach ($request->positions as $position) {
+                $user = User::find($position['userId']);
+                if ($user) {
+                    $user->job = $position['job'];
+                    $user->save();
+                }
             }
-        }
+        });
 
         return response()->json(['message' => 'Jobs mis à jour avec succès']);
     }
 
-    // Mettre à jour les affectations temporaires dans la table user_position
     public function updateTemporaryJobs(Request $request)
     {
-        $positions = $request->input('positions', []);
+        $validatedData = $request->validate([
+            'positions' => 'required|array',
+            'positions.*.userId' => 'required|exists:users,id',
+            'positions.*.job' => 'required|string|max:255'
+        ]);
 
-        foreach ($positions as $position) {
-            // Utilisation de create pour ajouter une nouvelle ligne à user_position
-            UserPosition::create([
-                'user_id' => $position['userId'],
-                'position' => $position['job']
-            ]);
+        try {
+            DB::transaction(function () use ($validatedData) {
+                foreach ($validatedData['positions'] as $position) {
+                    UserPosition::create([
+                        'user_id' => $position['userId'],
+                        'position' => $position['job']
+                    ]);
+                }
+            });
+        } catch (\Exception $e) {
+            Log::error('Error updating temporary jobs: ' . $e->getMessage());
+            return response()->json(['message' => 'Error occurred while updating the temporary assignments.'], 500);
         }
 
         return response()->json(['message' => 'Affectations temporaires mises à jour']);
     }
 
-    // Finaliser les jobs en fonction des affectations temporaires
     public function finalizeJobs()
-{
-    // Récupérer toutes les affectations temporaires
-    $userPositions = UserPosition::all();
+    {
+        try {
+            DB::transaction(function () {
+                $userPositions = UserPosition::all();
+                $positionCounts = [];
 
-    // Tableau pour compter les occurrences de chaque poste par utilisateur
-    $positionCounts = [];
+                foreach ($userPositions as $userPosition) {
+                    $userId = $userPosition->user_id;
+                    $position = $userPosition->position;
 
-    // Compter les occurrences de chaque poste par utilisateur
-    foreach ($userPositions as $userPosition) {
-        $userId = $userPosition->user_id;
-        $position = $userPosition->position;
-
-        if (!isset($positionCounts[$userId])) {
-            $positionCounts[$userId] = [];
-        }
-
-        if (!isset($positionCounts[$userId][$position])) {
-            $positionCounts[$userId][$position] = 0;
-        }
-
-        $positionCounts[$userId][$position]++;
-    }
-
-    // Tableau pour stocker les postes déjà assignés
-    $assignedPositions = [];
-    
-    // Tableau pour stocker les utilisateurs déjà assignés
-    $assignedUsers = [];
-
-    // Assigner les postes aux utilisateurs
-    while (count($assignedUsers) < count($positionCounts)) {
-        foreach ($positionCounts as $userId => $positions) {
-            // Trier les postes par occurrences décroissantes
-            arsort($positions);
-
-            // Trouver le premier poste non assigné pour cet utilisateur
-            foreach ($positions as $position => $count) {
-                if (!in_array($position, $assignedPositions)) {
-                    $user = User::find($userId);
-                    if ($user) {
-                        $user->job = $position;
-                        $user->save();
-
-                        // Ajouter l'utilisateur et le poste aux tableaux des assignations
-                        $assignedUsers[] = $userId;
-                        $assignedPositions[] = $position;
+                    if (!isset($positionCounts[$userId])) {
+                        $positionCounts[$userId] = [];
                     }
-                    break;
+
+                    if (!isset($positionCounts[$userId][$position])) {
+                        $positionCounts[$userId][$position] = 0;
+                    }
+
+                    $positionCounts[$userId][$position]++;
                 }
-            }
+
+                $assignedPositions = [];
+                $assignedUsers = [];
+                while (count($assignedUsers) < count($positionCounts)) {
+                    foreach ($positionCounts as $userId => $positions) {
+                        arsort($positions);
+
+                        foreach ($positions as $position => $count) {
+                            if (!in_array($position, $assignedPositions)) {
+                                $user = User::find($userId);
+                                if ($user) {
+                                    $user->job = $position;
+                                    $user->save();
+
+                                    $assignedUsers[] = $userId;
+                                    $assignedPositions[] = $position;
+                                }
+                                break;
+                            }
+                        }
+                    }
+                }
+
+                // Supprimer toutes les affectations temporaires après finalisation
+                //UserPosition::truncate();
+            });
+        } catch (\Exception $e) {
+            Log::error('Error finalizing jobs: ' . $e->getMessage());
+            return response()->json(['message' => 'Error occurred while finalizing the jobs.'], 500);
         }
+
+        return response()->json(['message' => 'Les emplois ont été finalisés avec succès']);
     }
 
-    // Supprimer toutes les affectations temporaires après finalisation
-    UserPosition::truncate();
-
-    return response()->json(['message' => 'Les emplois ont été finalisés avec succès']);
-}
-
-
-    // Vérifier si tous les utilisateurs ont complété leurs affectations
     public function checkAllUsersCompleted()
     {
         $positionCount = UserPosition::count();
 
         return response()->json([
-            'allCompleted' =>  $positionCount >= 81 
+            'allCompleted' => $positionCount >= 81
         ]);
     }
-
 }

@@ -15,6 +15,7 @@
     
 </head>
 <body>
+
     @include('layouts.sidebar')
     @php
     $jobs_by_mbti = [
@@ -110,8 +111,9 @@
                       <div class="card">
                           <div class="card__side card__side--front-1">
                               <div class="card__title">
+                                <br><br>
                                   <h4 class="card__heading">{{ $user->name }}</h4><br>
-                                  <h4 class="card__heading">{{ $user->mbti_type }}</h4>
+                                  <h4 class="card__heading">{{ $user->mbti_type }}</h4><br>
                                   <img class="image_mbti" src="{{ asset('all_mbti/' . $user->mbti_type . '.png') }}" alt="">
                               </div>
                           </div>
