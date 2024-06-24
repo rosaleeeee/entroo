@@ -13,9 +13,7 @@ background-color: #f3f4f6;
 }
 
 .nav1{
-<<<<<<< HEAD
-    
-    position:fixed;
+     position:fixed;
     top:0;
     background-color:#5398D4;
     bottom: 0;
@@ -24,19 +22,7 @@ background-color: #f3f4f6;
     width: 200px;
     transition: width 0.2s linear;
     z-index: 1000; /* Assure que la barre de navigation est toujours au-dessus des autres éléments */
-
-=======
-  position: fixed;
-  top: 0;
-  background-color: #5398D4;
-  bottom: 0;
-  height: 100%;
-  left: 0;
-  width: 200px;
-  transition: width 0.2s linear;
->>>>>>> e8761f1e455e1c479a4237d44b3562b4b7806cf0
 }
-
 .logo{
   text-align: -50px;
   display: flex;
