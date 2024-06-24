@@ -162,7 +162,7 @@ class MbtiQuizController extends Controller
                 $results[$data[$key]]++;
             } else {
                 // Gérer les réponses manquantes
-                return redirect()->back()->withErrors(['message' => 'Veuillez répondre à toutes les questions.']);
+                return redirect()->back()->withErrors(['message' => 'Please answer all the questions.']);
             }
         }
 

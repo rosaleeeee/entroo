@@ -63,17 +63,20 @@ textarea {
     width: 100%;
     height: 70%;
 }
-
+.buttons-container{
+    margin-left:200px;
+}
 .custom-button {
     padding: 10px 20px; /* Ajuster le padding selon le besoin */
     font-size: 16px; /* Taille de police */
-    background-color: #007bff; /* Couleur de fond */
+    background-color: #4b83ec; /* Couleur de fond */
     color: #fff; /* Couleur de texte */
     border: none; /* Retirer la bordure */
     border-radius: 5px; /* Coins arrondis */
     cursor: pointer; /* Curseur de type pointer au survol */
     display: block; /* Pour centrer le bouton */
     margin: 0 auto; /* Pour centrer le bouton */
+    margin-bottom:15px;
 }
 
 .custom-button:hover {

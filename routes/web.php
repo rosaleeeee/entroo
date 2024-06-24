@@ -129,7 +129,9 @@ Route::get('/messages', [BusinessModelController::class, 'messages'])->middlewar
 Route::post('/message', [BusinessModelController::class, 'message'])->middleware(['auth', 'verified'])->name('message');
 
 use App\Http\Controllers\GameController;
-
+Route::get('/level3/modellev3', function () {
+    return view('level3.modellev3');
+})->name('level1ns');
 
 Route::post('/check-answers', [GameController::class, 'checkAnswers']);
 require __DIR__.'/auth.php';

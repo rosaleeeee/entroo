@@ -10,7 +10,10 @@
     padding: 20px;
     
 }
-
+.bbttnn{
+    background-color:red;
+    margin-left: 200px;
+}
 .app {
     background: #fff;
     width: 90%;

@@ -11,15 +11,37 @@
     justify-content: center;
 }
 
-/* Style pour le titre du quiz */
-.quiz-container h1 {
-    text-align: center;
+/* Style pour l'en-tête contenant le titre et l'image */
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: center; /* Centrer horizontalement */
+    margin-bottom: 20px; /* Espacement en bas */
 }
 
+/* Style pour le titre du quiz */
+.header h1 {
+    font-size: 3em;
+    font-weight: bold;
+    color: #2553af; /* Bleu vif */
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin: 0 20px 0 0; /* Marge droite pour espacement entre le titre et l'image */
+}
+
+/* Style pour l'image */
+.header .imgtest {
+    width: 50px;
+}
+.errro{
+    text-align: center;
+}
 /* Style pour chaque question du quiz */
 .question {
-    margin-bottom: 15px;
+    margin-bottom: 0px;
+    margin-top: 27px;
     text-align: center; /* Centrer les questions */
+    font-size: 19px;
 }
 
 /* Style pour le texte des questions */
@@ -107,15 +129,7 @@
 .btn-next:hover {
     background-color: #5a6268; /* Gris plus foncé au survol */
 }
-.big{
-    font-size: 3em;
-    font-weight: bold;
-    color: #2553af; /* Bleu vif */
-    text-align: center;
-    margin-bottom: 20px;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-}
+
 .center-buttons {
     display: flex;
     justify-content: center;
