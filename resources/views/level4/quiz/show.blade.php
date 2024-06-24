@@ -4,19 +4,21 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>MBTI Quiz</title>
+        <title>MBTI TEST</title>
         <link rel="stylesheet" href="{{ asset('mbti_quiz.css') }}">
     </head>
     <body>
         @include('layouts.sidebar')
         <div class="quiz-container">
-            <h1 class="big">MBTI Quiz</h1>
-    
+            <div class="header">
+                <h1 class="big">MBTI TEST</h1>
+                <img class="imgtest" src="{{ asset('all_mbti/question-mark.png') }}" alt="">
+            </div>
             @if ($errors->any())
                 <div class="error-message">
                     <ul>
                         @foreach ($errors->all() as $error)
-                            <li>{{ $error }}</li>
+                            <li class="errro" >{{ $error }}</li>
                         @endforeach
                     </ul>
                 </div>
@@ -85,5 +87,4 @@
         </script>
     </body>
     </html>
-    </x-app-layout>
-    
+</x-app-layout>

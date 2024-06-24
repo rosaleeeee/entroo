@@ -21,33 +21,6 @@
             </div>
         </div>
 
-        <script>
-            // Get the popup
-            var popup = document.getElementById('popup');
-
-            // Get the button that opens the popup
-            var btn = document.getElementById('helpBtn');
-
-            // Get the <span> element that closes the popup
-            var span = document.getElementsByClassName('close')[0];
-
-            // When the user clicks the button, open the popup
-            btn.onclick = function() {
-                popup.style.display = 'block';
-            }
-
-            // When the user clicks on <span> (x), close the popup
-            span.onclick = function() {
-                popup.style.display = 'none';
-            }
-
-            // When the user clicks anywhere outside of the popup, close it
-            window.onclick = function(event) {
-                if (event.target == popup) {
-                    popup.style.display = 'none';
-                }
-            }
-        </script>
 
         <!-- Page Content -->
         <main>
@@ -181,82 +154,5 @@
 
             <button id="submitBtn" class="submit-button">Submit</button>
         </main>
-
-        <script>
-            $(document).ready(function() {
-                $(".draggable").draggable({
-                    revert: "invalid",
-                    zIndex: 100,
-                    scroll: false
-                });
-
-                $(".droppable").droppable({
-                    accept: ".draggable",
-                    drop: function(event, ui) {
-                        $(this).append(ui.helper.css({
-                            left: 0,
-                            top: 0,
-                            position: "relative"
-                        }));
-                    }
-                });
-
-                $(".learn-more-btn").click(function() {
-                    var popupId = $(this).closest(".draggable").attr("id");
-                    $("#" + popupId + " .popup").css("display", "block");
-                });
-
-                $(".close").click(function() {
-                    $(this).closest(".popup").css("display", "none");
-                });
-
-                // Set up CSRF token for all AJAX requests
-                $.ajaxSetup({
-                    headers: {
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                    }
-                });
-
-                // Function to check answers on submit
-                $("#submitBtn").click(function() {
-                    var userAnswers = {};
-
-                    $(".droppable").each(function() {
-                        var cellId = $(this).children(".draggable").attr("id");
-                        var droppedText = $(this).find("h3").text().trim();
-                        userAnswers[cellId] = droppedText;
-                    });
-
-                    var attempts = 1; // Assuming a variable to track attempts
-
-                    // Send AJAX request to backend to check answers and calculate score
-                    $.ajax({
-                        url: '/check-answers',
-                        type: 'POST',
-                        data: {
-                            userAnswers: userAnswers,
-                            attempts: attempts
-                        },
-                        success: function(response) {
-                            console.log('Response:', response); // Log the response for debugging
-                            if (response.allCorrect) {
-                                alert(response.message);
-                            } else {
-                                alert("Sorry, you didn't get all answers correct. The correct answers will now be displayed.");
-                                $(".droppable").each(function() {
-                                    var cellId = $(this).children(".draggable").attr("id");
-                                    $(this).find(".draggable").css({ left: 0, top: 0, position: "relative" }).appendTo($(this));
-                                });
-                            }
-                            attempts = response.attempts; // Update attempts from response
-                        },
-                        error: function(xhr) {
-                            console.error('Error:', xhr.responseText); // Log the error response for debugging
-                            alert("An error occurred. Please try again.");
-                        }
-                    });
-                });
-            });
-        </script>
     </body>
 </x-app-layout>

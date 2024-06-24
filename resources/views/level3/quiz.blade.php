@@ -25,6 +25,7 @@
                 </div>
             </div>
         </section>
+        <button type="button" class="bbttnn" onclick="window.location.href='modellev3'">Next</button>
 
         <script>
             const questions = [
