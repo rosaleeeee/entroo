@@ -226,4 +226,5 @@
             startQuiz();
         </script>
     </body>
+
 </x-app-layout>
