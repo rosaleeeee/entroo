@@ -135,6 +135,14 @@ Route::get('/level3/modellev3', function () {
 
 Route::post('/claim-idea-points', [IdeaController::class, 'claimIdeaPoints'])->middleware(['auth', 'verified'])->name('claim-idea-points');
 
+use App\Http\Controllers\RankingController;
+
+Route::get('/ranking', [RankingController::class, 'index'])->name('ranking');
+use App\Http\Controllers\AdminRankingController;
+
+Route::get('/admin-ranking', [AdminRankingController::class, 'index'])->name('admin-ranking');
+
+
 Route::post('/check-answers', [GameController::class, 'checkAnswers']);
 require __DIR__.'/auth.php';
 
