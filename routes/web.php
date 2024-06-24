@@ -133,5 +133,11 @@ Route::get('/level3/modellev3', function () {
     return view('level3.modellev3');
 })->name('level1ns');
 
+Route::post('/claim-idea-points', [IdeaController::class, 'claimIdeaPoints'])->middleware(['auth', 'verified'])->name('claim-idea-points');
+
 Route::post('/check-answers', [GameController::class, 'checkAnswers']);
 require __DIR__.'/auth.php';
+
+
+
+

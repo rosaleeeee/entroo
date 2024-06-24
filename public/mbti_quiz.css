@@ -8,11 +8,12 @@
     min-height: 100vh; /* 100% de la hauteur de la fenêtre */
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    align-items: center; /* Centrer horizontalement */
+    justify-content: flex-start; /* Commencer en haut */
 }
 
 /* Style pour l'en-tête contenant le titre et l'image */
-.header {
+.bheader {
     display: flex;
     align-items: center;
     justify-content: center; /* Centrer horizontalement */
@@ -20,7 +21,7 @@
 }
 
 /* Style pour le titre du quiz */
-.header h1 {
+.bheader h1 {
     font-size: 3em;
     font-weight: bold;
     color: #2553af; /* Bleu vif */
@@ -30,12 +31,10 @@
 }
 
 /* Style pour l'image */
-.header .imgtest {
+.bheader .imgtest {
     width: 50px;
 }
-.errro{
-    text-align: center;
-}
+
 /* Style pour chaque question du quiz */
 .question {
     margin-bottom: 0px;
@@ -103,6 +102,9 @@
 /* Style pour les messages d'erreur */
 .error-message {
     color: red;
+    text-align: center;
+    font-weight: 600;
+    list-style: none;
 }
 
 /* Style pour la pagination */
@@ -135,6 +137,7 @@
     justify-content: center;
     margin-top: 20px;
 }
+
 .next-button, .submit-button {
     padding: 10px 20px;
     background-color: #4CAF50; /* Vert */
@@ -145,9 +148,13 @@
     font-size: 16px;
     margin: 0 5px;
 }
+
 .next-button:hover, .submit-button:hover {
     background-color: #45a049;
 }
+
 .submit-button {
     display: none;
 }
+
+

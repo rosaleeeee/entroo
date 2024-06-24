@@ -2,6 +2,13 @@
     <link href="{{ asset('use_case2.css') }}" rel="stylesheet">
     @include('layouts.sidebar')
     <div class="container">
+        @php
+        $userScore = Auth::user()->score;  
+        @endphp
+        <div class="co_score">
+            <img class="dia_img" src="{{ asset('all_mbti/diamond.png') }}" alt="Congratulations">
+            <p class="user-score">{{ $userScore }}</p>
+        </div>
         <div class="header-container">
             <h1 class="page-title">Business Model Results</h1>
             <img class="job_image" src="{{ asset('all_mbti/united.png')}}" alt="image">

@@ -48,3 +48,20 @@ p {
 .custom-button:hover {
     background-color: #0056b3;
 }
+.co_score {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    margin-bottom: 10px;
+}
+
+.user-score {
+    font-size: 18px;
+    font-weight: 600;
+    margin-left: 10px; /* Espace entre l'image et le score */
+    margin-right: 20px;
+}
+
+.dia_img {
+    width: 30px;
+}

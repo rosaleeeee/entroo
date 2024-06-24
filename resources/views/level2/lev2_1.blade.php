@@ -3,6 +3,10 @@
     @include('layouts.sidebar')
 
     <div class="container">
+        <div class="co_score">
+            <img class="dia_img" src="{{ asset('all_mbti/diamond.png') }}" alt="Congratulations">
+            <p class="user-score">{{ $userScore }}</p>
+        </div>
         <div class="page-header">
             <h1 class="page-title">Entrepreneurs' Ideas and Voting </h1>
             <img class="img_vote" src="{{ asset('images_mbti/vote.png') }}" alt="Like">
@@ -32,7 +36,7 @@
                         <p>{{ $idea->description }}</p>
                         <div class="idea-info">
                             <p class="submitted-by">Submitted by: {{ $idea->user->name }}</p>
-                            <p class="votes">Votes: {{ $idea->votes_count }}</p>
+                         <p class="votes">Votes: {{ $idea->votes_count }}</p>
                             <form action="/vote/{{ $idea->id }}" method="POST" class="vote-form">
                                 @csrf
                                 <button type="submit" class="img-like-button"><img class="img_like" src="{{ asset('images_mbti/like2.png') }}" alt="Like"></button>

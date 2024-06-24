@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
@@ -10,16 +11,14 @@ use Auth;
 class IdeaController extends Controller
 {
     public function index()
-{
-    // Récupérer toutes les idées avec le nombre de votes
-    $ideas = Idea::withCount('votes')->get();
+    {
+        $ideas = Idea::withCount('votes')->get();
+        $usersWithVotes = User::whereHas('votes')->count();
+        $atLeastNineUsersVoted = $usersWithVotes >= 9;
+        $userScore = Auth::user()->score;
 
-    // Compter le nombre d'utilisateurs ayant voté au moins une fois
-    $usersWithVotes = User::whereHas('votes')->count();
-    $atLeastNineUsersVoted = $usersWithVotes >= 9;
-
-    return view('level2.lev2_1', compact('ideas', 'atLeastNineUsersVoted'));
-}
+        return view('level2.lev2_1', compact('ideas', 'atLeastNineUsersVoted', 'userScore'));
+    }
 
     public function showForm()
     {
@@ -70,6 +69,24 @@ class IdeaController extends Controller
     public function winningIdea()
     {
         $winningIdea = Idea::withCount('votes')->orderBy('votes_count', 'desc')->first();
-        return view('level2.lev2_2', compact('winningIdea'));
+
+        $userScore = Auth::user()->score;
+
+        return view('level2.lev2_2', compact('winningIdea', 'userScore'));
+    }
+
+    public function claimIdeaPoints()
+    {
+        $user = Auth::user();
+
+        if (!$user->has_received_idea_points) {
+            $user->score += 5;
+            $user->has_received_idea_points = true;
+            $user->save();
+
+            return redirect()->back()->with('success', 'You have successfully claimed your points.');
+        }
+
+        return redirect()->back()->with('error', 'You have already claimed your points.');
     }
 }

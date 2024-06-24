@@ -1,6 +1,13 @@
 <x-app-layout>
     <link href="{{ asset('use_case1.css') }}" rel="stylesheet">
     @include('layouts.sidebar')
+    <div class="polpp" >@php
+        $userScore = Auth::user()->score;  
+        @endphp
+        <div class="co_score">
+            <img class="dia_img" src="{{ asset('all_mbti/diamond.png') }}" alt="Congratulations">
+            <p class="user-score">{{ $userScore }}</p>
+        </div>
     <div class="bdiv">
         <div class="container">
             <img class="job_image" src="{{ asset('all_mbti/wait.png')}}" alt="image">
@@ -9,6 +16,7 @@
             <a id="view-results-btn" class="custom-button disabled" disabled>See results</a>
         </div>
     </div>
+</div>
     <script>
         // Faire une requête Ajax pour vérifier si tous les utilisateurs ont terminé
         fetch('{{ route("business_model.checkCompletion") }}')

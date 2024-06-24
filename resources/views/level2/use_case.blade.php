@@ -4,6 +4,13 @@
 
     @include('layouts.sidebar')
     <div class="container"> <!-- Ajout de classe pour centrer le contenu -->
+        @php
+        $userScore = Auth::user()->score;  
+        @endphp
+        <div class="co_score">
+            <img class="dia_img" src="{{ asset('all_mbti/diamond.png') }}" alt="Congratulations">
+            <p class="user-score">{{ $userScore }}</p>
+        </div>
         <h1 class="page-title">Business Model Canvas</h1> <!-- Ajout de classe pour le titre -->
         <form id="business-model-form" action="{{ route('business_model.store') }}" method="POST">
             @csrf

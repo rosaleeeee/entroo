@@ -2,6 +2,13 @@
     <link href="{{ asset('level2.css') }}" rel="stylesheet">
     @include('layouts.sidebar')
     <div class="containe_r">
+        @php
+        $userScore = Auth::user()->score;  
+        @endphp
+        <div class="co_score">
+            <img class="dia_img" src="{{ asset('all_mbti/diamond.png') }}" alt="Congratulations">
+            <p class="user-score">{{ $userScore }}</p>
+        </div>
         <div class="content-containe_r">
             <div class="smart-containe_r">
                 <img class="job_image" src="{{ asset('images_mbti/idea.png')}}" alt="image">

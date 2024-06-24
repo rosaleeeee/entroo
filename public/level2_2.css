@@ -7,7 +7,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh; /* Centrage vertical */
+    height: 100vh;
+    margin-top: -35px;
 }
 
 .idea-details {
@@ -15,10 +16,10 @@
     padding: 30px;
     border-radius: 12px;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
-    text-align: center; /* Centrage du contenu à l'intérieur */
-    width: 900px;
-    height: 600px;
-    position: relative; /* Position relative pour les éléments absolus */
+    text-align: center;
+    width: 1050px;
+    height:620px;
+    position: relative;
 }
 
 .img_mo {
@@ -55,17 +56,54 @@
     background-color: #28a745;
     color: #fff;
     border: none;
-    padding: 15px 30px;
+    padding: 10px 20px;
     border-radius: 8px;
     cursor: pointer;
     font-size: 20px;
     transition: background-color 0.3s ease;
     position: absolute;
-    bottom: 20px; /* Distance du bas de .idea-details */
-    left: 50%; /* Centrer horizontalement */
-    transform: translateX(-50%); /* Ajuster pour le centrage */
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    margin-bottom: 5px;
 }
 
 .comment-button:hover {
     background-color: #218838;
+}
+.co_score {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    margin-bottom: 10px;
+}
+
+.user-score {
+    font-size: 18px;
+    font-weight: 600;
+    margin-left: 10px; /* Espace entre l'image et le score */
+    margin-right: 20px;
+}
+
+.dia_img {
+    width: 30px;
+}
+.comment-button.claim-button {
+    background-color: #ffc107;
+    color: #343a40;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 500;
+    transition: background-color 0.3s ease;
+    position: absolute;
+    bottom: 70px; /* Ajustez la position verticale selon vos besoins */
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.comment-button.claim-button:hover {
+    background-color: #ffa000;
 }
