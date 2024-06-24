@@ -206,15 +206,3 @@ li{
 /* Media queries */
 
 /* For screens smaller than 768px (tablets and mobile devices) */
-@media (max-width: 768px) {
-  .nav1 {
-      width: 150px;
-  }
-  .logo {
-      width: 120px;
-      margin-top: 40px;
-  }
-  .a_nav {
-      font-size: 12px;
-      padding: 8px;
-  }
