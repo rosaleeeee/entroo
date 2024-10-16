@@ -12,7 +12,7 @@
             <img class="image_start" src="{{ asset('images/BM.png') }}" alt="Business Model Icon">
         </div>
         <h1>BUSINESS MODEL</h1>
-        <button class="start-button" onclick="window.location.href='buss_'">start</button>
+        <button class="start-button" onclick="window.location.href='BUSINESSMODEL'">start</button>
     </div>
 </body>
  

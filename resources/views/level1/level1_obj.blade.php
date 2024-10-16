@@ -2,16 +2,12 @@
     
             <!-- Page Content -->
 
-            <main>
-    <div style="width: 100px; ; color: black; padding: 20px;">
-        <!-- start navbar --> 
+   
     @include('layouts.sidebar')
 
 <!-- end navbar -->   
-</div>
-<link href="{{ asset('level-obj.css') }}" rel="stylesheet">
 
-</head>
+<link href="{{ asset('level-obj.css') }}" rel="stylesheet">
 <body>
     <div id="content">
         <div id="left">
@@ -22,7 +18,7 @@
                 In this level, you will learn the fundamental components of a business model and 
                 understand how they fit together to create a successful business strategy. 
                 Let's get started with an interactive exercise!</p></br>
-            <h3><u>Objectives:</u></h3>
+            <h3>Objectives</h3>
             </br>
            
             <ul>

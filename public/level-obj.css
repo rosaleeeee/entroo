@@ -5,6 +5,28 @@ body {
     background-color: #EFEFEF;
 }
 
+/* Score Container */
+.co_score {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    margin-bottom: 10px;
+    padding: 0 20px; /* Added padding for smaller screens */
+}
+
+.user-score {
+    font-size: 1.5vw; /* Smaller font size, use viewport width */
+    font-weight: 600;
+    margin-left: 10px; /* Space between image and score */
+    margin-right: 10vw; /* Responsive margin */
+}
+
+/* Score Image */
+.dia_img {
+    width: 5vw; /* Responsive image size based on viewport width */
+    max-width: 30px; /* Ensures image doesn't become too large */
+}
+
 #content {
     display: flex;
     margin-top: 0px;
